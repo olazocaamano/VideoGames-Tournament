@@ -1,1 +1,10 @@
+# Team Roles – Database Project (DGETI Evaluation)
+
+| Role | Primary Responsibility (Spanish) | Key Artifacts (English) | Evaluation Criteria (DGETI + English) |
+|------|----------------------------------|--------------------------|----------------------------------------|
+| **The Analyst Designer (Architect)** | Traduce las reglas de negocio a un modelo visual. Garantiza la Normalización (3FN). | `erd_diagram.mmd`<br>`dictionary.md` | **Concept:** Correct cardinality (1:N, N:M).<br>**English:** Clear descriptions in Data Dictionary.<br>**Tech:** Diagram compiles in Mermaid/Lucidchart. |
+| **The SQL Developer (Builder)** | Escribe el código DDL para crear la estructura. Define tipos de datos exactos. | `01_schema.sql`<br>Constraints (PK, FK) | **Concept:** Syntax accuracy (CREATE, ALTER).<br>**English:** Meaningful table/column names (snake_case).<br>**Tech:** Script runs without syntax errors. |
+| **The Database Administrator (Guardian)** | Gestiona seguridad, usuarios y backups. Ensambla el entregable final. | `03_users.sql`<br>Backup Strategy | **Concept:** Security principles (Least Privilege).<br>**English:** Professional comments in SQL scripts.<br>**Tech:** Users have correct permissions (GRANT/REVOKE). |
+| **The Query Master (Manipulator)** | Pobla la base de datos (datos semilla) y extrae reportes de inteligencia de negocios. | `02_seed.sql`<br>`queries/*.sql` | **Concept:** Logic in JOINs and Aggregates.<br>**English:** Query aliases and readability.<br>**Tech:** Queries return accurate data sets. |
+| **The SQL Tester (QA / Breaker)** | Intenta romper la BD. Valida integridad referencial y tipos de datos. | `tests/bug_report.md`<br>`tests/test_cases.sql` | **Concept:** Understanding of constraints & validation.<br>**English:** Clear bug descriptions (Expected vs. Actual).<br>**Tech:** Identification of logic/structural flaws. |
 
