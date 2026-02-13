@@ -1,5 +1,5 @@
 #**ROLES**
-
+|:-:|:-:|
 |ROL|Nombre|
 |:--|:--|
 |The Analist & Designer|Galán Torres Citlalli|
