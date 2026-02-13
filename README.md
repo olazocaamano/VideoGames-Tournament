@@ -1,7 +1,7 @@
 #**ROLES**
 
 |ROL|Nombre|
-|:-:|:-:|
+|:--|:--|
 |The Analist & Designer|Galán Torres Citlalli|
 |The SQL Developer|Olazo Caamaño Emmanuel|
 |The Query Master|Jimenez Solis Caleb|
