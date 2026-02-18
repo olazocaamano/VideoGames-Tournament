@@ -1,0 +1,64 @@
+# User Stories Document: eSports Platform
+
+This document details the functional requirements of the system, divided by roles and priorities to facilitate project development.
+
+---
+
+## Stories Summary
+
+| ID | Title | Role | Priority | Dependency |
+| :--- | :--- | :--- | :---: | :---: |
+| **US-01** | Platform Management | General Admin | 100 | None |
+| **US-02** | Profile and Participation | Player | 200 | US-01 |
+| **US-03** | Competition Control | Tournament Admin | 300 | US-02 |
+| **US-04** | Visualization and Results | General User | 400 | US-03 |
+
+---
+
+## User Stories Detail
+
+### US-01: Platform Management
+**Story:** As a **Site Administrator**, I want to manage user accounts and roles to ensure the platform is secure and every user has the correct permissions.
+
+**Description:** * The system must allow creating, blocking, or deleting user accounts.
+* It must allow the assignment of specific roles: **Player** or **Tournament Organizer**.
+* Interface to visualize the complete list of registered users.
+
+**Priority:** 100 (Critical)  
+**Dependency:** None
+
+---
+
+### US-02: Profile and Participation
+**Story:** As a **Player**, I want to create my profile and register for tournaments to compete and let others see my progress.
+
+**Description:** * The user must be able to complete their profile with data such as **Nickname** and **Favorite Game**.
+* The system must show a list of tournaments with "Open" status.
+* The player must be able to click "Register" and view their personal match calendar.
+
+**Priority:** 200 (High)  
+**Dependency:** US-01
+
+---
+
+### US-03: Competition Control
+**Story:** As an **Organizer**, I want to create tournaments and record results so that the competition progresses automatically and orderly.
+
+**Description:** * The system will allow creating a tournament by defining: Name, Date, Game, and Prizes.
+* It must allow generating brackets manually or automatically with the registered players.
+* The organizer will be able to record the winner of each match so the system updates the next round.
+
+**Priority:** 300 (High)  
+**Dependency:** US-02
+
+---
+
+### US-04: Visualization and Results
+**Story:** As a **User or Visitor**, I want to consult standings and statistics to stay informed about the best players and results.
+
+**Description:** * Public access to tournament brackets (ongoing or finished).
+* Profile search to view a player's basic statistics (matches won/lost).
+* The user does not need to be logged in to view this information.
+
+**Priority:** 400 (Medium)  
+**Dependency:** US-03
