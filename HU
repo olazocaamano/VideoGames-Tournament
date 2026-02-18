@@ -6,8 +6,8 @@ This document details the functional requirements of the system, divided by role
 
 ## Stories Summary
 
-| ID | Title | Role | Priority | Dependency |
-| :--- | :--- | :--- | :---: | :---: |
+|ID| Title|Role|Priority|Dependency|
+|:---| :--- |:---|:---:|:---:|
 | **US-01** | Platform Management | General Admin | 100 | None |
 | **US-02** | Profile and Participation | Player | 200 | US-01 |
 | **US-03** | Competition Control | Tournament Admin | 300 | US-02 |
@@ -15,9 +15,9 @@ This document details the functional requirements of the system, divided by role
 
 ---
 
-## User Stories Detail
+##User Stories Detail
 
-### US-01: Platform Management
+###US-01: Platform Management
 **Story:** As a **Site Administrator**, I want to manage user accounts and roles to ensure the platform is secure and every user has the correct permissions.
 
 **Description:** * The system must allow creating, blocking, or deleting user accounts.
