@@ -1,3 +1,4 @@
+'''
 erDiagram
     USER ||--o{ TOURNAMENT : manages
     USER ||--o{ REGISTRATION : joins
@@ -39,3 +40,4 @@ erDiagram
         string winner
         string round
     }
+'''
