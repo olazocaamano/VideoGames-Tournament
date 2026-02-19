@@ -1,4 +1,4 @@
-```
+```mermaid
 erDiagram
     USER ||--o{ TOURNAMENT : manages
     USER ||--o{ REGISTRATION : joins
