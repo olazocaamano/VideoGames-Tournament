@@ -1,3 +1,4 @@
+\\\mermaid
 erDiagram
     USER ||--o{ TOURNAMENT : "creates/manages"
     USER ||--o{ REGISTRATION : "enrolls"
@@ -41,3 +42,4 @@ erDiagram
         int winner_id FK
         varchar round
     }
+\\\
