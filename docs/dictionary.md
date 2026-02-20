@@ -1,59 +1,59 @@
-# Data Dictionary - eSports Tournament System
+# Data Dictionary - eSports Tournament System (Relational)
 
-This document describes the structure and constraints of the database tables based on the Entity Relationship Diagram.
+This document describes the structure, data types, and constraints for the MySQL database.
 
 ---
 
 ## Table: USER
-Stores information for all account types (Administrators and Players).
+Stores account data for administrators and players.
 
 | Field | Type | Constraint | Description |
 | :--- | :--- | :--- | :--- |
-| id | int | Primary Key | Unique identifier for each user. |
-| username | string | Unique, Not Null | Unique name for login purposes. |
-| email | string | Unique, Not Null | Contact and identification email. |
-| password | string | Not Null | Encrypted access credentials. |
-| role | string | Not Null | Defines permissions (e.g., 'admin', 'player'). |
-| nickname | string | Not Null | Display name within the competition. |
-| favorite_game | string | Nullable | Game preference for user profile. |
+| **id** | INT | PK, Auto-increment | Unique identifier for each user. |
+| **username** | VARCHAR(50) | Unique, Not Null | Unique name for system login. |
+| **email** | VARCHAR(100) | Unique, Not Null | User's electronic mail address. |
+| **password** | VARCHAR(255) | Not Null | Hashed security credentials. |
+| **role** | VARCHAR(20) | Not Null | User type: 'admin' or 'player'. |
+| **nickname** | VARCHAR(50) | Not Null | In-game name displayed in brackets. |
+| **favorite_game**| VARCHAR(50) | Nullable | Preferred game for personalized view. |
 
 ---
 
 ## Table: TOURNAMENT
-Stores the details of the competitions created by administrators.
+Stores competition details managed by an administrator.
 
 | Field | Type | Constraint | Description |
 | :--- | :--- | :--- | :--- |
-| id | int | Primary Key | Unique identifier for the tournament. |
-| name | string | Not Null | Official title of the tournament. |
-| game | string | Not Null | Specific game to be played. |
-| prize_pool | string | Nullable | Description of prizes or cash pool. |
-| start_date | datetime | Not Null | Date and time when the event begins. |
-| status | string | Not Null | Current state (e.g., 'open', 'ongoing', 'finished'). |
-| creator_id | int | Foreign Key | Reference to the User (Admin) who created it. |
+| **id** | INT | PK, Auto-increment | Unique identifier for the tournament. |
+| **name** | VARCHAR(100) | Not Null | Official name of the event. |
+| **game** | VARCHAR(50) | Not Null | Game title (e.g., 'Valorant'). |
+| **prize_pool** | VARCHAR(100) | Nullable | Description of the rewards. |
+| **start_date** | DATETIME | Not Null | Scheduled start time. |
+| **status** | VARCHAR(20) | Not Null | State: 'open', 'ongoing', 'finished'. |
+| **creator_id** | INT | FK (USER.id) | The Admin who created the tournament. |
 
 ---
 
 ## Table: REGISTRATION
-Acts as a bridge to manage players signing up for tournaments.
+Associative table for the Many-to-Many relationship between Users and Tournaments.
 
 | Field | Type | Constraint | Description |
 | :--- | :--- | :--- | :--- |
-| id | int | Primary Key | Unique identifier for the registration record. |
-| user_id | int | Foreign Key | Reference to the Player who is joining. |
-| tournament_id | int | Foreign Key | Reference to the specific Tournament. |
-| registration_date | datetime | Not Null | Timestamp of when the player joined. |
+| **id** | INT | PK, Auto-increment | Registration record identifier. |
+| **user_id** | INT | FK (USER.id) | ID of the player signing up. |
+| **tournament_id**| INT | FK (TOURNAMENT.id)| ID of the tournament being joined. |
+| **registration_date**| DATETIME | Not Null | Date of enrollment (Default: NOW). |
 
 ---
 
 ## Table: MATCH
-Stores individual match data and results within a tournament.
+Stores the competitive encounters and their results within a specific tournament.
 
 | Field | Type | Constraint | Description |
 | :--- | :--- | :--- | :--- |
-| id | int | Primary Key | Unique identifier for the match. |
-| tournament_id | int | Foreign Key | Reference to the parent Tournament. |
-| player_1 | string | Not Null | Nickname of the first participant. |
-| player_2 | string | Not Null | Nickname of the second participant. |
-| winner | string | Nullable | Nickname of the player who won the match. |
-| round | string | Not Null | Stage of the tournament (e.g., 'quarter-finals'). |
+| **id** | INT | PK, Auto-increment | Match identifier. |
+| **tournament_id**| INT | FK (TOURNAMENT.id)| Tournament this match belongs to. |
+| **player_1_id** | INT | FK (USER.id) | ID of the first participant. |
+| **player_2_id** | INT | FK (USER.id) | ID of the second participant. |
+| **winner_id** | INT | FK (USER.id), Nullable | ID of the player who won the match. |
+| **round** | VARCHAR(50) | Not Null | Tournament stage (e.g., 'Quarter-finals'). |
