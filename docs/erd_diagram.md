@@ -1,27 +1,28 @@
-```mermaid
 erDiagram
-    USER ||--o{ TOURNAMENT : manages
-    USER ||--o{ REGISTRATION : joins
-    TOURNAMENT ||--o{ REGISTRATION : contains
-    TOURNAMENT ||--o{ MATCH : includes
+    USER ||--o{ TOURNAMENT : "creates/manages"
+    USER ||--o{ REGISTRATION : "enrolls"
+    USER ||--o{ MATCH : "participates_as_p1"
+    USER ||--o{ MATCH : "participates_as_p2"
+    TOURNAMENT ||--o{ REGISTRATION : "has"
+    TOURNAMENT ||--o{ MATCH : "organizes"
 
     USER {
         int id PK
-        string username
-        string email
-        string password
-        string role
-        string nickname
-        string favorite_game
+        varchar username
+        varchar email
+        varchar password
+        varchar role
+        varchar nickname
+        varchar favorite_game
     }
 
     TOURNAMENT {
         int id PK
-        string name
-        string game
-        string prize_pool
+        varchar name
+        varchar game
+        varchar prize_pool
         datetime start_date
-        string status
+        varchar status
         int creator_id FK
     }
 
@@ -35,9 +36,8 @@ erDiagram
     MATCH {
         int id PK
         int tournament_id FK
-        string player_1
-        string player_2
-        string winner
-        string round
+        int player_1_id FK
+        int player_2_id FK
+        int winner_id FK
+        varchar round
     }
-```
