@@ -10,12 +10,25 @@ Stores account data for administrators and players.
 | Field | Type | Constraint | Description |
 | :--- | :--- | :--- | :--- |
 | **id** | INT | PK, Auto-increment | Unique identifier for each user. |
-| **username** | VARCHAR(50) | Unique, Not Null | Unique name for system login. |
-| **email** | VARCHAR(100) | Unique, Not Null | User's electronic mail address. |
+| **username** | VARCHAR(50) | Not Null | Unique name for system login. |
+| **email** | VARCHAR(100) | Not Null | User's electronic mail address. |
 | **password** | VARCHAR(255) | Not Null | Hashed security credentials. |
-| **role** | VARCHAR(20) | Not Null | User type: 'admin' or 'player'. |
-| **nickname** | VARCHAR(50) | Not Null | In-game name displayed in brackets. |
-| **favorite_game**| VARCHAR(50) | Nullable | Preferred game for personalized view. |
+| **role** | VARCHAR(20) | Not Null | User type (e.g., 'admin', 'player'). |
+| **nickname** | VARCHAR(50) | Not Null | In-game name displayed in tournaments. |
+
+---
+
+## Table: GAMES
+Stores master data of supported esports titles.
+
+| Field | Type | Constraint | Description |
+| :--- | :--- | :--- | :--- |
+| **id** | INT | PK, Auto-increment | Unique identifier for each game. |
+| **game_name** | VARCHAR(100) | Not Null | Official title of the game. |
+| **genre** | VARCHAR(50) | Not Null | Game category (e.g., FPS, MOBA). |
+| **publisher** | VARCHAR(100) | Nullable | Company that publishes the game. |
+| **release_date** | DATE | Nullable | Official launch date. |
+| **is_active** | BOOLEAN | Not Null | Indicates if the game is currently supported. |
 
 ---
 
@@ -26,11 +39,11 @@ Stores competition details managed by an administrator.
 | :--- | :--- | :--- | :--- |
 | **id** | INT | PK, Auto-increment | Unique identifier for the tournament. |
 | **name** | VARCHAR(100) | Not Null | Official name of the event. |
-| **game** | VARCHAR(50) | Not Null | Game title (e.g., 'Valorant'). |
-| **prize_pool** | VARCHAR(100) | Nullable | Description of the rewards. |
+| **game_id** | INT | FK (GAMES.id), Not Null | Game associated with the tournament. |
+| **prize_pool** | DECIMAL(12,2) | Not Null | Total monetary prize amount. |
 | **start_date** | DATETIME | Not Null | Scheduled start time. |
-| **status** | VARCHAR(20) | Not Null | State: 'open', 'ongoing', 'finished'. |
-| **creator_id** | INT | FK (USER.id) | The Admin who created the tournament. |
+| **status** | ENUM('open','ongoing','finished') | Not Null | Current state of the tournament. |
+| **creator_id** | INT | FK (USER.id), Not Null | Administrator who created the tournament. |
 
 ---
 
@@ -40,9 +53,9 @@ Associative table for the Many-to-Many relationship between Users and Tournament
 | Field | Type | Constraint | Description |
 | :--- | :--- | :--- | :--- |
 | **id** | INT | PK, Auto-increment | Registration record identifier. |
-| **user_id** | INT | FK (USER.id) | ID of the player signing up. |
-| **tournament_id**| INT | FK (TOURNAMENT.id)| ID of the tournament being joined. |
-| **registration_date**| DATETIME | Not Null | Date of enrollment (Default: NOW). |
+| **user_id** | INT | FK (USER.id), Not Null | ID of the player signing up. |
+| **tournament_id** | INT | FK (TOURNAMENT.id), Not Null | ID of the tournament being joined. |
+| **registration_date** | DATETIME | Not Null | Date and time of enrollment. |
 
 ---
 
@@ -52,8 +65,8 @@ Stores the competitive encounters and their results within a specific tournament
 | Field | Type | Constraint | Description |
 | :--- | :--- | :--- | :--- |
 | **id** | INT | PK, Auto-increment | Match identifier. |
-| **tournament_id**| INT | FK (TOURNAMENT.id)| Tournament this match belongs to. |
-| **player_1_id** | INT | FK (USER.id) | ID of the first participant. |
-| **player_2_id** | INT | FK (USER.id) | ID of the second participant. |
+| **tournament_id** | INT | FK (TOURNAMENT.id), Not Null | Tournament this match belongs to. |
+| **player_1_id** | INT | FK (USER.id), Not Null | ID of the first participant. |
+| **player_2_id** | INT | FK (USER.id), Not Null | ID of the second participant. |
 | **winner_id** | INT | FK (USER.id), Nullable | ID of the player who won the match. |
 | **round** | VARCHAR(50) | Not Null | Tournament stage (e.g., 'Quarter-finals'). |
