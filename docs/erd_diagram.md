@@ -7,44 +7,33 @@ erDiagram
     TOURNAMENT ||--o{ REGISTRATION : "has"
     TOURNAMENT ||--o{ MATCH : "organizes"
     GAMES ||--o{ TOURNAMENT : "belongs_to"
-    USER ||--o{ USER_GAMES : "favorites"
-    GAMES ||--o{ USER_GAMES : "is_favorited"
 
     USER {
         int id PK
-        varchar username UNIQUE
-        varchar email UNIQUE
+        varchar username
+        varchar email
         varchar password
         varchar role
         varchar nickname
-        datetime created_at
     }
 
     GAMES {
         int id PK
-        varchar game_name UNIQUE
+        varchar game_name
         varchar genre
         varchar publisher
         date release_date
         boolean is_active
     }
 
-    USER_GAMES {
-        int user_id FK
-        int game_id FK
-        datetime added_at
-        PK user_id, game_id
-    }
-
     TOURNAMENT {
         int id PK
         varchar name
         int game_id FK
-        decimal(12,2) prize_pool
+        decimal prize_pool
         datetime start_date
-        enum('open','ongoing','finished') status
+        enum status
         int creator_id FK
-        datetime created_at
     }
 
     REGISTRATION {
@@ -52,7 +41,6 @@ erDiagram
         int user_id FK
         int tournament_id FK
         datetime registration_date
-        UNIQUE user_id, tournament_id
     }
 
     MATCH {
@@ -62,6 +50,5 @@ erDiagram
         int player_2_id FK
         int winner_id FK
         varchar round
-        datetime played_at
     }
 ```
