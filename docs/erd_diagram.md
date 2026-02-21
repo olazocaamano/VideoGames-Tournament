@@ -1,11 +1,12 @@
 ```mermaid
 erDiagram
-    USER ||--o{ TOURNAMENT : "creates/manages"
+    USER ||--o{ TOURNAMENT : "creates_manages"
     USER ||--o{ REGISTRATION : "enrolls"
     USER ||--o{ MATCH : "participates_as_p1"
     USER ||--o{ MATCH : "participates_as_p2"
     TOURNAMENT ||--o{ REGISTRATION : "has"
     TOURNAMENT ||--o{ MATCH : "organizes"
+    GAMES ||--o{ TOURNAMENT : "belongs_to"
 
     USER {
         int id PK
@@ -14,16 +15,24 @@ erDiagram
         varchar password
         varchar role
         varchar nickname
-        varchar favorite_game
+    }
+
+    GAMES {
+        int id PK
+        varchar game_name
+        varchar genre
+        varchar publisher
+        date release_date
+        boolean is_active
     }
 
     TOURNAMENT {
         int id PK
         varchar name
-        varchar game
-        varchar prize_pool
+        int game_id FK
+        decimal prize_pool
         datetime start_date
-        varchar status
+        enum status
         int creator_id FK
     }
 
