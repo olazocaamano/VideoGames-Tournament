@@ -15,6 +15,7 @@ erDiagram
         varchar password
         varchar role
         varchar nickname
+        boolean is_active
     }
 
     GAMES {
