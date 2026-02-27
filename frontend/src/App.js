@@ -19,9 +19,23 @@ function Admin() {
   };
 
   return (
-    <div className="admin-panel">
-      <h1>Admin Panel</h1>
-      <button onClick={handleLogout}>Logout</button>
+    <div className="window-admin">
+
+      <div className="bar">
+
+        <div className="left">
+          <div className="circle"></div>
+          <h1>Administrator</h1>
+        </div>
+
+        <ul className="menu">
+          <li><a href="/home">Home</a></li>
+          <li><a href="/tournaments">Tournaments</a></li>
+          <li><a href="/players">Players</a></li>
+          <li><a href="/statistics">Statistics</a></li>
+        </ul>
+      </div>
+
     </div>
   );
 }
@@ -42,9 +56,13 @@ function Player() {
   };
 
   return (
-    <div className="user-panel">
-      <h1>Player Panel</h1>
-      <button onClick={handleLogout}>Logout</button>
+    <div>
+
+      <div className="user-panel">
+        <h1>Player Panel</h1>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
+
     </div>
   );
 }
@@ -155,9 +173,9 @@ function Home() {
           <div className="container">
             <div className="con-user">
               <h2>User</h2>
-              <form onSubmit={handleUserLogin}> 
-                <input type="text" placeholder="Username" required value={userUsername} onChange={(e) => setUserUsername(e.target.value)}/>
-                <input type="password" placeholder="Password" required value={userPassword} onChange={(e) => setUserPassword(e.target.value)}/>
+              <form onSubmit={handleUserLogin}>
+                <input type="text" placeholder="Username" required value={userUsername} onChange={(e) => setUserUsername(e.target.value)} />
+                <input type="password" placeholder="Password" required value={userPassword} onChange={(e) => setUserPassword(e.target.value)} />
                 <div className="resetPass">
                   <p>Forgot your password? <a href="/Reset">Reset</a></p>
                 </div>
