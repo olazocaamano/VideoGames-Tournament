@@ -1,0 +1,25 @@
+esports-project/
+├── docs/                   # Documentación técnica
+│   ├── dictionary.md       # Diccionario de datos
+│   └── erd_diagram.md      # Diagrama Entidad-Relación (Mermaid)
+├── queries/                # Consultas SQL para pruebas
+│   ├── analysis.sql
+│   └── report_sales.sql
+├── src/                    # Scripts de creación de Base de Datos
+│   ├── 01_schema.sql       # Tablas (USER, TOURNAMENT, etc.)
+│   ├── 02_seed.sql         # Datos de ejemplo
+│   └── 03_users.sql        # Permisos de base de datos
+├── tests/                  # Reportes de calidad
+│   ├── bug_report.md
+│   └── test_cases.sql
+├── api-backend/            # NUEVA: Servidor Node.js + Express
+│   ├── models/             # Esquemas de MongoDB
+│   ├── routes/             # Endpoints (login, register)
+│   └── index.js            # Archivo principal del servidor
+├── client-frontend/        # NUEVA: Aplicación en React
+│   ├── public/
+│   └── src/                # Componentes y páginas
+├── .gitignore              # Archivos que Git no debe subir
+├── HU.md                   # Tus Historias de Usuario
+├── README.md               # Presentación del proyecto
+└── ROLES.md                # Definición de permisos

@@ -1,0 +1,186 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  color: #f8fafc;
+  background: linear-gradient(135deg, #232143, #2b6451);
+  size: 100%;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.window {
+  margin: 50px auto;
+  width: 1400px;
+  height: calc(100vh - 100px);
+  background-color: #222;
+  border-radius: 30px;
+  box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+  padding: 20px;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.window h1 {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+.content {
+  display: flex;
+  gap: 30px;
+  height: 100%;
+}
+
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-games {
+  width: 25%;
+  height: 75%;
+  padding: 20px;
+  background-color: #2e2e2e;
+  border-radius: 20px;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+  overflow-y: auto;
+  animation: fadeInUp 1s ease forwards;
+  cursor: default;
+}
+
+.list-games h2 {
+  margin-bottom: 5px;
+}
+
+.list-games p {
+  margin: 0 0 15px 0;
+  color: #a0a0a0;
+}
+
+.list-games ul {
+  padding: 0;
+}
+
+.list-games li {
+  list-style: none;
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.statistics-button {
+  width: 925px;
+  margin: 0 auto 30px auto;
+  padding: 15px;
+  background-color: #258816;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.statistics-button:hover {
+  background-color: #206915;
+}
+
+.container {
+  display: flex;
+  gap: 30px;
+  padding: 0 30px;
+}
+
+.con-user,
+.con-admin {
+  flex: 1;
+  height: 380px;
+  background-color: #2e2e2e;
+  border-radius: 15px;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+  padding: 20px;
+  animation: fadeInUp 1.2s ease forwards;
+}
+
+.con-user h2,
+.con-admin h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+  border-bottom: 1px solid #555;
+  padding-bottom: 10px;
+}
+
+.resetPass,
+.register {
+  height: 40px;
+}
+
+.register {
+  text-align: right;
+}
+
+.resetPass a,
+.register a {
+  color: rgb(182, 255, 129);
+  text-decoration: none;
+
+  transition: 0.2s;
+}
+
+.resetPass a:hover,
+.register a:hover {
+  color: rgb(120, 167, 86);
+}
+
+
+/* =========================
+   FORM STYLES
+========================= */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background-color: #1f1f1f;
+  color: white;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: #258816;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #206915;
+  transform: scale(1.05);
+}
