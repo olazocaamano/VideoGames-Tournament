@@ -227,11 +227,11 @@ button:hover {
   align-items: center;
 
   animation: fadeInUp 0.8s ease forwards;
-  animation-delay: 1s;
+  animation-delay: 0.7s;
 
   transform-origin: left center;
   animation: expandBar 0.9s ease-out forwards;
-  animation-delay: 1.5s;
+  animation-delay: 0.4s;
   overflow: hidden;
 }
 
@@ -264,7 +264,7 @@ button:hover {
   margin-right: 30px;
 }
 
-.menu li a{
+.menu li button{
   text-decoration: none;
   color: white;
   font-weight: bold;
@@ -279,15 +279,38 @@ button:hover {
   align-content: center;
 }
 
-.menu li a:hover {
+.menu li button:hover {
   background-color: transparent;
+  text-shadow: 0 2px 7px #ffff;
   transform: scale(1.15);
+  color: #ffff;
+}
+
+.menu button.active {
+  background-color: #222;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 0 10px #37e028;
+  color: rgb(182, 255, 129);
+}
+
+.logout {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  transition: 0.3s;
+  display: inline-block;
+  background-color: #881616;
+  height: 40px;
+  width: auto;
+  padding: 0 20px;
+  border-radius: 10px;
+  align-content: center;
 }
 
 .left, .menu {
   opacity: 0;
   animation: fadeIn 0.5s ease forwards;
-  animation-delay: 1.9s;
+  animation-delay: 0.9s;
 }
 
 @keyframes fadeIn {
@@ -312,4 +335,16 @@ button:hover {
     height: 55px;
     border-radius: 30px;
   }
+}
+
+.admin-box {
+  margin: 10px auto;
+  width: 100%;
+  max-width: 1500px;
+  height: 560px;
+  background-color: #222;
+  border-radius: 30px;
+  box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+  padding: 30px;
+  animation: fadeInUp 0.8s ease forwards;
 }

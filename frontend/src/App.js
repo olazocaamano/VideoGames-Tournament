@@ -6,6 +6,7 @@ import "./App.css";
 function Admin() {
   const navigate = useNavigate();
   const role = localStorage.getItem("role");
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     if (role !== "admin") {
@@ -29,11 +30,27 @@ function Admin() {
         </div>
 
         <ul className="menu">
-          <li><a href="/home">Home</a></li>
-          <li><a href="/tournaments">Tournaments</a></li>
-          <li><a href="/players">Players</a></li>
-          <li><a href="/statistics">Statistics</a></li>
+          <li><button className={activeSection === "home" ? "active" : ""} onClick={() => setActiveSection("home")}>Home</button></li>
+          <li><button className={activeSection === "tournaments" ? "active" : ""} onClick={() => setActiveSection("tournaments")}>Tournaments</button></li>
+          <li><button className={activeSection === "players" ? "active" : ""} onClick={() => setActiveSection("players")}>Players</button></li>
+          <li><button className={activeSection === "statistics" ? "active" : ""} onClick={() => setActiveSection("statistics")}>Statistics</button></li>
+          <button onClick={handleLogout} className="logout">Logout</button>
         </ul>
+      </div>
+
+      <div className="content">
+        {activeSection === "home" && <div className="admin-box">
+          Contenido de Home
+        </div>}
+        {activeSection === "tournaments" && <div className="admin-box">
+          Contenido de Tournaments
+        </div>}
+        {activeSection === "players" && <div className="admin-box">
+          Contenido de Players
+        </div>}
+        {activeSection === "statistics" && <div className="admin-box">
+          Contenido de Statistics
+        </div>}
       </div>
 
     </div>
