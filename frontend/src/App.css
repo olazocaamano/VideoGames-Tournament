@@ -7,7 +7,7 @@ body {
   font-family: 'Orbitron', sans-serif;
   color: #f8fafc;
   background: linear-gradient(135deg, #232143, #2b6451);
-  size: 100%;
+  min-height: 100vh;
 }
 
 @keyframes fadeInUp {
@@ -22,13 +22,14 @@ body {
 }
 
 .window {
-  margin: 50px auto;
-  width: 1400px;
-  height: calc(100vh - 100px);
+  margin: 40px auto;
+  width: 90%;
+  max-width: 1400px;
+  min-height: calc(100vh - 80px);
   background-color: #222;
   border-radius: 30px;
   box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
-  padding: 20px;
+  padding: 30px;
   animation: fadeInUp 0.8s ease forwards;
 }
 
@@ -37,13 +38,13 @@ body {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 42px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .content {
   display: flex;
   gap: 30px;
-  height: 100%;
+  flex-wrap: wrap;
 }
 
 .right-panel {
@@ -53,15 +54,13 @@ body {
 }
 
 .list-games {
-  width: 25%;
-  height: 75%;
+  width: 300px;
   padding: 20px;
   background-color: #2e2e2e;
   border-radius: 20px;
   box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
   overflow-y: auto;
   animation: fadeInUp 1s ease forwards;
-  cursor: default;
 }
 
 .list-games h2 {
@@ -84,7 +83,8 @@ body {
 }
 
 .statistics-button {
-  width: 925px;
+  width: 100%;
+  max-width: 965px;
   margin: 0 auto 30px auto;
   padding: 15px;
   background-color: #258816;
@@ -93,22 +93,25 @@ body {
   text-decoration: none;
   color: white;
   font-size: 24px;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .statistics-button:hover {
   background-color: #206915;
+  transform: scale(1.02);
 }
 
 .container {
   display: flex;
   gap: 30px;
-  padding: 0 30px;
+  padding: 0 20px;
+  flex-wrap: wrap;
 }
 
 .con-user,
 .con-admin {
   flex: 1;
+  min-width: 300px;
   height: 380px;
   background-color: #2e2e2e;
   border-radius: 15px;
@@ -139,7 +142,6 @@ body {
 .register a {
   color: rgb(182, 255, 129);
   text-decoration: none;
-
   transition: 0.2s;
 }
 
@@ -147,11 +149,6 @@ body {
 .register a:hover {
   color: rgb(120, 167, 86);
 }
-
-
-/* =========================
-   FORM STYLES
-========================= */
 
 form {
   display: flex;
@@ -167,6 +164,11 @@ input {
   background-color: #1f1f1f;
   color: white;
   font-size: 16px;
+  transition: 0.2s;
+}
+
+input:focus {
+  box-shadow: 0 0 6px #258816;
 }
 
 button {
@@ -177,10 +179,26 @@ button {
   color: white;
   font-size: 16px;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: 0.3s ease;
 }
 
 button:hover {
   background-color: #206915;
   transform: scale(1.05);
+}
+
+.admin-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.user-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }

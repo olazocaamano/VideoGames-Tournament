@@ -1,15 +1,70 @@
 import React, { useEffect, useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
 
-function App() {
+function Admin() {
+  const navigate = useNavigate();
+  const role = localStorage.getItem("role");
+
+  useEffect(() => {
+    if (role !== "admin") {
+      navigate("/");
+    }
+  }, [role, navigate]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("role");
+    navigate("/");
+  };
+
+  return (
+    <div className="admin-panel">
+      <h1>Admin Panel</h1>
+      <button onClick={handleLogout}>Logout</button>
+    </div>
+  );
+}
+
+function Player() {
+  const navigate = useNavigate();
+  const role = localStorage.getItem("role");
+
+  useEffect(() => {
+    if (role !== "player") {
+      navigate("/")
+    }
+  }, [role, navigate]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("role");
+    navigate("/");
+  };
+
+  return (
+    <div className="user-panel">
+      <h1>Player Panel</h1>
+      <button onClick={handleLogout}>Logout</button>
+    </div>
+  );
+}
+
+function Home() {
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
-  const [userRole, setUserRole] = useState(null);
 
-  const handleLogin = async (e) => {
+  const [userUsername, setUserUsername] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userMessage, setUserMessage] = useState("");
+
+  const [games, setGames] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const handleAdminLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -17,17 +72,42 @@ function App() {
         { username, password }
       );
 
-      setLoginMessage(response.data.message);
-      setUserRole(response.data.user.role);
-      
+      const role = response.data.user.role;
+
+      if (role === "admin") {
+        localStorage.setItem("role", role);
+        navigate("/admin");
+      } else {
+        setLoginMessage("Access denied. You are not an admin.");
+      }
+
     } catch (error) {
       setLoginMessage("Invalid credentials");
     }
-  }
+  };
 
-  const [games, setGames] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const handleUserLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/users/login",
+        { username: userUsername, password: userPassword }
+      );
+
+      const role = response.data.user.role;
+
+      if (role === "player") {
+        localStorage.setItem("role", role);
+        navigate("/player");
+      } else {
+        setUserMessage("Access denied. You are not a player.");
+      }
+
+    } catch (error) {
+      setUserMessage("Invalid credentials");
+    }
+  };
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -36,7 +116,6 @@ function App() {
         setGames(response.data);
       } catch (err) {
         setError("Failed to load games");
-        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -76,22 +155,23 @@ function App() {
           <div className="container">
             <div className="con-user">
               <h2>User</h2>
-              <form>
-                <input type="text" placeholder="Username" required />
-                <input type="password" placeholder="Password" required />
+              <form onSubmit={handleUserLogin}> 
+                <input type="text" placeholder="Username" required value={userUsername} onChange={(e) => setUserUsername(e.target.value)}/>
+                <input type="password" placeholder="Password" required value={userPassword} onChange={(e) => setUserPassword(e.target.value)}/>
                 <div className="resetPass">
                   <p>Forgot your password? <a href="/Reset">Reset</a></p>
                 </div>
                 <button type="submit">Login</button>
                 <div className="register">
-                  <p>Don't have an account <a href="/Register">Register</a></p>
+                  <p>Don't have an account? <a href="/Register">Register</a></p>
                 </div>
+                <p>{userMessage}</p>
               </form>
             </div>
 
             <div className="con-admin">
               <h2>Admin</h2>
-              <form onSubmit={handleLogin}>
+              <form onSubmit={handleAdminLogin}>
                 <input
                   type="text"
                   placeholder="Username"
@@ -125,6 +205,16 @@ function App() {
         </div>
       </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/admin" element={<Admin />} />
+      <Route path="/player" element={<Player />} />
+    </Routes>
   );
 }
 
