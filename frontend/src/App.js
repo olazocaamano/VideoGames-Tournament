@@ -12,10 +12,12 @@ function Admin() {
     if (role !== "admin") {
       navigate("/");
     }
+      
   }, [role, navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem("role");
+    localStorage.removeItem("username");
     navigate("/");
   };
 
@@ -40,7 +42,14 @@ function Admin() {
 
       <div className="content">
         {activeSection === "home" && <div className="admin-box">
-          Contenido de Home
+          <div className="top">
+            <h2>Resumen General</h2>
+          </div>
+
+          <div className="box-tournaments">
+            <h2>Torneos activos</h2>
+
+          </div>
         </div>}
         {activeSection === "tournaments" && <div className="admin-box">
           Contenido de Tournaments
@@ -111,6 +120,7 @@ function Home() {
 
       if (role === "admin") {
         localStorage.setItem("role", role);
+
         navigate("/admin");
       } else {
         setLoginMessage("Access denied. You are not an admin.");

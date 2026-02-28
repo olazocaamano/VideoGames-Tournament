@@ -345,6 +345,42 @@ button:hover {
   background-color: #222;
   border-radius: 30px;
   box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
-  padding: 30px;
-  animation: fadeInUp 0.8s ease forwards;
+  padding: 10px;
+
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+  animation-delay: 0.5s;
+}
+
+.top {
+  display: flex;
+  margin: 0 auto;
+  width: 98%;
+  height: 50px;
+  border-radius: 30px;
+  background-color: #1f1f1f;
+  align-items: center;
+}
+
+.top h2 {
+  margin-left: 20px;
+}
+
+.box-tournaments {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 10px;
+  width: 30%;
+  height: 470px;
+  border-radius: 30px;
+  background-color: #2f2f2f;
+}
+
+.box-tournaments h2 {
+  margin: 10px auto;
+  text-align: center;
+}
+
+.box-tournaments li {
+  
 }
