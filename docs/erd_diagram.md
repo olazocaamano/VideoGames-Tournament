@@ -35,6 +35,7 @@ erDiagram
         datetime start_date
         enum status
         int creator_id FK
+        boolean is_active
     }
 
     REGISTRATION {

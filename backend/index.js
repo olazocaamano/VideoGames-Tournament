@@ -4,6 +4,7 @@ const db = require('./db');
 
 const gamesRoutes = require('./routes/gamesRoutes');
 const usersRoutes = require('./routes/usersRoutes');
+const tournamentsRoutes = require('./routes/tournamentsRoutes');
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.json());//For the server to understand data in JSON format
 //Routes (Endpoints)
 app.use('/api/games', gamesRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api/tournaments', tournamentsRoutes);
 
 //Test route to see if the server is live
 app.get('/', (req, res) => {

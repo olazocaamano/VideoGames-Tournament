@@ -1,0 +1,1 @@
+INSERT INTO tournaments (name, game_id, prize_pool, start_date, status, is_active) VALUES ('Clash Royale 2v2', 5, 1200, NOW(), 'open', 1);

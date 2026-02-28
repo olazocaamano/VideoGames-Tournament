@@ -8,11 +8,15 @@ function Admin() {
   const role = localStorage.getItem("role");
   const [activeSection, setActiveSection] = useState("home");
 
+  const [tournaments, setTournaments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     if (role !== "admin") {
       navigate("/");
     }
-      
+
   }, [role, navigate]);
 
   const handleLogout = () => {
@@ -20,6 +24,21 @@ function Admin() {
     localStorage.removeItem("username");
     navigate("/");
   };
+
+  useEffect(() => {
+    const fetchTournaments = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/tournaments?active=1");
+        setTournaments(response.data);
+      } catch (err) {
+        setError("Failed to load tournaments :(");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTournaments();
+  }, []);
 
   return (
     <div className="window-admin">
@@ -43,13 +62,26 @@ function Admin() {
       <div className="content">
         {activeSection === "home" && <div className="admin-box">
           <div className="top">
-            <h2>Resumen General</h2>
+            <h2>General Summary</h2>
           </div>
 
           <div className="box-tournaments">
-            <h2>Torneos activos</h2>
+            <h2>Active Tournaments</h2>
 
+            {loading && <p>Loading tournaments...</p>}
+            {error && <p>{error}</p>}
+
+            {!loading && !error && (
+              <ul>
+                {tournaments.map((tournament) => (
+                  <li key={tournament.id}>
+                    <strong><a href="/">{tournament.name}</a></strong> - <span className={`status ${tournament.status}`}>{tournament.status.toUpperCase()}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
+
         </div>}
         {activeSection === "tournaments" && <div className="admin-box">
           Contenido de Tournaments
@@ -157,7 +189,7 @@ function Home() {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/games");
+        const response = await axios.get("http://localhost:5000/api/games?active=1");
         setGames(response.data);
       } catch (err) {
         setError("Failed to load games");

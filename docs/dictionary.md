@@ -45,6 +45,7 @@ Stores competition details managed by an administrator.
 | **start_date** | DATETIME | Not Null | Scheduled start time. |
 | **status** | ENUM('open','ongoing','finished') | Not Null | Current state of the tournament. |
 | **creator_id** | INT | FK (USER.id), Not Null | Administrator who created the tournament. |
+| **is_active** | BOOLEAN | Not Null | Indicates if the tournament is available. |
 
 ---
 
