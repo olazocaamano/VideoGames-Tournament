@@ -72,3 +72,29 @@ Stores the competitive encounters and their results within a specific tournament
 | **player_2_id** | INT | FK (USER.id), Not Null | ID of the second participant. |
 | **winner_id** | INT | FK (USER.id), Nullable | ID of the player who won the match. |
 | **round** | VARCHAR(50) | Not Null | Tournament stage (e.g., 'Quarter-finals'). |
+
+## Table: ACTIVITY  
+Stores system event logs such as new users, new tournaments, added games, registrations, and match results.
+
+| Field | Type | Constraint | Description |
+| :--- | :--- | :--- | :--- |
+| **id** | INT | PK, Auto-increment | Unique identifier for each activity record. |
+| **user_id** | INT | FK (USER.id), Nullable | User who performed the action. |
+| **tournament_id** | INT | FK (TOURNAMENT.id), Nullable | Related tournament, if applicable. |
+| **game_id** | INT | FK (GAMES.id), Nullable | Related game, if applicable. |
+| **match_id** | INT | FK (MATCH.id), Nullable | Related match, if applicable. |
+| **action_type** | VARCHAR(50) | Not Null | Type of action (e.g., CREATE_USER, CREATE_TOURNAMENT, REGISTER, CREATE_MATCH). |
+| **description** | VARCHAR(255) | Not Null | Human-readable message displayed in the frontend. |
+| **created_at** | DATETIME | Not Null, Default CURRENT_TIMESTAMP | Date and time when the activity occurred. |
+
+## Table: MATCH
+Stores the competitive encounters and their results within a specific tournament.
+
+| Field | Type | Constraint | Description |
+| :--- | :--- | :--- | :--- |
+| **id** | INT | PK, Auto-increment | Match identifier. |
+| **tournament_id** | INT | FK (tournaments.id), Not Null | Tournament this match belongs to. |
+| **player_1_id** | INT | FK (user.id), Not Null | ID of the first participant. |
+| **player_2_id** | INT | FK (user.id), Not Null | ID of the second participant. |
+| **winner_id** | INT | FK (user.id), Nullable | ID of the player who won the match. |
+| **round** | VARCHAR(50) | Not Null | Tournament stage (e.g., 'Quarter-finals', 'Semi-finals', 'Final'). |

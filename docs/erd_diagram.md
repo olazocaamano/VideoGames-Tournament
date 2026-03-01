@@ -4,9 +4,16 @@ erDiagram
     USER ||--o{ REGISTRATION : "enrolls"
     USER ||--o{ MATCH : "participates_as_p1"
     USER ||--o{ MATCH : "participates_as_p2"
+    USER ||--o{ ACTIVITY : "generates"
+
     TOURNAMENT ||--o{ REGISTRATION : "has"
     TOURNAMENT ||--o{ MATCH : "organizes"
+    TOURNAMENT ||--o{ ACTIVITY : "related_to"
+
     GAMES ||--o{ TOURNAMENT : "belongs_to"
+    GAMES ||--o{ ACTIVITY : "related_to"
+
+    MATCH ||--o{ ACTIVITY : "related_to"
 
     USER {
         int id PK
@@ -52,5 +59,16 @@ erDiagram
         int player_2_id FK
         int winner_id FK
         varchar round
+    }
+
+    ACTIVITY {
+        int id PK
+        int user_id FK
+        int tournament_id FK
+        int game_id FK
+        int match_id FK
+        varchar action_type
+        varchar description
+        datetime created_at
     }
 ```

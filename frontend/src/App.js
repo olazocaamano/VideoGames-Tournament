@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Activity, useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
@@ -11,6 +11,10 @@ function Admin() {
   const [tournaments, setTournaments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [activities, setActivities] = useState([]);
+  const [loadinga, setLoadinga] = useState(true);
+  const [errora, setErrora] = useState(null);
 
   useEffect(() => {
     if (role !== "admin") {
@@ -40,13 +44,31 @@ function Admin() {
     fetchTournaments();
   }, []);
 
+
+  useEffect(() => {
+    const fetchActivies = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/activity");
+        setActivities(response.data);
+      } catch (err) {
+        setErrora("Failed to load activities :(");
+      } finally {
+        setLoadinga(false);
+      }
+    };
+
+    fetchActivies();
+  }, []);
+
   return (
     <div className="window-admin">
 
       <div className="bar">
 
         <div className="left">
-          <div className="circle"></div>
+          <div className="circle">
+            <img src="/images/iconos/administrador.png" alt="logo" />
+          </div>
           <h1>Administrator</h1>
         </div>
 
@@ -65,21 +87,45 @@ function Admin() {
             <h2>General Summary</h2>
           </div>
 
-          <div className="box-tournaments">
-            <h2>Active Tournaments</h2>
+          <div className="admin-container">
+            <div className="box-tournaments">
+              <div className="box-tournaments-content">
+                <h2>Active Tournaments</h2>
 
-            {loading && <p>Loading tournaments...</p>}
-            {error && <p>{error}</p>}
+                {loading && <p>Loading tournaments...</p>}
+                {error && <p>{error}</p>}
 
-            {!loading && !error && (
-              <ul>
-                {tournaments.map((tournament) => (
-                  <li key={tournament.id}>
-                    <strong><a href="/">{tournament.name}</a></strong> - <span className={`status ${tournament.status}`}>{tournament.status.toUpperCase()}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
+                {!loading && !error && (
+                  <ul>
+                    {tournaments.map((tournament) => (
+                      <li key={tournament.id}>
+                        <strong><a href="/">{tournament.name}</a></strong> - <span className={`status ${tournament.status}`}>{tournament.status.toUpperCase()}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+
+            <div className="box-activity">
+
+              <div className="box-activity-content">
+                <h2>Recent Activity</h2>
+
+                {loadinga && <p>Loading avtivities...</p>}
+                {errora && <p>{errora}</p>}
+
+                {!loadinga && !errora && (
+                  <ul>
+                    {activities.map((activity) =>
+                      <li key={activity.id}>
+                        <strong>{activity.description}</strong>
+                      </li>
+                    )}
+                  </ul>
+                )}
+              </div>
+            </div>
           </div>
 
         </div>}
