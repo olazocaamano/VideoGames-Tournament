@@ -15,6 +15,7 @@ body {
     opacity: 0;
     transform: translateY(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -28,7 +29,7 @@ body {
   min-height: calc(100vh - 80px);
   background-color: #222;
   border-radius: 30px;
-  box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
   padding: 30px;
   animation: fadeInUp 0.8s ease forwards;
 }
@@ -58,7 +59,7 @@ body {
   padding: 20px;
   background-color: #2e2e2e;
   border-radius: 20px;
-  box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
   overflow-y: auto;
   animation: fadeInUp 1s ease forwards;
 }
@@ -82,7 +83,7 @@ body {
   font-size: 18px;
 
   width: 90%;
-  border-bottom: 4px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
 }
 
 .statistics-button {
@@ -118,7 +119,7 @@ body {
   height: 380px;
   background-color: #2e2e2e;
   border-radius: 15px;
-  box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
   padding: 20px;
   animation: fadeInUp 1.2s ease forwards;
 }
@@ -213,7 +214,7 @@ button:hover {
   min-height: calc(100vh - 80px);
   background-color: #222;
   border-radius: 30px;
-  box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
   padding: 30px;
   animation: fadeInUp 0.8s ease forwards;
 }
@@ -225,7 +226,7 @@ button:hover {
   height: 70px;
   background-color: #206915;
   border-radius: 50%;
-  box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
   justify-content: space-between;
   align-items: center;
 
@@ -277,7 +278,7 @@ button:hover {
   margin-right: 30px;
 }
 
-.menu li button{
+.menu li button {
   text-decoration: none;
   color: white;
   font-weight: bold;
@@ -323,14 +324,17 @@ button:hover {
   align-content: center;
 }
 
-.left, .menu {
+.left,
+.menu {
   opacity: 0;
   animation: fadeIn 0.5s ease forwards;
   animation-delay: 0.9s;
 }
 
 @keyframes fadeIn {
-  to { opacity: 1; }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes expandBar {
@@ -360,7 +364,7 @@ button:hover {
   height: 560px;
   background-color: #222;
   border-radius: 30px;
-  box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
   padding: 10px;
 
   opacity: 0;
@@ -376,7 +380,7 @@ button:hover {
   border-radius: 30px;
   background-color: #1f1f1f;
   align-items: center;
-  box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .top h2 {
@@ -386,15 +390,17 @@ button:hover {
 .box-tournaments {
   display: flex;
   flex-direction: column;
-  margin: 10px 10px;
-  width: 25%;
+  margin: 10px;
+  width: 35%;
   height: 470px;
+  scrollbar-gutter: stable;
   border-radius: 30px;
+  overflow: hidden;
   background-color: #2f2f2f;
-  box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-.box-activity-content {
+.box-tournaments-content {
   display: flex;
   align-content: center;
   margin: 10px;
@@ -423,18 +429,48 @@ button:hover {
   background: rgba(120, 255, 120, 0.8);
 }
 
+.box-tournaments-content ul {
+  padding: 0;
+}
+
 .box-tournaments-content h2 {
   margin: 25px auto 5px auto;
   text-align: center;
 }
 
-.box-tournaments-content li {
+.box-tournaments-content ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 10px 0;
   font-size: 18px;
   list-style: none;
-  width: 90%;
+  width: 100%;
   border-bottom: 2px solid #ffffff;
+  padding-bottom: 5px;
 }
+
+.box-tournaments-content li .actions {
+  display: flex;
+  gap: 10px;
+}
+
+.box-tournaments-content li button {
+  padding: 4px 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background-color: #258816;
+  color: white;
+  transition: 0.2s;
+}
+
+.box-tournaments-content li button:hover {
+  background-color: #206915;
+  transform: scale(1.05);
+}
+
 
 .box-tournaments-content a {
   text-decoration: none;
@@ -481,7 +517,7 @@ button:hover {
   border-radius: 30px;
   overflow: hidden;
   background-color: #2f2f2f;
-  box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .box-activity-content {
@@ -528,4 +564,123 @@ button:hover {
   gap: 10px;
   padding: 0 20px;
   flex-wrap: wrap;
+}
+
+.box-button-add {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 10px;
+  width: 60%;
+  height: 100%;
+}
+
+.box-button-add button {
+  width: 100%;
+  height: 50px;
+  font-size: 25px;
+  font-style: bold;
+}
+
+.box-bottom-button {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  width: 40%;
+  height: 50%;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  border-radius: 30px;
+
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+
+  opacity: 0;
+  animation: fadeInOverlay 0.4s forwards;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background-color: #2f2f2f;
+  padding: 30px;
+  border-radius: 20px;
+  width: 500px;
+  max-width: 90%;
+  opacity: 0;
+  transform: translateY(-30px) scale(0.95);
+  animation: fadeInModal 0.5s forwards;
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.close-btn {
+  display: flex;
+  justify-content: center;
+  width: 10%;
+  background: #881616;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  padding: 5px 10px;
+  cursor: pointer;
+  float: right;
+  margin-bottom: 10px;
+}
+
+.close-btn:hover {
+  background: #eb0000;
+}
+
+.modal-edit {
+  background-color: #2f2f2f;
+  padding: 30px;
+  border-radius: 20px;
+  width: 500px;
+  max-width: 90%;
+  opacity: 0;
+  transform: translateY(-30px) scale(0.95);
+  animation: fadeInModal 0.5s forwards;
+}
+
+.modal-edit input,
+.modal-edit select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: #1f1f1f;
+  color: white;
+  font-size: 16px;
 }
