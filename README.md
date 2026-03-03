@@ -7,9 +7,4 @@
 |The QA/Tester|Lopez Gil Dilan Osmar|
 |The DBA(Admin)|Aguilar Medina Angel Uriel
 
-Este proyecto fue creado con la intención de alentar ambientes competitivos y sanos 
-en los cuales se puedan desempeñar torneos de videojuegos para que sea más accesible la creación 
-organización y de eventos de este tipo y equipos jugadores o cualquier sección interesada 
-este proyecto se divide en:
-(archivo seleccionado1)
-. . .
+This project was created with the intention of encouraging healthy and competitive environments in which video game tournaments can be held, making it more accessible for the creation, organization, and hosting of such events, and for teams, players, or any interested section. This project is divided into: (selected file 1) . . .
