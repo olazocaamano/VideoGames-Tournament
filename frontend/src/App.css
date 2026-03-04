@@ -310,7 +310,6 @@ button:hover {
 }
 
 .logout {
-  text-decoration: none;
   color: white;
   font-weight: bold;
   font-size: 25px;
@@ -378,9 +377,35 @@ button:hover {
   width: 98%;
   height: 50px;
   border-radius: 30px;
-  background-color: #1f1f1f;
+  background-color: #1c1c1c;
   align-items: center;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+  align-items: center;
+}
+
+.icono {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  margin-left: 5px;
+}
+
+.circ {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  background-color: #2f2f2f;
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-right: 5px;
+  overflow: hidden;
+}
+
+.circ img {
+  width: 55%;
+  height: 55%;
 }
 
 .top h2 {

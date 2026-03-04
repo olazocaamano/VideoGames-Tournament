@@ -271,6 +271,9 @@ function Admin() {
         {activeSection === "home" && (
           <div className="admin-box">
             <div className="top">
+              <div className="circle">
+                <img src="/images/iconos/general_summary.png" className="icono" />
+              </div>
               <h2>General Summary</h2>
             </div>
 
@@ -336,6 +339,9 @@ function Admin() {
         {activeSection === "tournaments" && (
           <div className="admin-box">
             <div className="top">
+              <div className="circle">
+                <img src="/images/iconos/tournament.png" />
+              </div>
               <h2>Tournament Control</h2>
             </div>
 
@@ -470,10 +476,28 @@ function Admin() {
           </div>
         )}
         {activeSection === "players" && (
-          <div className="admin-box">Contenido de Players</div>
+          <div className="admin-box">
+
+            <div className="top">
+              <div className="circle">
+                <img src="/images/iconos/players.png" />
+              </div>
+              <h2>Players Control</h2>
+            </div>
+
+          </div>
         )}
         {activeSection === "statistics" && (
-          <div className="admin-box">Contenido de Statistics</div>
+          <div className="admin-box">
+
+            <div className="top">
+              <div className="circ">
+                <img src="/images/iconos/statistics.png" className="icono_statistics" />
+              </div>
+              <h2>Statistics</h2>
+            </div>
+
+          </div>
         )}
       </div>
     </div>
