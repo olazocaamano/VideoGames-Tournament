@@ -4,7 +4,7 @@ This document describes the structure, data types, and constraints for the MySQL
 
 ---
 
-## Table: USER
+## Table: USERS
 Stores account data for administrators and players.
 
 | Field | Type | Constraint | Description |
@@ -33,7 +33,7 @@ Stores master data of supported esports titles.
 
 ---
 
-## Table: TOURNAMENT
+## Table: TOURNAMENTS
 Stores competition details managed by an administrator.
 
 | Field | Type | Constraint | Description |
@@ -61,17 +61,19 @@ Associative table for the Many-to-Many relationship between Users and Tournament
 
 ---
 
-## Table: MATCH
+## Table: MATCHES
 Stores the competitive encounters and their results within a specific tournament.
 
 | Field | Type | Constraint | Description |
 | :--- | :--- | :--- | :--- |
 | **id** | INT | PK, Auto-increment | Match identifier. |
-| **tournament_id** | INT | FK (TOURNAMENT.id), Not Null | Tournament this match belongs to. |
-| **player_1_id** | INT | FK (USER.id), Not Null | ID of the first participant. |
-| **player_2_id** | INT | FK (USER.id), Not Null | ID of the second participant. |
-| **winner_id** | INT | FK (USER.id), Nullable | ID of the player who won the match. |
-| **round** | VARCHAR(50) | Not Null | Tournament stage (e.g., 'Quarter-finals'). |
+| **tournament_id** | INT | FK (tournaments.id), Not Null | Tournament this match belongs to. |
+| **player_1_id** | INT | FK (user.id), Not Null | ID of the first participant. |
+| **player_2_id** | INT | FK (user.id), Not Null | ID of the second participant. |
+| **winner_id** | INT | FK (user.id), Nullable | ID of the player who won the match. |
+| **round** | VARCHAR(50) | Not Null | Tournament stage (e.g., 'Quarter-finals', 'Semi-finals', 'Final'). |
+
+---
 
 ## Table: ACTIVITY  
 Stores system event logs such as new users, new tournaments, added games, registrations, and match results.
@@ -86,15 +88,3 @@ Stores system event logs such as new users, new tournaments, added games, regist
 | **action_type** | VARCHAR(50) | Not Null | Type of action (e.g., CREATE_USER, CREATE_TOURNAMENT, REGISTER, CREATE_MATCH). |
 | **description** | VARCHAR(255) | Not Null | Human-readable message displayed in the frontend. |
 | **created_at** | DATETIME | Not Null, Default CURRENT_TIMESTAMP | Date and time when the activity occurred. |
-
-## Table: MATCH
-Stores the competitive encounters and their results within a specific tournament.
-
-| Field | Type | Constraint | Description |
-| :--- | :--- | :--- | :--- |
-| **id** | INT | PK, Auto-increment | Match identifier. |
-| **tournament_id** | INT | FK (tournaments.id), Not Null | Tournament this match belongs to. |
-| **player_1_id** | INT | FK (user.id), Not Null | ID of the first participant. |
-| **player_2_id** | INT | FK (user.id), Not Null | ID of the second participant. |
-| **winner_id** | INT | FK (user.id), Nullable | ID of the player who won the match. |
-| **round** | VARCHAR(50) | Not Null | Tournament stage (e.g., 'Quarter-finals', 'Semi-finals', 'Final'). |

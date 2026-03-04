@@ -1,28 +1,28 @@
 ```mermaid
 erDiagram
-    USER ||--o{ TOURNAMENT : "creates_manages"
-    USER ||--o{ REGISTRATION : "enrolls"
-    USER ||--o{ MATCH : "participates_as_p1"
-    USER ||--o{ MATCH : "participates_as_p2"
-    USER ||--o{ ACTIVITY : "generates"
+    USERS ||--o{ TOURNAMENTS : "creates_manages"
+    USERS ||--o{ REGISTRATION : "enrolls"
+    USERS ||--o{ MATCHES : "participates_as_p1"
+    USERS ||--o{ MATCHES : "participates_as_p2"
+    USERS ||--o{ ACTIVITY : "generates"
 
-    TOURNAMENT ||--o{ REGISTRATION : "has"
-    TOURNAMENT ||--o{ MATCH : "organizes"
-    TOURNAMENT ||--o{ ACTIVITY : "related_to"
+    TOURNAMENTS ||--o{ REGISTRATION : "has"
+    TOURNAMENTS ||--o{ MATCHS : "organizes"
+    TOURNAMENTS ||--o{ ACTIVITY : "related_to"
 
-    GAMES ||--o{ TOURNAMENT : "belongs_to"
+    GAMES ||--o{ TOURNAMENTS : "belongs_to"
     GAMES ||--o{ ACTIVITY : "related_to"
 
-    MATCH ||--o{ ACTIVITY : "related_to"
+    MATCHES ||--o{ ACTIVITY : "related_to"
 
-    USER {
+    USERS {
         int id PK
         varchar username
         varchar email
         varchar password
         varchar role
         varchar nickname
-        boolean is_active
+        boolean is_active   
     }
 
     GAMES {
@@ -34,7 +34,7 @@ erDiagram
         boolean is_active
     }
 
-    TOURNAMENT {
+    TOURNAMENTS {
         int id PK
         varchar name
         int game_id FK
@@ -52,7 +52,7 @@ erDiagram
         datetime registration_date
     }
 
-    MATCH {
+    MATCHES {
         int id PK
         int tournament_id FK
         int player_1_id FK
