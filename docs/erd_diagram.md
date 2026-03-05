@@ -7,7 +7,7 @@ erDiagram
     USERS ||--o{ ACTIVITY : "generates"
 
     TOURNAMENTS ||--o{ REGISTRATION : "has"
-    TOURNAMENTS ||--o{ MATCHS : "organizes"
+    TOURNAMENTS ||--o{ MATCHES: "organizes"
     TOURNAMENTS ||--o{ ACTIVITY : "related_to"
 
     GAMES ||--o{ TOURNAMENTS : "belongs_to"
