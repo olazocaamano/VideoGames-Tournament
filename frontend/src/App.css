@@ -52,6 +52,7 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  height: 500px;
 }
 
 .list-games {
@@ -89,7 +90,7 @@ body {
 .statistics-button {
   width: 100%;
   max-width: 965px;
-  margin: 0 auto 30px auto;
+  height: 55px;
   padding: 15px;
   background-color: #258816;
   border-radius: 10px;
@@ -112,10 +113,138 @@ body {
   flex-wrap: wrap;
 }
 
+.container-center {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 500px;
+}
+
+.carrousel {
+  margin: 20px auto;
+  height: 400px;
+  padding: 0;
+  flex-direction: row;
+  border-radius: 30px;
+}
+
+.carrousel-slide {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;  
+}
+
+.carrousel-inner {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+
+.carrousel-item {
+  min-width: 100%;
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carrousel-item img {
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  object-fit: contain;
+  border-radius: 40px;
+}
+
+.slide-info {
+  position: absolute;
+  bottom: 100px;
+  left: 150px;
+  color: white;
+  background: rgba(0, 0, 0, 0.402);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  max-height: 200px;
+}
+
+.slide-info h1 {
+  text-align: start;
+  font-size: 30px;
+  margin: 10px;
+}
+
+.slide-info p {
+  margin: 10px;
+  font-size: 15px;
+  text-align: justify;
+}
+
+.line-decorative {
+  border: none;
+  height: 4px;
+  width: 60%;
+  margin: 25px auto;
+  border-radius: 20px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.15) 20%,
+    rgba(255,255,255,0.9) 50%,
+    rgba(255,255,255,0.15) 80%,
+    rgba(255,255,255,0) 100%
+  );
+
+  background-size: 200% 100%;
+  animation: moveLine 3s linear infinite;
+}
+
+@keyframes moveLine {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.carrousel-indicators {
+  position: absolute;
+  bottom: 12px;
+  left: 15%;
+  width: 70%;
+  transform: translateY(-20%);
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.479);
+  border-radius: 40px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  margin: 0 6px;
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dot:hover {
+  background-color: white;
+}
+
+.dot.active {
+  background-color: white;
+  transform: scale(1.2);
+}
+
 .con-user,
 .con-admin {
-  flex: 1;
-  min-width: 300px;
+  margin: 0 auto;
+  width: 300px;
   height: 380px;
   background-color: #2e2e2e;
   border-radius: 15px;
@@ -124,9 +253,14 @@ body {
   animation: fadeInUp 1.2s ease forwards;
 }
 
+.con-admin {
+  margin-top: 170px;
+}
+
 .con-user h2,
 .con-admin h2 {
   text-align: center;
+  margin-top: 0;
   margin-bottom: 20px;
   font-size: 28px;
   border-bottom: 1px solid #555;
@@ -152,6 +286,22 @@ body {
 .resetPass a:hover,
 .register a:hover {
   color: rgb(120, 167, 86);
+}
+
+.admin-access {
+  text-align: start;
+}
+
+.admin-access a {
+  font-size: 12px;
+  color: rgb(86, 86, 86);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.admin-access a:hover {
+  text-decoration: underline;
+  color: black;
 }
 
 form {

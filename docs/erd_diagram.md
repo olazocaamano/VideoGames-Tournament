@@ -12,7 +12,7 @@ erDiagram
 
     GAMES ||--o{ TOURNAMENTS : "belongs_to"
     GAMES ||--o{ ACTIVITY : "related_to"
-
+    
     MATCHES ||--o{ ACTIVITY : "related_to"
 
     USERS {
@@ -71,4 +71,5 @@ erDiagram
         varchar description
         datetime created_at
     }
+    
 ```

@@ -544,28 +544,8 @@ function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const handleAdminLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/api/users/login",
-        { username, password }
-      );
-
-      const role = response.data.user.role;
-
-      localStorage.setItem("userId", response.data.user.id);
-
-      if (role === "admin") {
-        localStorage.setItem("role", role);
-        navigate("/admin");
-      } else {
-        setLoginMessage("Access denied. You are not an admin.");
-      }
-    } catch (error) {
-      setLoginMessage("Invalid credentials");
-    }
-  };
+  const [image_url, setImageUrl] = useState("");
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const handleUserLogin = async (e) => {
     e.preventDefault();
@@ -606,35 +586,72 @@ function Home() {
     fetchGames();
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) =>
+        prev === games.length - 1 ? 0 : prev + 1
+      );
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [games]);
+
   return (
     <div className="window">
       <h1>TOE | the platform for gamers</h1>
 
       <div className="content">
-        <div className="list-games">
-          <h2>List of available games</h2>
-          <p>(It is updated every day!)</p>
-
-          {loading && <p>Loading games...</p>}
-          {error && <p>{error}</p>}
-
-          {!loading && !error && (
-            <ul>
-              {games.map((game) => (
-                <li key={game.id}>
-                  <strong>{game.game_name}</strong> - {game.publisher}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
 
         <div className="right-panel">
-          <a href="index.html" className="statistics-button">
-            Statistics
-          </a>
 
           <div className="container">
+
+            <div className="container-center">
+              <a href="index.html" className="statistics-button">
+                Statistics
+              </a>
+
+              <div className="carrousel">
+                <div className="carrousel-slide">
+                  <div
+                    className="carrousel-inner"
+                    style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                  >
+                    {games.map((game) => (
+                      <div key={game.id} className="carrousel-item">
+
+                        <img
+                          className="d-block w-100"
+                          src={`http://localhost:5000${game.image_url}`}
+                          alt={game.game_name}
+                        />
+
+                        <div className="slide-info">
+                          <h1>{game.game_name}</h1>
+
+                          <hr className="line-decorative"></hr>
+
+                          <p>{game.description}</p>
+                        </div>
+
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="carrousel-indicators">
+                    {games.map((_, index) => (
+                      <span
+                        key={index}
+                        className={index === currentSlide ? "dot active" : "dot"}
+                        onClick={() => setCurrentSlide(index)}
+                      ></span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
             <div className="con-user">
               <h2>User</h2>
               <form onSubmit={handleUserLogin}>
@@ -660,47 +677,163 @@ function Home() {
                 <button type="submit">Login</button>
                 <div className="register">
                   <p>
-                    Don't have an account? <a href="/Register">Register</a>
+                    Don't have an account? <a href="/user/register">Register</a>
                   </p>
+                </div>
+                <div className="admin-access">
+                  <a href="/admin/login">Administrator access</a>
                 </div>
                 <p>{userMessage}</p>
               </form>
             </div>
 
-            <div className="con-admin">
-              <h2>Admin</h2>
-              <form onSubmit={handleAdminLogin}>
-                <input
-                  type="text"
-                  placeholder="Username"
-                  required
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <div className="resetPass">
-                  <p>
-                    Forgot your password? <a href="/Reset">Reset</a>
-                  </p>
-                </div>
-                <button type="submit">Login</button>
-                <div className="register">
-                  <p>
-                    Don't have an account <a href="/Register">Register</a>
-                  </p>
-                </div>
-                <p>{loginMessage}</p>
-              </form>
-            </div>
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function AdminLogin() {
+  const navigate = useNavigate();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginMessage, setLoginMessage] = useState("");
+
+  const handleAdminLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/users/login",
+        { username, password }
+      );
+
+      const role = response.data.user.role;
+
+      localStorage.setItem("userId", response.data.user.id);
+
+      if (role === "admin") {
+        localStorage.setItem("role", role);
+        navigate("/admin");
+      } else {
+        setLoginMessage("Access denied. You are not an admin.");
+      }
+    } catch (error) {
+      setLoginMessage("Invalid credentials");
+    }
+  };
+
+  return (
+    <div className="con-admin">
+      <h2>Admin</h2>
+      <form onSubmit={handleAdminLogin}>
+        <input
+          type="text"
+          placeholder="Username"
+          required
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <div className="resetPass">
+          <p>
+            Forgot your password? <a href="/Reset">Reset</a>
+          </p>
+        </div>
+        <button type="submit">Login</button>
+        <div className="register">
+          <p>
+            Don't have an account <a href="/user/register">Register</a>
+          </p>
+        </div>
+        <p>{loginMessage}</p>
+      </form>
+    </div>
+  );
+}
+
+function UserRegister() {
+  const navigate = useNavigate();
+
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [message, setMessage] = useState("");
+
+  const handleRegister = async (e) => {
+
+    e.preventDefault();
+
+    try {
+
+      const response = await fetch("http://localhost:5000/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          role: "user"
+        })
+      });
+
+      const data = await response.json();
+
+      setMessage(data.message);
+
+    } catch (error) {
+
+      setMessage("Server error");
+
+    }
+
+  };
+
+  return (
+    <div className="con-user">
+
+      <h2>Register</h2>
+
+      <form  onSubmit={handleRegister}>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button type="submit">Register</button>
+
+        <div className="register">
+          <p>Already have an account? <a href="/">Login</a></p>
+        </div>
+
+        <p>{message}</p>
+      </form>
     </div>
   );
 }
@@ -709,6 +842,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/user/register" element={<UserRegister />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/player" element={<Player />} />
     </Routes>
