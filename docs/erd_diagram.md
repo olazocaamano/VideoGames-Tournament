@@ -12,22 +12,22 @@ erDiagram
 
     GAMES ||--o{ TOURNAMENTS : "belongs_to"
     GAMES ||--o{ ACTIVITY : "related_to"
-    
+
     MATCHES ||--o{ ACTIVITY : "related_to"
 
     USERS {
         int id PK
-        varchar username
-        varchar email
+        varchar username UNIQUE
+        varchar email UNIQUE
         varchar password
         varchar role
         varchar nickname
-        boolean is_active   
+        boolean is_active
     }
 
     GAMES {
         int id PK
-        varchar game_name
+        varchar game_name UNIQUE
         varchar genre
         varchar publisher
         date release_date
@@ -50,6 +50,7 @@ erDiagram
         int user_id FK
         int tournament_id FK
         datetime registration_date
+        UNIQUE user_id, tournament_id
     }
 
     MATCHES {
@@ -71,5 +72,5 @@ erDiagram
         varchar description
         datetime created_at
     }
-    
+
 ```

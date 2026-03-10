@@ -10,12 +10,12 @@ Stores account data for administrators and players.
 | Field | Type | Constraint | Description |
 | :--- | :--- | :--- | :--- |
 | **id** | INT | PK, Auto-increment | Unique identifier for each user. |
-| **username** | VARCHAR(50) | Not Null | Unique name for system login. |
-| **email** | VARCHAR(100) | Not Null | User's electronic mail address. |
+| **username** | VARCHAR(50) | Not Null, Unique | Unique name for system login. |
+| **email** | VARCHAR(100) | Not Null, Unique | User's electronic mail address. |
 | **password** | VARCHAR(255) | Not Null | Hashed security credentials. |
 | **role** | VARCHAR(20) | Not Null | User type (e.g., 'admin', 'player'). |
 | **nickname** | VARCHAR(50) | Not Null | In-game name displayed in tournaments. |
-| **is_active** | BOOLEAN | Not Null | Indicates if the user is in any tournament. |
+| **is_active** | BOOLEAN | Not Null | Indicates if the user account is active. |
 
 ---
 
@@ -25,7 +25,7 @@ Stores master data of supported esports titles.
 | Field | Type | Constraint | Description |
 | :--- | :--- | :--- | :--- |
 | **id** | INT | PK, Auto-increment | Unique identifier for each game. |
-| **game_name** | VARCHAR(100) | Not Null | Official title of the game. |
+| **game_name** | VARCHAR(100) | Not Null, Unique | Official title of the game. |
 | **genre** | VARCHAR(50) | Not Null | Game category (e.g., FPS, MOBA). |
 | **publisher** | VARCHAR(100) | Nullable | Company that publishes the game. |
 | **release_date** | DATE | Nullable | Official launch date. |
@@ -44,7 +44,7 @@ Stores competition details managed by an administrator.
 | **prize_pool** | DECIMAL(12,2) | Not Null | Total monetary prize amount. |
 | **start_date** | DATETIME | Not Null | Scheduled start time. |
 | **status** | ENUM('open','ongoing','finished') | Not Null | Current state of the tournament. |
-| **creator_id** | INT | FK (USER.id), Not Null | Administrator who created the tournament. |
+| **creator_id** | INT | FK (USERS.id), Not Null | Administrator who created the tournament. |
 | **is_active** | BOOLEAN | Not Null | Indicates if the tournament is available. |
 
 ---
@@ -55,9 +55,15 @@ Associative table for the Many-to-Many relationship between Users and Tournament
 | Field | Type | Constraint | Description |
 | :--- | :--- | :--- | :--- |
 | **id** | INT | PK, Auto-increment | Registration record identifier. |
-| **user_id** | INT | FK (USER.id), Not Null | ID of the player signing up. |
-| **tournament_id** | INT | FK (TOURNAMENT.id), Not Null | ID of the tournament being joined. |
+| **user_id** | INT | FK (USERS.id), Not Null | ID of the player signing up. |
+| **tournament_id** | INT | FK (TOURNAMENTS.id), Not Null | ID of the tournament being joined. |
 | **registration_date** | DATETIME | Not Null | Date and time of enrollment. |
+
+### Additional Constraint
+
+| Constraint | Description |
+|---|---|
+| **UNIQUE(user_id, tournament_id)** | Prevents a user from registering more than once in the same tournament. |
 
 ---
 
@@ -67,10 +73,10 @@ Stores the competitive encounters and their results within a specific tournament
 | Field | Type | Constraint | Description |
 | :--- | :--- | :--- | :--- |
 | **id** | INT | PK, Auto-increment | Match identifier. |
-| **tournament_id** | INT | FK (tournaments.id), Not Null | Tournament this match belongs to. |
-| **player_1_id** | INT | FK (user.id), Not Null | ID of the first participant. |
-| **player_2_id** | INT | FK (user.id), Not Null | ID of the second participant. |
-| **winner_id** | INT | FK (user.id), Nullable | ID of the player who won the match. |
+| **tournament_id** | INT | FK (TOURNAMENTS.id), Not Null | Tournament this match belongs to. |
+| **player_1_id** | INT | FK (USERS.id), Not Null | ID of the first participant. |
+| **player_2_id** | INT | FK (USERS.id), Not Null | ID of the second participant. |
+| **winner_id** | INT | FK (USERS.id), Nullable | ID of the player who won the match. |
 | **round** | VARCHAR(50) | Not Null | Tournament stage (e.g., 'Quarter-finals', 'Semi-finals', 'Final'). |
 
 ---
@@ -81,10 +87,10 @@ Stores system event logs such as new users, new tournaments, added games, regist
 | Field | Type | Constraint | Description |
 | :--- | :--- | :--- | :--- |
 | **id** | INT | PK, Auto-increment | Unique identifier for each activity record. |
-| **user_id** | INT | FK (USER.id), Nullable | User who performed the action. |
-| **tournament_id** | INT | FK (TOURNAMENT.id), Nullable | Related tournament, if applicable. |
+| **user_id** | INT | FK (USERS.id), Nullable | User who performed the action. |
+| **tournament_id** | INT | FK (TOURNAMENTS.id), Nullable | Related tournament, if applicable. |
 | **game_id** | INT | FK (GAMES.id), Nullable | Related game, if applicable. |
-| **match_id** | INT | FK (MATCH.id), Nullable | Related match, if applicable. |
+| **match_id** | INT | FK (MATCHES.id), Nullable | Related match, if applicable. |
 | **action_type** | VARCHAR(50) | Not Null | Type of action (e.g., CREATE_USER, CREATE_TOURNAMENT, REGISTER, CREATE_MATCH). |
 | **description** | VARCHAR(255) | Not Null | Human-readable message displayed in the frontend. |
 | **created_at** | DATETIME | Not Null, Default CURRENT_TIMESTAMP | Date and time when the activity occurred. |

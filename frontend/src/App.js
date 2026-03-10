@@ -591,7 +591,7 @@ function Home() {
       setCurrentSlide((prev) =>
         prev === games.length - 1 ? 0 : prev + 1
       );
-    }, 2000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [games]);
