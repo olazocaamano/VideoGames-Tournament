@@ -1,4 +1,4 @@
-## Version v0.7.2 – Correction of Tables and Data Dictionary
+## Version v0.7.2 – Correction of Tables and Data Dictionary (March 10, 2026)
 
 Corrections were applied to the database tables and the data dictionary based on the suggestions provided by **The Query Master** and **The SQL Tester**. These adjustments improve consistency, constraints, and relational integrity in the database design.
 
