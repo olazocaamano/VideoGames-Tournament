@@ -15,7 +15,7 @@ This table defines the prefixes used to identify which component of the system i
 | **CONFIG** | Configuration | Changes in system configuration files, environment variables, or runtime settings. | [CONFIG]-0.2.3 |
 
 
-## Version [DOC]-v0.7.105 - Version documentation is added.
+## Version [DOC]-v0.7.105 - Version documentation is added. (March 10, 2026)
 
 The CHANGELOG.md file was created to better record program versions, allowing for detailed visualization of changes and improving workflow.
 
