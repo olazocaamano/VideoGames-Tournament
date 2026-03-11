@@ -393,45 +393,15 @@ function Admin() {
                       <h2>Create Tournament</h2>
 
                       <form onSubmit={handleCreateTournament}>
-                        <input
-                          type="text"
-                          name="name"
-                          placeholder="Tournament name"
-                          required
-                          value={newTournament.name}
-                          onChange={handleChange}
-                        />
+                        <input type="text" name="name" placeholder="Tournament name" required value={newTournament.name} onChange={handleChange} />
 
-                        <input
-                          type="number"
-                          name="game_id"
-                          placeholder="Game ID"
-                          required
-                          value={newTournament.game_id}
-                          onChange={handleChange}
-                        />
+                        <input type="number" name="game_id" placeholder="Game ID" required value={newTournament.game_id} onChange={handleChange} />
 
-                        <input
-                          type="number"
-                          name="prize_pool"
-                          placeholder="Prize Pool"
-                          value={newTournament.prize_pool}
-                          onChange={handleChange}
-                        />
+                        <input type="number" name="prize_pool" placeholder="Prize Pool" value={newTournament.prize_pool} onChange={handleChange} />
 
-                        <input
-                          type="datetime-local"
-                          name="start_date"
-                          required
-                          value={newTournament.start_date}
-                          onChange={handleChange}
-                        />
+                        <input type="datetime-local" name="start_date" required value={newTournament.start_date} onChange={handleChange} />
 
-                        <select
-                          name="status"
-                          value={newTournament.status}
-                          onChange={handleChange}
-                        >
+                        <select name="status" value={newTournament.status} onChange={handleChange}>
                           <option value="open">Open</option>
                           <option value="ongoing">Ongoing</option>
                           <option value="finished">Finished</option>
@@ -804,7 +774,7 @@ function UserRegister() {
 
       <h2>Register</h2>
 
-      <form  onSubmit={handleRegister}>
+      <form onSubmit={handleRegister}>
         <input
           type="text"
           placeholder="Username"
