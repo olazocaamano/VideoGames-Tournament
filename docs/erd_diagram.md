@@ -2,18 +2,18 @@
 erDiagram
     USERS ||--o{ TOURNAMENTS : creates
     USERS ||--o{ REGISTRATION : registers
-    USERS ||--o{ MATCHES : plays
-    USERS ||--o{ MATCHES : wins
+    USERS ||--o{ MATCHES : participates
+    USERS ||--o{ MATCHES : winner_of
     USERS ||--o{ ACTIVITY : generates
 
-    GAMES ||--o{ TOURNAMENTS : has
+    GAMES ||--o{ TOURNAMENTS : used_in
 
-    TOURNAMENTS ||--o{ REGISTRATION : has
+    TOURNAMENTS ||--o{ REGISTRATION : accepts
     TOURNAMENTS ||--o{ MATCHES : organizes
     TOURNAMENTS ||--o{ ACTIVITY : related_to
 
-    MATCHES ||--o{ ACTIVITY : related_to
-    GAMES ||--o{ ACTIVITY : related_to
+    MATCHES ||--o{ ACTIVITY : logs
+    GAMES ||--o{ ACTIVITY : logs
 
     USERS {
         int id PK

@@ -24,10 +24,12 @@ The CHANGELOG.md file was created to better record program versions, allowing fo
 - The `CHANGELOG.md` file was added.
 - The "Version Dictionary" table was added to the `CHANGELOG.md` file, specifying in which area the change was made.
 
+
 ---
 
 
-## Version [DOC]-v0.7.2 – Correction of Tables and Data Dictionary (March 10, 2026)
+
+## Version [DB]-v0.7.2 – Correction of Tables and Data Dictionary (March 10, 2026)
 
 Corrections were applied to the database tables and the data dictionary based on the suggestions provided by **The Query Master** and **The SQL Tester**. These adjustments improve consistency, constraints, and relational integrity in the database design.
 
@@ -37,3 +39,27 @@ Corrections were applied to the database tables and the data dictionary based on
 - Improved descriptions in the **Data Dictionary** for better clarity and accuracy.
 - Added a composite constraint `UNIQUE(user_id, tournament_id)` in the **REGISTRATION** table to prevent duplicate registrations.
 - Standardized naming of tables and fields across the schema.
+
+
+---
+
+
+## Version [DB]-v0.7.206 - Correction of Relationship Names (March 11, 2026)
+
+The names of the relationships between tables were updated to improve clarity and readability.  
+These changes were suggested by **The Query Master** together with the **Database Administrator**, who identified that some relationship descriptions were ambiguous or inconsistent.
+
+### Changes
+- Updated relationship **GAMES → TOURNAMENTS**
+  - `belongs_to` → `used_in`
+  - Clarifies that tournaments are played using a specific game.
+
+- Updated relationship **TOURNAMENTS → REGISTRATION**
+  - `belongs_to` → `accepts`
+  - Represents that tournaments accept multiple registrations.
+
+- Corrected typo in relationships with **ACTIVITY**
+  - `longs` → `logs`
+  - Indicates that activity records or logs actions related to matches and games.
+
+- Improved semantic clarity in relationship descriptions to better reflect system behavior.
