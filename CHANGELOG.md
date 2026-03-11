@@ -14,6 +14,7 @@ This table defines the prefixes used to identify which component of the system i
 | **DOC** | Documentation | Updates or corrections to technical documentation, guides, or project specifications. | [DOC]-1.0.1 |
 | **CONFIG** | Configuration | Changes in system configuration files, environment variables, or runtime settings. | [CONFIG]-0.2.3 |
 
+---
 
 ## Version [DOC]-v0.7.105 - Version documentation is added. (March 10, 2026)
 
@@ -23,7 +24,7 @@ The CHANGELOG.md file was created to better record program versions, allowing fo
 - The `CHANGELOG.md` file was added.
 - The "Version Dictionary" table was added to the `CHANGELOG.md` file, specifying in which area the change was made.
 
-
+---
 
 
 ## Version [DOC]-v0.7.2 – Correction of Tables and Data Dictionary (March 10, 2026)
