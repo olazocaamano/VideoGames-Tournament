@@ -1,10 +1,36 @@
-**ROLES**
-|ROL|Nombre|
-|:--|:--|
-|The Analist & Designer|Galán Torres Citlalli|
-|The SQL Developer|Olazo Caamaño Emmanuel|
-|The Query Master|Jimenez Solis Caleb|
-|The QA/Tester|Lopez Gil Dilan Osmar|
-|The DBA(Admin)|Aguilar Medina Angel Uriel
+# eSports Tournament Database System
 
-This project was created with the intention of encouraging healthy and competitive environments in which video game tournaments can be held, making it more accessible for the creation, organization, and hosting of such events, and for teams, players, or any interested section. This project is divided into: (selected file 1) . . .
+## Project Overview
+This project was created to promote healthy and competitive environments where video game tournaments can be organized and managed efficiently. The system is designed to simplify the creation, administration, and participation in tournaments, making it accessible for players, teams, and organizers interested in competitive gaming events.
+
+The database structure supports the management of users, games, tournaments, matches, registrations, and activity tracking within the platform.
+
+The project is divided into the following components:
+- **Database Design**
+- **Entity-Relationship Diagram**
+- **Data Dictionary**
+- **SQL Implementation**
+- **Query Development**
+- **Testing and Validation**
+
+---
+
+## Current Version
+The latest version of the database design and system updates can always be found in the **CHANGELOG**.
+
+Latest updates and improvements:  
+**[View the latest version in the CHANGELOG](CHANGELOG.md)**
+
+This repository is updated weekly with improvements, corrections, and structural updates.
+
+---
+
+## Team Roles
+
+| Role | Name |
+|:--|:--|
+| The Analist & Designer | Galán Torres Citlalli |
+| The SQL Developer | Olazo Caamaño Emmanuel |
+| The Query Master | Jimenez Solis Caleb |
+| The QA/Tester | Lopez Gil Dilan Osmar |
+| The DBA (Admin) | Aguilar Medina Angel Uriel |
