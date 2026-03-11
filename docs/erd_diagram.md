@@ -1,26 +1,27 @@
 ```mermaid
 erDiagram
-    USERS ||--o{ TOURNAMENTS : "creates_manages"
-    USERS ||--o{ REGISTRATION : "enrolls"
-    USERS ||--o{ MATCHES : "participates_as_p1"
-    USERS ||--o{ MATCHES : "participates_as_p2"
+    USERS ||--o{ TOURNAMENTS : "creates"
+    USERS ||--o{ REGISTRATION : "registers"
+    USERS ||--o{ MATCHES : "plays"
+    USERS ||--o{ MATCHES : "wins"
     USERS ||--o{ ACTIVITY : "generates"
+
+    GAMES ||--o{ TOURNAMENTS : "has"
 
     TOURNAMENTS ||--o{ REGISTRATION : "has"
     TOURNAMENTS ||--o{ MATCHES: "organizes"
     TOURNAMENTS ||--o{ ACTIVITY : "related_to"
 
-    GAMES ||--o{ TOURNAMENTS : "belongs_to"
-    GAMES ||--o{ ACTIVITY : "related_to"
-
     MATCHES ||--o{ ACTIVITY : "related_to"
+
+    GAMES ||--o{ ACTIVITY : "related_to"
 
     USERS {
         int id PK
         varchar username UNIQUE
         varchar email UNIQUE
         varchar password
-        varchar role
+        enum role
         varchar nickname
         boolean is_active
     }
