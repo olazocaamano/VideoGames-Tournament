@@ -1,25 +1,24 @@
 ```mermaid
 erDiagram
-    USERS ||--o{ TOURNAMENTS : "creates"
-    USERS ||--o{ REGISTRATION : "registers"
-    USERS ||--o{ MATCHES : "plays"
-    USERS ||--o{ MATCHES : "wins"
-    USERS ||--o{ ACTIVITY : "generates"
+    USERS ||--o{ TOURNAMENTS : creates
+    USERS ||--o{ REGISTRATION : registers
+    USERS ||--o{ MATCHES : plays
+    USERS ||--o{ MATCHES : wins
+    USERS ||--o{ ACTIVITY : generates
 
-    GAMES ||--o{ TOURNAMENTS : "has"
+    GAMES ||--o{ TOURNAMENTS : has
 
-    TOURNAMENTS ||--o{ REGISTRATION : "has"
-    TOURNAMENTS ||--o{ MATCHES: "organizes"
-    TOURNAMENTS ||--o{ ACTIVITY : "related_to"
+    TOURNAMENTS ||--o{ REGISTRATION : has
+    TOURNAMENTS ||--o{ MATCHES : organizes
+    TOURNAMENTS ||--o{ ACTIVITY : related_to
 
-    MATCHES ||--o{ ACTIVITY : "related_to"
-
-    GAMES ||--o{ ACTIVITY : "related_to"
+    MATCHES ||--o{ ACTIVITY : related_to
+    GAMES ||--o{ ACTIVITY : related_to
 
     USERS {
         int id PK
-        varchar username UNIQUE
-        varchar email UNIQUE
+        varchar username
+        varchar email
         varchar password
         enum role
         varchar nickname
@@ -28,7 +27,7 @@ erDiagram
 
     GAMES {
         int id PK
-        varchar game_name UNIQUE
+        varchar game_name
         varchar genre
         varchar publisher
         date release_date
@@ -37,12 +36,12 @@ erDiagram
 
     TOURNAMENTS {
         int id PK
-        varchar name
         int game_id FK
+        int creator_id FK
+        varchar name
         decimal prize_pool
         datetime start_date
         enum status
-        int creator_id FK
         boolean is_active
     }
 
@@ -51,7 +50,6 @@ erDiagram
         int user_id FK
         int tournament_id FK
         datetime registration_date
-        UNIQUE user_id, tournament_id
     }
 
     MATCHES {
@@ -73,5 +71,4 @@ erDiagram
         varchar description
         datetime created_at
     }
-
 ```
