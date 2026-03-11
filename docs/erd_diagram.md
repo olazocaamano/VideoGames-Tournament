@@ -12,6 +12,8 @@ erDiagram
     TOURNAMENTS ||--o{ MATCHES : organizes
     TOURNAMENTS ||--o{ ACTIVITY : related_to
 
+    STATUS ||--o{ TOURNAMENTS : defines
+
     MATCHES ||--o{ ACTIVITY : logs
     GAMES ||--o{ ACTIVITY : logs
 
@@ -70,5 +72,11 @@ erDiagram
         varchar action_type
         varchar description
         datetime created_at
+    }
+
+    STATUS {
+        int id PK
+        varchar name
+        varchar description
     }
 ```

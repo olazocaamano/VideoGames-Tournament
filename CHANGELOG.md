@@ -63,3 +63,22 @@ These changes were suggested by **The Query Master** together with the **Databas
   - Indicates that activity records or logs actions related to matches and games.
 
 - Improved semantic clarity in relationship descriptions to better reflect system behavior.
+
+
+---
+
+
+## Version [DB]-v0.7.207 - Implementation of STATUS Table (March 11, 2026)
+
+The **STATUS** table was introduced to improve the management of status values used in the system.  
+Instead of storing the status as a specific field using an ENUM type, it was replaced with a relational approach by creating a separate table and linking it through a foreign key.
+
+This change was suggested by the **Database Administrator (DBA)**, who identified that using a dedicated table would provide better flexibility, normalization, and scalability for the database design.
+
+### Changes
+- Added new table **STATUS** to store tournament status values.
+- Removed the **ENUM status** field from the **TOURNAMENTS** table.
+- Added the field **status_id** in **TOURNAMENTS** as a foreign key referencing **STATUS.id**.
+- Established a new relationship between **STATUS** and **TOURNAMENTS** to manage tournament states through relational data.
+- Improved database normalization and future scalability by replacing ENUM with a catalog table.
+- Field `status -> status_id`.

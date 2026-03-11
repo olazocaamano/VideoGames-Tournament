@@ -43,7 +43,7 @@ Stores competition details managed by an administrator.
 | **game_id** | INT | FK (GAMES.id), Not Null | Game associated with the tournament. |
 | **prize_pool** | DECIMAL(12,2) | Not Null | Total monetary prize amount. |
 | **start_date** | DATETIME | Not Null | Scheduled start time. |
-| **status** | ENUM('open','ongoing','finished') | Not Null | Current state of the tournament. |
+| **status_id** | INT| FK → STATUS.id | Current state of the tournament. |
 | **creator_id** | INT | FK (USERS.id), Not Null | Administrator who created the tournament. |
 | **is_active** | BOOLEAN | Not Null | Indicates if the tournament is available. |
 
@@ -94,3 +94,14 @@ Stores system event logs such as new users, new tournaments, added games, regist
 | **action_type** | VARCHAR(50) | Not Null | Type of action (e.g., CREATE_USER, CREATE_TOURNAMENT, REGISTER, CREATE_MATCH). |
 | **description** | VARCHAR(255) | Not Null | Human-readable message displayed in the frontend. |
 | **created_at** | DATETIME | Not Null, Default CURRENT_TIMESTAMP | Date and time when the activity occurred. |
+
+---
+
+## Table: STATUS
+Stores the possible status values that can be assigned to tournaments.
+
+| Field | Type | Constraint | Description |
+|------|------|-----------|-------------|
+| **id** | INT | PK, Auto-increment | Unique identifier for each status. |
+| **name** | VARCHAR(50) | UNIQUE, NOT NULL | Name of the tournament status. |
+| **description** | VARCHAR(255) | NULL | Optional description of the status. |
