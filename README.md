@@ -18,10 +18,7 @@ The project is divided into the following components:
 ## Current Version
 The latest version of the database design and system updates can always be found in the **CHANGELOG**.
 
-Latest updates and improvements:  
-**[View the latest version in the CHANGELOG](CHANGELOG.md)**
-
-This repository is updated weekly with improvements, corrections, and structural updates.
+[![Version](https://img.shields.io/badge/version-v0.7.4-blue)](CHANGELOG.md)
 
 ---
 
