@@ -24,7 +24,7 @@ erDiagram
         varchar username
         varchar email
         varchar password
-        enum role
+        int role_id FK
         varchar nickname
         boolean is_active
     }
@@ -45,7 +45,7 @@ erDiagram
         varchar name
         decimal prize_pool
         datetime start_date
-        enum status
+        int status_id FK
         boolean is_active
     }
 

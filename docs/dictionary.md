@@ -136,3 +136,5 @@ The following table summarizes the main relationships between entities in the da
 | MATCHES | ACTIVITY | 1 : N | Matches may generate activity records. |
 | GAMES | ACTIVITY | 1 : N | Games may be referenced in activity logs. |
 | TOURNAMENTS | ACTIVITY | 1 : N | Tournament events may generate activity records. |
+
+
