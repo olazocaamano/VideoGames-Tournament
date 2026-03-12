@@ -1,4 +1,25 @@
-## Version [DB]-v0.7.3 - Implementation of STATUS Table (March 11, 2026)
+
+
+---
+
+## Version [DB]-v0.7.308 - Implementation of ROLES Table (March 12, 2026)
+
+The **ROLES** table was added to improve role management in the system.  
+Instead of storing user roles as an ENUM field in the **USERS** table, a relational approach was implemented using a dedicated table and a foreign key.
+
+This change improves database normalization, flexibility, and consistency in role assignment.
+
+### Changes
+
+- Added new table **ROLES** to store system roles.
+- Removed the **ENUM role** field from the **USERS** table.
+- Added field **role_id** in **USERS** as a foreign key referencing **ROLES.id**.
+- Established a new relationship between **ROLES** and **USERS**.
+- Improved database normalization by replacing ENUM with a relational role catalog.
+
+---
+
+## Version-Official [DB]-v0.7.3 - Implementation of STATUS Table (March 11, 2026)
 
 The **STATUS** table was introduced to improve the management of status values used in the system.  
 Instead of storing the status as a specific field using an ENUM type, it was replaced with a relational approach by creating a separate table and linking it through a foreign key.

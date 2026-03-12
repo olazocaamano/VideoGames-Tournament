@@ -14,6 +14,8 @@ erDiagram
 
     STATUS ||--o{ TOURNAMENTS : defines
 
+    ROLES ||--o{ USERS : assigns
+
     MATCHES ||--o{ ACTIVITY : logs
     GAMES ||--o{ ACTIVITY : logs
 
@@ -78,5 +80,13 @@ erDiagram
         int id PK
         varchar name
         varchar description
+        boolean is_active
+    }
+
+    ROLES {
+        int id PK
+        varchar role_name
+        varchar description
+        boolean is_active
     }
 ```

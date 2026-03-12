@@ -13,7 +13,7 @@ Stores account data for administrators and players.
 | **username** | VARCHAR(50) | Not Null, Unique | Unique name for system login. |
 | **email** | VARCHAR(100) | Not Null, Unique | User's electronic mail address. |
 | **password** | VARCHAR(255) | Not Null | Hashed security credentials. |
-| **role** | VARCHAR(20) | Not Null | User type (e.g., 'admin', 'player'). |
+| **role_id** | INT | FK (ROLES.id), Not Null | Role assigned to the user. |
 | **nickname** | VARCHAR(50) | Not Null | In-game name displayed in tournaments. |
 | **is_active** | BOOLEAN | Not Null | Indicates if the user account is active. |
 
@@ -102,6 +102,18 @@ Stores the possible status values that can be assigned to tournaments.
 
 | Field | Type | Constraint | Description |
 |------|------|-----------|-------------|
-| **id** | INT | PK, Auto-increment | Unique identifier for each status. |
+| **status_id** | INT | FK (STATUS.id), Not Null | Current state of the tournament. |
 | **name** | VARCHAR(50) | UNIQUE, NOT NULL | Name of the tournament status. |
 | **description** | VARCHAR(255) | NULL | Optional description of the status. |
+| **is_active** | BOOLEAN | DEFAULT TRUE | Indicates if the status is currently available. |
+---
+
+### Table: ROLES
+
+| Field | Type | Constraints | Description |
+|------|------|------|------|
+| id | INT | PK, AUTO_INCREMENT | Unique identifier for each role in the system. |
+| role_name | VARCHAR(50) | NOT NULL, UNIQUE | Name of the role assigned to users (e.g., admin, player, organizer). |
+| description | VARCHAR(255) | NULL | Brief explanation of the role and its permissions within the system. |
+| is_active | BOOLEAN | DEFAULT TRUE | Indicates whether the role is currently active in the system. |
+
