@@ -117,3 +117,22 @@ Stores the possible status values that can be assigned to tournaments.
 | description | VARCHAR(255) | NULL | Brief explanation of the role and its permissions within the system. |
 | is_active | BOOLEAN | DEFAULT TRUE | Indicates whether the role is currently active in the system. |
 
+---
+
+## Entity Relationship Summary
+
+The following table summarizes the main relationships between entities in the database.
+
+| Parent Table | Child Table | Relationship | Description |
+|---|---|---|---|
+| ROLES | USERS | 1 : N | A role can be assigned to many users. |
+| STATUS | TOURNAMENTS | 1 : N | A status can be applied to multiple tournaments. |
+| GAMES | TOURNAMENTS | 1 : N | A game can have multiple tournaments associated with it. |
+| USERS | REGISTRATION | 1 : N | A user can register for multiple tournaments. |
+| TOURNAMENTS | REGISTRATION | 1 : N | A tournament can accept multiple player registrations. |
+| USERS | TOURNAMENTS | N : M | A user can participate in multiple tournaments and a tournament can have multiple users. This relationship is implemented through the **REGISTRATION** table. |
+| TOURNAMENTS | MATCHES | 1 : N | A tournament organizes multiple matches. |
+| USERS | MATCHES | 1 : N | Users participate in matches as players. |
+| MATCHES | ACTIVITY | 1 : N | Matches may generate activity records. |
+| GAMES | ACTIVITY | 1 : N | Games may be referenced in activity logs. |
+| TOURNAMENTS | ACTIVITY | 1 : N | Tournament events may generate activity records. |
