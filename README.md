@@ -18,7 +18,7 @@ The project is divided into the following components:
 ## Current Version
 The latest version of the database design and system updates can always be found in the **CHANGELOG**.
 
-[![Version](https://img.shields.io/badge/version-v0.7.4-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v0.7.4-blue)](https://github.com/olazocaamano/VideoGames-Tournament/blob/main/CHANGELOG.md#version-doc-v074---data-dictionary-relationship-summary-added-march-12-2026)
 
 ---
 
