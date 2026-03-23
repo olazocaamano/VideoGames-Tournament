@@ -26,7 +26,7 @@ The latest version of the database design and system updates can always be found
 
 | Role | Name |
 |:--|:--|
-| The Analist & Designer | Galán Torres Citlalli |
+| The Analyst & Designer | Galán Torres Citlalli |
 | The SQL Developer | Olazo Caamaño Emmanuel |
 | The Query Master | Jimenez Solis Caleb |
 | The QA/Tester | Lopez Gil Dilan Osmar |
