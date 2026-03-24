@@ -12,23 +12,23 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.register = async (req, res) => {
-    const { username, email, password, role } = req.body;
+    const { username, email, password, role_id } = req.body;
 
     try {
         const [result] = await db.query(
             `
-            INSERT INTO users (username, email, password, role, is_active)
+            INSERT INTO users (username, email, password, role_id, is_active)
             VALUES (?, ?, ?, ?, 1)
             `,
-            [username, email, password, role]
+            [username, email, password, role_id]
         );
 
         const newUserId = result.insertId;
 
         await logActivity({
             user_id: newUserId,
-            action_type: role === "admin" ? "NEW_ADMIN" : "NEW_USER",
-            description: role === "admin"
+            action_type: role_id === 1 ? "NEW_ADMIN" : "NEW_USER",
+            description: role_id === 1
                 ? `New administrator added: ${username}`
                 : `New user registered: ${username}`
         });
@@ -46,7 +46,14 @@ exports.login = async (req, res) => {
 
     try {
         const [results] = await db.query(
-            'SELECT id, username, role FROM users WHERE username = ? AND password = ?',
+            `SELECT 
+                u.id, 
+                u.username, 
+                r.role_name 
+            FROM users u
+            INNER JOIN roles r ON u.role_id = r.id
+            WHERE u.username = ? AND u.password = ?`,
+
             [username, password]
         );
 

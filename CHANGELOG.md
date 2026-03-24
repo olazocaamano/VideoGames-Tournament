@@ -4,17 +4,47 @@
 
 This table defines the prefixes used to identify which component of the system is affected by a version change.
 
-| Prefix | Component | Description | Example Version |
-|------|------|------|------|
-| **FE** | Frontend | Changes in the user interface, visual components, client-side logic, or user experience. | [FE]-1.2.0 |
-| **BE** | Backend | Changes in server-side logic, services, controllers, authentication, or application processing. | [BE]-2.0.1 |
-| **API** | API Services | Changes to API endpoints, request/response structure, or service contracts. | [API]-1.3.0 |
-| **DB** | Database | Modifications to database schema, tables, relationships, migrations, or constraints. | [DB]-1.1.0 |
-| **SEC** | Security | Security fixes, vulnerability patches, authentication improvements, or access control changes. | [SEC]-1.0.2 |
-| **INFRA** | Infrastructure | Changes related to deployment, servers, containers, CI/CD pipelines, or environment configuration. | [INFRA]-0.4.1 |
-| **TEST** | Testing | Addition or modification of automated tests, test cases, or testing environments. | [TEST]-0.3.0 |
-| **DOC** | Documentation | Updates or corrections to technical documentation, guides, or project specifications. | [DOC]-1.0.1 |
-| **CONFIG** | Configuration | Changes in system configuration files, environment variables, or runtime settings. | [CONFIG]-0.2.3 |
+| Prefix     | Component      | Description                                                                                        | Example Version |
+| ---------- | -------------- | -------------------------------------------------------------------------------------------------- | --------------- |
+| **FE**     | Frontend       | Changes in the user interface, visual components, client-side logic, or user experience.           | [FE]-1.2.0      |
+| **BE**     | Backend        | Changes in server-side logic, services, controllers, authentication, or application processing.    | [BE]-2.0.1      |
+| **API**    | API Services   | Changes to API endpoints, request/response structure, or service contracts.                        | [API]-1.3.0     |
+| **DB**     | Database       | Modifications to database schema, tables, relationships, migrations, or constraints.               | [DB]-1.1.0      |
+| **SEC**    | Security       | Security fixes, vulnerability patches, authentication improvements, or access control changes.     | [SEC]-1.0.2     |
+| **INFRA**  | Infrastructure | Changes related to deployment, servers, containers, CI/CD pipelines, or environment configuration. | [INFRA]-0.4.1   |
+| **TEST**   | Testing        | Addition or modification of automated tests, test cases, or testing environments.                  | [TEST]-0.3.0    |
+| **DOC**    | Documentation  | Updates or corrections to technical documentation, guides, or project specifications.              | [DOC]-1.0.1     |
+| **CONFIG** | Configuration  | Changes in system configuration files, environment variables, or runtime settings.                 | [CONFIG]-0.2.3  |
+
+---
+
+## Version [FE]-v0.8.1 - Code correction in role validations (March 23, 2026)
+
+Login validations were corrected, primarily for the administrator login, to utilize the `ROLES` table created a few versions back. This improves data flow and prevents potential errors due to spelling mistakes.
+This update coincides with version [![Version](https://img.shields.io/badge/version-v0.8.0-blue)](https://github.com/olazocaamano/VideoGames-Tournament/blob/main/CHANGELOG.md#version-be-v080---implementation-of-inner-join-for-the-users-table-march-23-2026)
+
+## Changes
+
+- Correction: `Player -> player` and `Admin -> admin`
+
+## Version [BE]-v0.8.0 - Implementation of INNER JOIN for the `USERS` table (March 23, 2026)
+
+The login query was corrected to correctly relate the `USERS` table to the `ROLES` table using an **INNER JOIN** and to relate the `id` and `role_id`
+columns.
+
+### Changes
+
+- Added:
+
+```
+    SELECT
+        u.id,
+        u.username,
+        r.role_name
+    FROM users u
+    INNER JOIN roles r ON u.role_id = r.id
+    WHERE u.username = ? AND u.password = ?
+```
 
 ---
 

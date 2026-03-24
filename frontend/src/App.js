@@ -106,6 +106,19 @@ function Admin() {
 
   const [showModal, setShowModal] = useState(false);
 
+
+  useEffect(() => {
+    if (role !== "admin") {
+      navigate("/");
+    }
+  }, [role, navigate]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("role");
+    localStorage.removeItem("username");
+    navigate("/");
+  };
+
   const [newTournament, setNewTournament] = useState({
     name: "",
     game_id: "",
@@ -174,18 +187,6 @@ function Admin() {
     } catch (err) {
       console.error(err);
     }
-  };
-
-  useEffect(() => {
-    if (role !== "admin") {
-      navigate("/");
-    }
-  }, [role, navigate]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("role");
-    localStorage.removeItem("username");
-    navigate("/");
   };
 
   useEffect(() => {
@@ -293,10 +294,8 @@ function Admin() {
                             {tournament.name}
                           </strong>{" "}
                           {" "}
-                          <span
-                            className={`status ${tournament.status}`}
-                          >
-                            {tournament.status.toUpperCase()}
+                          <span className={`status ${tournament.status}`}>
+                            {tournament.status?.toUpperCase() || "LOADING..."}
                           </span>
                         </li>
                       ))}
@@ -363,7 +362,7 @@ function Admin() {
                           </strong>{" "}
                           {" "}
                           <br /><span className={`status ${tournament.status}`}>
-                            {tournament.status.toUpperCase()}
+                            {tournament.status?.toUpperCase() || "LOADING..."}
                           </span>
                           <button
                             style={{ marginLeft: "10px" }}
@@ -502,10 +501,6 @@ function Player() {
 function Home() {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loginMessage, setLoginMessage] = useState("");
-
   const [userUsername, setUserUsername] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userMessage, setUserMessage] = useState("");
@@ -526,7 +521,7 @@ function Home() {
         { username: userUsername, password: userPassword }
       );
 
-      const role = response.data.user.role;
+      const role = response.data.user.role_name;
 
       if (role === "player") {
         localStorage.setItem("role", role);
@@ -679,7 +674,7 @@ function AdminLogin() {
         { username, password }
       );
 
-      const role = response.data.user.role;
+      const role = response.data.user.role_name;
 
       localStorage.setItem("userId", response.data.user.id);
 
@@ -716,12 +711,10 @@ function AdminLogin() {
           <p>
             Forgot your password? <a href="/Reset">Reset</a>
           </p>
-        </div>
+        </div><br />
         <button type="submit">Login</button>
         <div className="register">
-          <p>
-            Don't have an account <a href="/user/register">Register</a>
-          </p>
+          <p><a href="/">Logout</a></p>
         </div>
         <p>{loginMessage}</p>
       </form>
