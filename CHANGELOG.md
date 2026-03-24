@@ -27,6 +27,8 @@ This update coincides with version [![Version](https://img.shields.io/badge/vers
 
 - Correction: `Player -> player` and `Admin -> admin`
 
+---
+
 ## Version [BE]-v0.8.0 - Implementation of INNER JOIN for the `USERS` table (March 23, 2026)
 
 The login query was corrected to correctly relate the `USERS` table to the `ROLES` table using an **INNER JOIN** and to relate the `id` and `role_id`
