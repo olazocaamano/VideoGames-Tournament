@@ -18,6 +18,23 @@ This table defines the prefixes used to identify which component of the system i
 
 ---
 
+## Version [DB]-v0.8.3 - DDL Schema Implementation from Existing Design (March 24, 2026)
+
+The database schema was created in SQL based on the Data Dictionary and ER diagram that were already defined before.
+This version does not change the database design. It only converts the existing design into SQL code using DDL statements.
+Some small corrections were made to the Data Dictionary to make sure it matches the SQL structure.
+The file `01_schema_tables.sql` was created, including all main tables. Foreign keys are not included yet and will be added in a future version.
+
+### Changes
+
+- Added `01_schema_tables.sql` with all table definitions.
+- Converted the Data Dictionary into SQL `CREATE TABLE` statements.
+- Followed coding standards (table names, column names, constraints).
+- Checked consistency between Data Dictionary, ER diagram, and SQL code.
+- Made small corrections in the Data Dictionary.
+
+---
+
 ## Version [FE]-v0.8.1 - Code correction in role validations (March 23, 2026)
 
 Login validations were corrected, primarily for the administrator login, to utilize the `ROLES` table created a few versions back. This improves data flow and prevents potential errors due to spelling mistakes.
