@@ -18,6 +18,68 @@ This table defines the prefixes used to identify which component of the system i
 
 ---
 
+## Version [FE]-v0.8.6 - Frontend structure refactoring (April 05, 2026)
+
+The frontend project structure was reorganized to improve code maintainability and scalability.
+Files were separated into pages, components, services, and utility functions to follow a more modular architecture.
+
+### Changes
+
+- Reorganized frontend folder structure.
+- Separated main views into `/pages`.
+- Extracted reusable UI elements into `/components`.
+- Centralized API calls into `/services`.
+- Moved helper functions into `/utils`.
+- Improved project readability and maintainability.
+
+### New Structure
+
+```bash  
+/src  
+    /pages  
+        Home.jsx  
+        Admin.jsx  
+        Player.jsx  
+        AdminLogin.jsx  
+        UserRegister.jsx  
+    /components  
+        CreateTournament.jsx  
+        TournamentList.jsx  
+        ActivityList.jsx  
+        Modal.jsx  
+    /services  
+        api.js  
+        tournamentService.js  
+        userService.js  
+    /hooks
+    /utils  
+        formatDate.js  
+    App.jsx
+```
+
+---
+## Version [BE]-v0.8.5 - Player retrieval endpoint added (April 05, 2026)
+
+### Changes
+
+- Added endpoint to retrieve all registered players.
+- Implemented query to filter users by role.
+
+---
+
+## Version [FE]-0.8.4 - Player visualization implementation (April 05, 2026)
+
+A new section was implemented in the admin panel to display all registered players from the database.
+This feature improves user management visibility and allows administrators to easily view player information within the system.
+
+### Changes
+
+- Added player list section in the admin panel.
+- Displayed player information in the user interface.
+- Integrated player view into existing navigation system.
+
+---
+
 ## Version [DB]-v0.8.3 - DDL Schema Implementation from Existing Design (March 24, 2026)
 
 The database schema was created in SQL based on the Data Dictionary and ER diagram that were already defined before.

@@ -80,7 +80,6 @@ erDiagram
         int id PK
         varchar name
         varchar description
-        boolean is_active
     }
 
     ROLES {

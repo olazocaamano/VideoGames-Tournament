@@ -3,7 +3,7 @@ const logActivity = require("../utils/activityLogger");
 
 exports.getUsers = async (req, res) => {
     try {
-        const [results] = await db.query('SELECT * FROM users');
+        const [results] = await db.query('SELECT id, username, email, role_id, is_active FROM users');
         res.json(results);
     } catch (err) {
         console.error(err);
@@ -14,13 +14,15 @@ exports.getUsers = async (req, res) => {
 exports.register = async (req, res) => {
     const { username, email, password, role_id } = req.body;
 
+    const nickname = req.body.nickname || username;
+
     try {
         const [result] = await db.query(
             `
-            INSERT INTO users (username, email, password, role_id, is_active)
-            VALUES (?, ?, ?, ?, 1)
+            INSERT INTO users (username, email, password, role_id, nickname, is_active)
+            VALUES (?, ?, ?, ?, ?, 1)
             `,
-            [username, email, password, role_id]
+            [username, email, password, role_id, nickname]
         );
 
         const newUserId = result.insertId;
@@ -66,5 +68,29 @@ exports.login = async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Database error' });
+    }
+};
+
+exports.getPlayers = async (req, res) => {
+    try {
+        const sql = `
+            SELECT 
+                u.id, 
+                u.username, 
+                u.nickname, 
+                u.email, 
+                u.role_id,
+                u.is_active,
+                r.role_name 
+            FROM users u
+            INNER JOIN roles r ON u.role_id = r.id
+            WHERE r.role_name = 'player'
+        `;
+
+        const [results] = await db.query(sql);
+        res.json(results);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Database error fetching players" });
     }
 };

@@ -8,15 +8,15 @@ This document describes the structure, data types, and constraints for the MySQL
 
 Stores account data for administrators and players.
 
-| Field         | Type         | Constraint                     | Description                              |
-| :------------ | :----------- | :----------------------------- | :--------------------------------------- |
-| **id**        | INT          | PK, Auto-increment             | Unique identifier for each user.         |
-| **username**  | VARCHAR(50)  | Not Null, Unique               | Unique name for system login.            |
-| **email**     | VARCHAR(100) | Not Null, Unique               | User's electronic mail address.          |
-| **password**  | VARCHAR(255) | Not Null                       | Hashed security credentials.             |
-| **role_id**   | INT          | FK (ROLES.role_name), Not Null | Role assigned to the user.               |
-| **nickname**  | VARCHAR(50)  | Not Null                       | In-game name displayed in tournaments.   |
-| **is_active** | BOOLEAN      | Not Null                       | Indicates if the user account is active. |
+| Field         | Type         | Constraint              | Description                              |
+| :------------ | :----------- | :---------------------- | :--------------------------------------- |
+| **id**        | INT          | PK, Auto-increment      | Unique identifier for each user.         |
+| **username**  | VARCHAR(50)  | Not Null, Unique        | Unique name for system login.            |
+| **email**     | VARCHAR(100) | Not Null, Unique        | User's electronic mail address.          |
+| **password**  | VARCHAR(255) | Not Null                | Hashed security credentials.             |
+| **role_id**   | INT          | FK (ROLES.id), Not Null | Role assigned to the user.               |
+| **nickname**  | VARCHAR(50)  | Not Null                | In-game name displayed in tournaments.   |
+| **is_active** | BOOLEAN      | Not Null                | Indicates if the user account is active. |
 
 ---
 
@@ -107,12 +107,11 @@ Stores system event logs such as new users, new tournaments, added games, regist
 
 Stores the possible status values that can be assigned to tournaments.
 
-| Field           | Type         | Constraint               | Description                                     |
-| --------------- | ------------ | ------------------------ | ----------------------------------------------- |
-| **status_id**   | INT          | FK (STATUS.id), Not Null | Current state of the tournament.                |
-| **name**        | VARCHAR(50)  | UNIQUE, NOT NULL         | Name of the tournament status.                  |
-| **description** | VARCHAR(255) | NULL                     | Optional description of the status.             |
-| **is_active**   | BOOLEAN      | DEFAULT TRUE             | Indicates if the status is currently available. |
+| Field           | Type         | Constraint                   | Description                         |
+| --------------- | ------------ | ---------------------------- | ----------------------------------- |
+| **id**          | INT          | PK, Auto-increment, Not Null | Current state of the tournament.    |
+| **name**        | VARCHAR(50)  | UNIQUE, NOT NULL             | Name of the tournament status.      |
+| **description** | VARCHAR(255) | NULL                         | Optional description of the status. |
 
 ---
 

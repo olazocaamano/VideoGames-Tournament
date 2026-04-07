@@ -1,0 +1,41 @@
+/* Contenedor de botones en la tabla */
+.action-buttons-group {
+    display: flex;
+    gap: 10px; /* Espacio entre MANAGE y LOGS */
+    justify-content: center;
+}
+
+/* Estilo para el botón de LOGS (un gris oscuro que resalte menos que el verde) */
+.btn-logs {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #555;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-logs:hover {
+    background-color: #444444;
+    border-color: #00d4ff; /* Un toque de azul al pasar el mouse */
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+}
+
+/* Estilo para el botón de MANAGE (Verde neón como el resto de tu app) */
+.btn-manage {
+    background-color: #258816;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-manage:hover {
+    background-color: #2eb11b;
+    box-shadow: 0 0 10px rgba(46, 177, 27, 0.5);
+}

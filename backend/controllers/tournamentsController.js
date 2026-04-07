@@ -4,11 +4,20 @@ const logActivity = require("../utils/activityLogger");
 exports.getTournaments = async (req, res) => {
     const active = req.query.active;
 
-    let sql = "SELECT * FROM tournaments";
+    let sql = `SELECT 
+                    t.id, 
+                    t.name, 
+                    t.game_id, 
+                    t.prize_pool, 
+                    t.start_date, 
+                    s.name AS status_name, 
+                    t.is_active 
+                FROM tournaments t
+                INNER JOIN status s ON t.status_id = s.id`;
     let values = [];
 
     if (active == 1 || active === "true") {
-        sql += " WHERE is_active = ?";
+        sql += " WHERE t.is_active = ?";
         values.push(1);
     }
 
@@ -28,8 +37,8 @@ exports.createTournament = async (req, res) => {
         const [result] = await db.query(
             `
             INSERT INTO tournaments 
-            (name, game_id, prize_pool, start_date, status, creator_id, is_active)
-            VALUES (?, ?, ?, ?, 'open', ?, 1)
+            (name, game_id, prize_pool, start_date, status_id, creator_id, is_active)
+            VALUES (?, ?, ?, ?, 1, ?, 1)
             `,
             [name, game_id, prize_pool, start_date, creator_id]
         );
@@ -53,16 +62,16 @@ exports.createTournament = async (req, res) => {
 
 exports.updateTournament = async (req, res) => {
     const { id } = req.params;
-    const { name, game_id, prize_pool, start_date, status, is_active, editor_id } = req.body;
+    const { name, game_id, prize_pool, start_date, status_id, is_active, editor_id } = req.body;
 
     try {
         const [result] = await db.query(
             `
             UPDATE tournaments
-            SET name = ?, game_id = ?, prize_pool = ?, start_date = ?, status = ?, is_active = ?
+            SET name = ?, game_id = ?, prize_pool = ?, start_date = ?, status_id = ?, is_active = ?
             WHERE id = ?
             `,
-            [name, game_id, prize_pool, start_date, status, is_active, id]
+            [name, game_id, prize_pool, start_date, status_id, is_active, id]
         );
 
         await logActivity({
