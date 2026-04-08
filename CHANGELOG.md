@@ -18,6 +18,25 @@ This table defines the prefixes used to identify which component of the system i
 
 ---
 
+## Version [SEC]-v0.9.0 - Password encryption and error handling improvements (April 08, 2026)
+
+User authentication was improved by adding password encryption and better error handling during registration and login.  
+These changes help protect user data and provide clearer feedback when something goes wrong.
+
+### Changes
+
+- Added password encryption using bcrypt when registering users.
+- Updated login to compare encrypted passwords instead of plain text.
+- Removed direct password validation in SQL queries.
+- Added validation to avoid duplicate usernames and emails.
+- Handled database errors for duplicate entries.
+- Improved backend responses with clear error messages.
+- Connected backend errors with frontend messages.
+- Displayed error messages in the registration form.
+- Cleared messages when the user modifies input fields.
+
+---
+
 ## Version [FE]-v0.8.6 - Frontend structure refactoring (April 05, 2026)
 
 The frontend project structure was reorganized to improve code maintainability and scalability.

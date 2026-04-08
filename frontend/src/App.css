@@ -269,7 +269,8 @@ body {
   animation: fadeInUp 1.2s ease forwards;
 }
 
-.con-admin {
+.con-admin,
+#con-user-register {
   margin-top: 170px;
 }
 

@@ -1,5 +1,6 @@
 const db = require('../db');
 const logActivity = require("../utils/activityLogger");
+const bcrypt = require('bcrypt');
 
 exports.getUsers = async (req, res) => {
     try {
@@ -12,34 +13,50 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.register = async (req, res) => {
-    const { username, email, password, role_id } = req.body;
+    const { username, email, password, nickname } = req.body;
 
-    const nickname = req.body.nickname || username;
+    const nicknameValue = nickname || username;
 
     try {
+        if (!username || !email || !password) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+
+        const [existingUser] = await db.query(
+            'SELECT id FROM users WHERE username = ? OR email = ?',
+            [username, email]
+        );
+
+        if (existingUser.length > 0) {
+            return res.status(400).json({ error: 'Username or email already exists' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         const [result] = await db.query(
             `
             INSERT INTO users (username, email, password, role_id, nickname, is_active)
-            VALUES (?, ?, ?, ?, ?, 1)
+            VALUES (?, ?, ?, 3, ?, 1)
             `,
-            [username, email, password, role_id, nickname]
+            [username, email, hashedPassword, nicknameValue]
         );
 
         const newUserId = result.insertId;
 
         await logActivity({
             user_id: newUserId,
-            action_type: role_id === 1 ? "NEW_ADMIN" : "NEW_USER",
-            description: role_id === 1
-                ? `New administrator added: ${username}`
-                : `New user registered: ${username}`
+            action_type: "NEW_USER",
+            description: `New user registered: ${username}`
         });
 
         res.json({ message: "User registered successfully" });
 
     } catch (err) {
+        if (err.code === 'ER_DUP_ENTRY') {
+            return res.status(400).json({ error: 'Username or email already exists' });
+        }
         console.error(err);
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ error: 'Server error' });
     }
 };
 
@@ -51,19 +68,34 @@ exports.login = async (req, res) => {
             `SELECT 
                 u.id, 
                 u.username, 
+                u.password,
                 r.role_name 
             FROM users u
             INNER JOIN roles r ON u.role_id = r.id
-            WHERE u.username = ? AND u.password = ?`,
-
-            [username, password]
+            WHERE u.username = ?`,
+            [username]
         );
 
         if (results.length === 0) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        res.json({ message: 'Login successful', user: results[0] });
+        const user = results[0];
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+        res.json({
+            message: 'Login successful',
+            user: {
+                id: user.id,
+                username: user.username,
+                role_name: user.role_name
+            }
+        });
 
     } catch (err) {
         console.error(err);
