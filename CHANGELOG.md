@@ -18,7 +18,7 @@ This table defines the prefixes used to identify which component of the system i
 
 ---
 
-## 🔄 Scrum Integration
+## Scrum Integration
 
 This project follows an adaptive Scrum approach.
 Development history has been organized into sprints:
