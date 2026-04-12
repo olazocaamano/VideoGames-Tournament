@@ -18,6 +18,19 @@ This table defines the prefixes used to identify which component of the system i
 
 ---
 
+## 🔄 Scrum Integration
+
+This project follows an adaptive Scrum approach.
+Development history has been organized into sprints:
+
+- Sprint 1 → Database & Authentication base
+- Sprint 2 → Frontend & Player visualization
+- Sprint 3 → Security improvements
+
+See `/docs/scrum` folder for backlog and sprint details.
+
+---
+
 ## Version [SEC]-v0.9.0 - Password encryption and error handling improvements (April 08, 2026)
 
 User authentication was improved by adding password encryption and better error handling during registration and login.  
