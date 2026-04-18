@@ -18,7 +18,7 @@ This table defines the prefixes used to identify which component of the system i
 
 ---
 
-## Scrum Integration
+## 🔄 Scrum Integration
 
 This project follows an adaptive Scrum approach.
 Development history has been organized into sprints:
@@ -26,6 +26,7 @@ Development history has been organized into sprints:
 - Sprint 1 → Database & Authentication base
 - Sprint 2 → Frontend & Player visualization
 - Sprint 3 → Security improvements
+- Sprint 4 → Tournament management & full system integration 🔥
 
 See `/docs/scrum` folder for backlog and sprint details.
 

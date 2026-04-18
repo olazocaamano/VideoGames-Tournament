@@ -554,7 +554,7 @@ button:hover {
   width: 70%;
   height: 70%;
   object-fit: contain;
-  margin-left: 5px;
+  margin-left: 0px;
 }
 
 .circ {
@@ -611,6 +611,8 @@ button:hover {
   scrollbar-width: none;
 }
 
+.box-tournaments h2,
+.box-activity h2,
 .box-tournaments-content h2,
 .box-activity-content h2 {
   text-align: center;
@@ -839,6 +841,11 @@ button:hover {
 .box-players {
     width: 98% !important;
     height: calc(100vh - 180px) !important;
+}
+
+.box-players-container {
+  width: 98%;
+  height: 480px;
 }
 
 .players-search-bar {

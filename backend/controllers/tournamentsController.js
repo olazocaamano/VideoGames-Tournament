@@ -1,6 +1,10 @@
+/* tournamentsController.js
+Handles tournament CRUD operations and activity logging */
+
 const db = require("../db");
 const logActivity = require("../utils/activityLogger");
 
+/* Get tournaments */
 exports.getTournaments = async (req, res) => {
     const active = req.query.active;
 
@@ -14,6 +18,7 @@ exports.getTournaments = async (req, res) => {
                     t.is_active 
                 FROM tournaments t
                 INNER JOIN status s ON t.status_id = s.id`;
+
     let values = [];
 
     if (active == 1 || active === "true") {
@@ -30,6 +35,7 @@ exports.getTournaments = async (req, res) => {
     }
 };
 
+/* Create tournament */
 exports.createTournament = async (req, res) => {
     const { name, game_id, prize_pool, start_date, creator_id } = req.body;
 
@@ -45,6 +51,7 @@ exports.createTournament = async (req, res) => {
 
         const tournamentId = result.insertId;
 
+        // Log creation activity
         await logActivity({
             user_id: creator_id,
             tournament_id: tournamentId,
@@ -60,12 +67,13 @@ exports.createTournament = async (req, res) => {
     }
 };
 
+/* Update tournament */
 exports.updateTournament = async (req, res) => {
     const { id } = req.params;
     const { name, game_id, prize_pool, start_date, status_id, is_active, editor_id } = req.body;
 
     try {
-        const [result] = await db.query(
+        await db.query(
             `
             UPDATE tournaments
             SET name = ?, game_id = ?, prize_pool = ?, start_date = ?, status_id = ?, is_active = ?
@@ -74,6 +82,7 @@ exports.updateTournament = async (req, res) => {
             [name, game_id, prize_pool, start_date, status_id, is_active, id]
         );
 
+        // Log update activity
         await logActivity({
             user_id: editor_id,
             tournament_id: id,
@@ -82,8 +91,9 @@ exports.updateTournament = async (req, res) => {
         });
 
         res.json({ message: "Tournament updated successfully" });
-    } catch (err) {
-        console.error(err);
+
+    } catch (error) {
+        console.error(error);
         res.status(500).json({ error: "Database error" });
     }
 };

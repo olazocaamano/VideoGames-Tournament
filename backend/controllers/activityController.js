@@ -1,7 +1,18 @@
+/* File: activityController.js
+Description: Handles retrieval of system activity logs.
+Combines data from users, tournaments, games, and matches
+to generate a complete activity feed. 
+*/
+
 const db = require('../db');
 
+/* Get all system activities
+Returns a detailed activity feed ordered by most recent first 
+*/
 exports.getActivities = async (req, res) => {
     try {
+
+        // Query activity log with related data from multiple tables
         const [rows] = await db.query(`
             SELECT 
                 a.id,

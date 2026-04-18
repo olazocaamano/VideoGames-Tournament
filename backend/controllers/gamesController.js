@@ -1,6 +1,8 @@
 const db = require('../db');
 const logActivity = require('../utils/activityLogger');
 
+// Get games
+// Returns all games or only active ones depending on query parameter
 exports.getGames = async (req, res) => {
     const active = req.query.active;
 
@@ -21,6 +23,8 @@ exports.getGames = async (req, res) => {
     }
 };
 
+// Create game
+// Inserts a new game and logs the action in activity table
 exports.createGame = async (req, res) => {
     const { game_name, genre, publisher, release_date, admin_id } = req.body;
 

@@ -1,21 +1,38 @@
+/*
+    File: Home.jsx
+    Description: Main landing page of the platform.
+    Includes user login, game carousel, and navigation links.
+    Shows available games and provides access to player/admin sections.
+ */
+
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+
+import "../App.css";
+
 import { loginUser } from "../services/userService";
 import API from "../services/api";
 
 function Home() {
     const navigate = useNavigate();
 
+    // Login form state (player)
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
+    // Games data (carousel)
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Current active slide in carousel
     const [currentSlide, setCurrentSlide] = useState(0);
 
+    /*
+        Handle player login
+        Validates credentials and redirects only if role is "player"
+     */
     const handleUserLogin = async (e) => {
         e.preventDefault();
 
@@ -23,6 +40,7 @@ function Home() {
             const response = await loginUser({ username, password });
             const role = response.data.user.role_name;
 
+            // Allow access only for player role
             if (role === "player") {
                 localStorage.setItem("role", role);
                 navigate("/player");
@@ -34,6 +52,9 @@ function Home() {
         }
     };
 
+    /*
+        Fetch available games for carousel display
+     */
     useEffect(() => {
         const fetchGames = async () => {
             try {
@@ -49,6 +70,9 @@ function Home() {
         fetchGames();
     }, []);
 
+    /*
+        Auto-slide carousel every 4 seconds
+     */
     useEffect(() => {
         if (games.length === 0) return;
 
@@ -63,30 +87,43 @@ function Home() {
 
     return (
         <div className="window">
-            <h1>TOE | the platform for gamers</h1>
+
+            {/* Page title */}
+            <h1>TOE | The platform for gamers</h1>
 
             <div className="content">
                 <div className="right-panel">
+
                     <div className="container">
                         <div className="container-center">
+
+                            {/* Link to statistics page */}
                             <Link to="/statistics" className="statistics-button">
                                 Statistics
                             </Link>
 
+                            {/* Games carousel section */}
                             <div className="carrousel">
                                 <div className="carrousel-slide">
+
+                                    {/* Slide container with transform animation */}
                                     <div
                                         className="carrousel-inner"
-                                        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                                        style={{
+                                            transform: `translateX(-${currentSlide * 100}%)`
+                                        }}
                                     >
                                         {games.map((game) => (
                                             <div key={game.id} className="carrousel-item">
+
+                                                {/* Game image */}
                                                 <img
                                                     className="d-block w-100"
                                                     src={`http://localhost:5000${game.image_url}`}
                                                     alt={game.game_name}
                                                 />
 
+                                                {/* Game information */}
                                                 <div className="slide-info">
                                                     <h1>{game.game_name}</h1>
                                                     <hr className="line-decorative" />
@@ -96,22 +133,30 @@ function Home() {
                                         ))}
                                     </div>
 
+                                    {/* Carousel indicators */}
                                     <div className="carrousel-indicators">
                                         {games.map((_, index) => (
                                             <span
                                                 key={index}
-                                                className={index === currentSlide ? "dot active" : "dot"}
+                                                className={
+                                                    index === currentSlide ? "dot active" : "dot"
+                                                }
                                                 onClick={() => setCurrentSlide(index)}
                                             ></span>
                                         ))}
                                     </div>
+
                                 </div>
                             </div>
                         </div>
 
+                        {/* Player login section */}
                         <div className="con-user">
-                            <h2>User</h2>
+                            <h2>User Login</h2>
+
                             <form onSubmit={handleUserLogin}>
+
+                                {/* Username input */}
                                 <input
                                     type="text"
                                     placeholder="Username"
@@ -119,6 +164,8 @@ function Home() {
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                 />
+
+                                {/* Password input */}
                                 <input
                                     type="password"
                                     placeholder="Password"
@@ -126,23 +173,38 @@ function Home() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
+
+                                {/* Password recovery link */}
                                 <div className="resetPass">
                                     <p>
-                                        Forgot your password? <Link to="/reset">Reset</Link>
+                                        Forgot your password?{" "}
+                                        <Link to="/reset">Reset</Link>
                                     </p>
                                 </div>
+
+                                {/* Submit login */}
                                 <button type="submit">Login</button>
+
+                                {/* Registration link */}
                                 <div className="register">
                                     <p>
-                                        Don't have an account? <Link to="/user/register">Register</Link>
+                                        Don't have an account?{" "}
+                                        <Link to="/user/register">Register</Link>
                                     </p>
                                 </div>
+
+                                {/* Admin access link */}
                                 <div className="admin-access">
-                                    <Link to="/admin/login">Administrator access</Link>
+                                    <Link to="/admin/login">
+                                        Administrator access
+                                    </Link>
                                 </div>
+
+                                {/* Login message */}
                                 <p>{message}</p>
                             </form>
                         </div>
+
                     </div>
                 </div>
             </div>

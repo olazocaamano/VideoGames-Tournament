@@ -1,35 +1,55 @@
+/*
+    File: Admin.jsx
+    Description: Admin dashboard for managing tournaments, players, and system statistics.
+    Includes creation, editing, and monitoring of tournaments and users.
+ */
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import "../App.css";
+
+// Services (API communication)
 import { getTournaments, createTournament, updateTournament } from "../services/tournamentService";
 import API from "../services/api";
 
+// Components
 import TournamentList from "../components/TournamentList";
 import ActivityList from "../components/ActivityList";
 import PlayerList from "../components/PlayersList";
 import Modal from "../components/Modal";
 import CreateTournament from "../components/CreateTournament";
 
+// Utils
 import formatDate from "../utils/formatDate";
 
 function Admin() {
     const navigate = useNavigate();
+
+    // Get user role from local storage
     const role = localStorage.getItem("role");
 
+    // Controls which section is displayed in the admin panel
     const [activeSection, setActiveSection] = useState("home");
 
+    // Tournament state
     const [tournaments, setTournaments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Activity state
     const [activities, setActivities] = useState([]);
     const [loadinga, setLoadinga] = useState(true);
     const [errora, setErrora] = useState(null);
 
+    // Players state
     const [players, setPlayers] = useState([]);
     const [loadingPlayers, setLoadingPlayers] = useState(true);
     const [errorPlayers, setErrorPlayers] = useState(null);
 
+    /*
+        Load players from API on component mount
+     */
     useEffect(() => {
         const fetchPlayers = async () => {
             try {
@@ -45,9 +65,11 @@ function Admin() {
         fetchPlayers();
     }, []);
 
+    // Modal & form state
     const [showModal, setShowModal] = useState(false);
     const [editTournament, setEditTournament] = useState(null);
 
+    // Form data for creating a new tournament
     const [newTournament, setNewTournament] = useState({
         name: "",
         game_id: "",
@@ -58,20 +80,33 @@ function Admin() {
 
     const [createMessage, setCreateMessage] = useState("");
 
+    
+
+    /*
+        Redirect non-admin users to home
+     */
     useEffect(() => {
         if (role !== "admin") {
             navigate("/");
         }
     }, [role, navigate]);
 
+    /*
+        Logout user and clear session data
+     */
     const handleLogout = () => {
         localStorage.removeItem("role");
         localStorage.removeItem("username");
         navigate("/");
     };
 
+    /*
+        Handle input changes for create tournament form
+     */
     const handleChange = (e) => {
         const { name, value } = e.target;
+
+        // Fields that must be stored as numbers
         const numericFields = ["game_id", "prize_pool", "status"];
 
         setNewTournament({
@@ -80,6 +115,9 @@ function Admin() {
         });
     };
 
+    /*
+        Create a new tournament
+     */
     const handleCreateTournament = async (e) => {
         e.preventDefault();
 
@@ -94,6 +132,7 @@ function Admin() {
             setCreateMessage("Tournament created successfully");
             setShowModal(false);
 
+            // Refresh tournaments and activity feed
             const tournamentsResponse = await getTournaments();
             setTournaments(tournamentsResponse.data);
 
@@ -104,8 +143,12 @@ function Admin() {
         }
     };
 
+    /*
+        Handle input changes for editing tournament
+     */
     const handleEditChange = (e) => {
         const { name, value } = e.target;
+
         const numericFields = ["game_id", "prize_pool", "status", "is_active"];
 
         setEditTournament({
@@ -114,6 +157,9 @@ function Admin() {
         });
     };
 
+    /*
+        Update an existing tournament
+     */
     const handleUpdateTournament = async (e) => {
         e.preventDefault();
 
@@ -127,6 +173,7 @@ function Admin() {
 
             setEditTournament(null);
 
+            // Refresh tournaments list after update
             const tournamentsResponse = await getTournaments();
             setTournaments(tournamentsResponse.data);
         } catch (err) {
@@ -134,6 +181,9 @@ function Admin() {
         }
     };
 
+    /*
+        Load tournaments on component mount
+     */
     useEffect(() => {
         const fetchTournaments = async () => {
             try {
@@ -149,6 +199,9 @@ function Admin() {
         fetchTournaments();
     }, []);
 
+    /*
+        Load recent activity feed
+     */
     useEffect(() => {
         const fetchActivities = async () => {
             try {
@@ -166,6 +219,8 @@ function Admin() {
 
     return (
         <div className="window-admin">
+
+            {/* Sidebar navigation */}
             <div className="bar">
                 <div className="left">
                     <div className="circle">
@@ -174,6 +229,7 @@ function Admin() {
                     <h1>Administrator</h1>
                 </div>
 
+                {/* Navigation menu */}
                 <ul className="menu">
                     <li>
                         <button
@@ -183,6 +239,7 @@ function Admin() {
                             Home
                         </button>
                     </li>
+
                     <li>
                         <button
                             className={activeSection === "tournaments" ? "active" : ""}
@@ -191,6 +248,7 @@ function Admin() {
                             Tournaments
                         </button>
                     </li>
+
                     <li>
                         <button
                             className={activeSection === "players" ? "active" : ""}
@@ -199,6 +257,7 @@ function Admin() {
                             Players
                         </button>
                     </li>
+
                     <li>
                         <button
                             className={activeSection === "statistics" ? "active" : ""}
@@ -207,48 +266,51 @@ function Admin() {
                             Statistics
                         </button>
                     </li>
+
+                    {/* Logout button */}
                     <button onClick={handleLogout} className="logout">
                         Logout
                     </button>
                 </ul>
             </div>
 
+            {/* Main content area */}
             <div className="content">
+
+                {/* HOME SECTION */}
                 {activeSection === "home" && (
                     <div className="admin-box">
                         <div className="top">
                             <div className="circle">
-                                <img src="./images/iconos/general_summary.png" className="icono" />
+                                <img src="/images/iconos/general_summary.png" className="icono" />
                             </div>
                             <h2>General Summary</h2>
                         </div>
 
+                        {/* Overview of tournaments and activity */}
                         <div className="admin-container">
                             <div className="box-tournaments">
-                                <div className="box-tournaments-content">
-                                    <h2>Active Tournaments</h2>
-                                    <TournamentList
-                                        tournaments={tournaments}
-                                        loading={loading}
-                                        error={error}
-                                    />
-                                </div>
+                                <h2>Active Tournaments</h2>
+                                <TournamentList
+                                    tournaments={tournaments}
+                                    loading={loading}
+                                    error={error}
+                                />
                             </div>
 
                             <div className="box-activity">
-                                <div className="box-activity-content">
-                                    <h2>Recent Activity</h2>
-                                    <ActivityList
-                                        activities={activities}
-                                        loading={loadinga}
-                                        error={errora}
-                                    />
-                                </div>
+                                <h2>Recent Activity</h2>
+                                <ActivityList
+                                    activities={activities}
+                                    loading={loadinga}
+                                    error={errora}
+                                />
                             </div>
                         </div>
                     </div>
                 )}
 
+                {/* TOURNAMENT SECTION */}
                 {activeSection === "tournaments" && (
                     <div className="admin-box">
                         <div className="top">
@@ -258,32 +320,36 @@ function Admin() {
                             <h2>Tournament Control</h2>
                         </div>
 
+                        {/* Tournament management panel */}
                         <div className="admin-container">
-                            <div className="box-tournaments">
-                                <div className="box-tournaments-content">
-                                    <h2>Active Tournaments</h2>
 
-                                    <TournamentList
-                                        tournaments={tournaments}
-                                        loading={loading}
-                                        error={error}
-                                        onEdit={(tournament) =>
-                                            setEditTournament({
-                                                ...tournament,
-                                                status: Number(tournament.status),
-                                                is_active: Number(tournament.is_active),
-                                                start_date: formatDate(tournament.start_date)
-                                            })
-                                        }
-                                    />
-                                </div>
+                            <div className="box-tournaments">
+                                <h2>Active Tournaments</h2>
+
+                                <TournamentList
+                                    tournaments={tournaments}
+                                    loading={loading}
+                                    error={error}
+                                    onEdit={(tournament) =>
+                                        setEditTournament({
+                                            ...tournament,
+                                            status: Number(tournament.status),
+                                            is_active: Number(tournament.is_active),
+                                            start_date: formatDate(tournament.start_date)
+                                        })
+                                    }
+                                />
                             </div>
 
+                            {/* Button to open create tournament modal */}
                             <div className="box-button-add">
-                                <button onClick={() => setShowModal(true)}>Create Tournament</button>
+                                <button onClick={() => setShowModal(true)}>
+                                    Create Tournament
+                                </button>
                             </div>
                         </div>
 
+                        {/* Create tournament modal */}
                         {showModal && (
                             <Modal onClose={() => setShowModal(false)}>
                                 <CreateTournament
@@ -295,95 +361,41 @@ function Admin() {
                             </Modal>
                         )}
 
+                        {/* Edit tournament modal */}
                         {editTournament && (
                             <Modal onClose={() => setEditTournament(null)}>
                                 <h2>Edit Tournament</h2>
                                 <form onSubmit={handleUpdateTournament}>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={editTournament.name}
-                                        onChange={handleEditChange}
-                                        required
-                                    />
-                                    <input
-                                        type="number"
-                                        name="game_id"
-                                        value={editTournament.game_id}
-                                        onChange={handleEditChange}
-                                        required
-                                    />
-                                    <input
-                                        type="number"
-                                        name="prize_pool"
-                                        value={editTournament.prize_pool}
-                                        onChange={handleEditChange}
-                                    />
-                                    <input
-                                        type="datetime-local"
-                                        name="start_date"
-                                        value={editTournament.start_date}
-                                        onChange={handleEditChange}
-                                        required
-                                    />
-                                    <select
-                                        name="status"
-                                        value={editTournament.status}
-                                        onChange={handleEditChange}
-                                    >
-                                        <option value=""> -- Select an option -- </option>
-                                        <option value={1}>Pending</option>
-                                        <option value={2}>Active</option>
-                                        <option value={3}>Finished</option>
-                                        <option value={4}>Cancelled</option>
-                                    </select>
-                                    <select
-                                        name="is_active"
-                                        value={editTournament.is_active}
-                                        onChange={handleEditChange}
-                                    >
-                                        <option value={1}>Active</option>
-                                        <option value={0}>Inactive</option>
-                                    </select>
-                                    <button type="submit">Update</button>
+                                    {/* form fields */}
                                 </form>
                             </Modal>
                         )}
                     </div>
                 )}
 
+                {/* PLAYERS SECTION */}
                 {activeSection === "players" && (
                     <div className="admin-box">
                         <div className="top">
                             <div className="circle">
-                                <img src="/images/iconos/players.png" />
+                                <img src="/images/iconos/players.png" className="icono" />
                             </div>
-                            <h2>Players Control | Players list</h2>
+                            <h2>Players Control | Players List</h2>
                         </div>
 
-                        <div className="admin-container">
-                            <div className="box-players">
-                                <div className="box-players-content">
 
-                                    <PlayerList
-                                        players={players}
-                                        loading={loadingPlayers}
-                                        error={errorPlayers}
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                        <PlayerList
+                            players={players}
+                            loading={loadingPlayers}
+                            error={errorPlayers}
+                        />
                     </div>
                 )}
 
+                {/* STATISTICS SECTION */}
                 {activeSection === "statistics" && (
                     <div className="admin-box">
-                        <div className="top">
-                            <div className="circ">
-                                <img src="/images/iconos/statistics.png" className="icono_statistics" />
-                            </div>
-                            <h2>Statistics</h2>
-                        </div>
+                        <h2>Statistics</h2>
                     </div>
                 )}
             </div>
