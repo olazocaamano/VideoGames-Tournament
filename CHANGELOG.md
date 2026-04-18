@@ -18,7 +18,41 @@ This table defines the prefixes used to identify which component of the system i
 
 ---
 
-## 🔄 Scrum Integration
+## Version [API]-v0.9.5 / [FE]-v0.9.5 / [DB]-v0.9.5 
+### Sprint 4 - Tournament management and system integration (April 27, 2026) [IN PROGRESS]
+
+This sprint focused on implementing tournament management and achieving a functional system flow 
+by integrating frontend, backend, and database components.
+
+### Added
+- Tournament creation form in frontend
+- Tournament list view UI
+- Initial integration between frontend, backend, and database
+
+### Changed
+- Improved error handling in UI and backend responses
+- Updated database relationships (STATUS, USERS)
+
+### In Progress
+- Tournament endpoints (register and retrieve)
+- Database validation and query testing
+- Dynamic display of tournaments from backend
+
+### System Status
+- Functional flow achieved: register → login → create tournament
+- Partial backend implementation for tournaments
+
+### Team Contributions
+See detailed contributions in:
+`/scrum/sprints/sprint-4/team-contributions.md`
+
+### Notes
+- Full tournament CRUD is not yet completed
+- Backend endpoints require final implementation
+
+---
+
+## Scrum Integration
 
 This project follows an adaptive Scrum approach.
 Development history has been organized into sprints:
