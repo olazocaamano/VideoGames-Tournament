@@ -1,0 +1,45 @@
+# SPRINT 4 BACKLOG
+
+## Sprint Goal
+Complete a functional system flow by implementing tournament management and integrating frontend, backend, and database.
+
+## Duration
+April 13 - April 27
+
+## User Stories
+- As an admin, I want to create tournaments to manage them in the system.
+- As a user, I want to view available tournaments.
+- As a user, I want the system to work correctly without errors.
+
+## Tasks
+
+### Backend
+- [ ] Create endpoint to register tournaments
+- [ ] Create endpoint to retrieve tournaments
+- [ ] Validate tournament data
+- [ ] Handle errors in tournament endpoints
+
+### Frontend
+- [x] Implement tournament creation form (CreateTournament.jsx)
+- [x] Connect form with backend
+- [x] Implement tournament list view (TournamentList.jsx)
+- [ ] Display tournaments from backend
+- [x] Show error messages in the UI
+
+### Database
+- [ ] Verify TOURNAMENTS table structure
+- [x] Check relationships with STATUS and USERS
+- [ ] Test insert and query operations
+
+### Integration
+- [x] Connect frontend, backend, and database
+- [x] Test complete flow:
+      register → login → view → create tournament
+
+## Expected Result
+The system will allow user registration, login, and tournament management with a complete functional flow.
+
+## Planned Versions
+- [API]-v0.9.x
+- [FE]-v0.9.x
+- [BE]-v0.9.x
