@@ -19,7 +19,7 @@ This table defines the prefixes used to identify which component of the system i
 ---
 
 ## Version [API]-v0.9.5 / [FE]-v0.9.5 / [DB]-v0.9.5 
-### Sprint 4 - Tournament management and system integration (April 27, 2026) [IN PROGRESS]
+### Sprint 4 - Tournament management and system integration (April 22, 2026)
 
 This sprint focused on implementing tournament management and achieving a functional system flow 
 by integrating frontend, backend, and database components.
