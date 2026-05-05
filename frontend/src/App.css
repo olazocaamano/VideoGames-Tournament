@@ -132,7 +132,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  position: relative;  
+  position: relative;
 }
 
 .carrousel-inner {
@@ -188,14 +188,12 @@ body {
   margin: 25px auto;
   border-radius: 20px;
 
-  background: linear-gradient(
-    90deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.15) 20%,
-    rgba(255,255,255,0.9) 50%,
-    rgba(255,255,255,0.15) 80%,
-    rgba(255,255,255,0) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.15) 20%,
+      rgba(255, 255, 255, 0.9) 50%,
+      rgba(255, 255, 255, 0.15) 80%,
+      rgba(255, 255, 255, 0) 100%);
 
   background-size: 200% 100%;
   animation: moveLine 3s linear infinite;
@@ -205,6 +203,7 @@ body {
   0% {
     background-position: -200% 0;
   }
+
   100% {
     background-position: 200% 0;
   }
@@ -225,7 +224,7 @@ body {
   height: 10px;
   width: 10px;
   margin: 0 6px;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
   display: inline-block;
   cursor: pointer;
@@ -712,6 +711,18 @@ button:hover {
   gap: 10px;
 }
 
+.box-register-content {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 30%;
+  height: 470px;
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: #2f2f2f;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
 .admin-container {
   display: flex;
   gap: 10px;
@@ -839,8 +850,8 @@ button:hover {
 }
 
 .box-players {
-    width: 98% !important;
-    height: calc(100vh - 180px) !important;
+  width: 98% !important;
+  height: calc(100vh - 180px) !important;
 }
 
 .box-players-container {
@@ -849,145 +860,273 @@ button:hover {
 }
 
 .players-search-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 25px;
-    border-bottom: 2px solid #444;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  border-bottom: 2px solid #444;
 }
 
 .players-search-bar input {
-    width: 60%;
-    padding: 10px 15px;
-    border-radius: 10px;
-    border: 1px solid #555;
-    background-color: #1a1a1a;
-    color: #f8fafc;
-    font-size: 16px;
+  width: 60%;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 1px solid #555;
+  background-color: #1a1a1a;
+  color: #f8fafc;
+  font-size: 16px;
 }
 
 .players-search-bar input:focus {
-    box-shadow: 0 0 10px #258816;
+  box-shadow: 0 0 10px #258816;
 }
 
 .player-count {
-    font-size: 18px;
-    color: #a0a0a0;
+  font-size: 18px;
+  color: #a0a0a0;
 }
 
 .players-grid {
-    height: calc(100% - 70px);
-    overflow-y: auto;
-    padding: 10px;
+  width: calc(102% - 0px);
+  height: calc(90% - 70px);
+  overflow-y: auto;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: inset 0 -35px 30px -5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 10px;
+}
+
+.pagination {
+  margin-left: 1200px;
+  width: auto;
+  height: auto;
+  border-radius: 1px black;
+}
+
+.bar-bottom {
+  background-color: #1c1c1c;
+  width: 102.2%;
+  height: 50px;
+  border-radius: 30px;
+  align-content: center;
+}
+
+.btn-search {
+  margin-right: 270px;
+}
+
+.page-indicator {
+  margin: 0 10px;
 }
 
 .players-grid::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
+
 .players-grid::-webkit-scrollbar-thumb {
-    background: rgba(37, 136, 22, 0.6);
-    border-radius: 20px;
+  background: rgba(37, 136, 22, 0.6);
+  border-radius: 20px;
 }
 
 .pixel-table {
-    width: 100%;
-    border-collapse: collapse;
-    color: #f8fafc;
+  width: 100%;
+  border-collapse: collapse;
+  color: #f8fafc;
 }
 
 .pixel-table th {
-    text-align: left;
-    padding: 15px;
-    background-color: #1c1c1c;
-    color: #ffffff;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 2px solid #555;
+  text-align: left;
+  padding: 15px;
+  background-color: #1c1c1c;
+  color: #ffffff;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #555;
 }
 
-.pixel-table th.text-center { text-align: center; }
+.pixel-table th.text-center {
+  text-align: center;
+}
 
 .grid-row {
-    border-bottom: 1px solid #333;
-    transition: background 0.2s ease;
+  border-bottom: 1px solid #333;
+  transition: background 0.2s ease;
 }
 
 .grid-row:hover {
-    background-color: rgba(120, 255, 120, 0.05);
+  background-color: rgba(120, 255, 120, 0.05);
 }
 
 .pixel-table td {
-    padding: 15px;
-    vertical-align: middle;
+  padding: 15px;
+  vertical-align: middle;
 }
 
 .status-indicator {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
 }
+
 .status-indicator.active {
-    background-color: #28a745 !important;
-    box-shadow: 0 0 10px rgba(40, 167, 69, 0.8);
+  background-color: #28a745 !important;
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.8);
 }
+
 .status-indicator.inactive {
-    background-color: #eb0000 !important;
-    box-shadow: 0 0 10px rgba(235, 0, 0, 0.8);
+  background-color: #eb0000 !important;
+  box-shadow: 0 0 10px rgba(235, 0, 0, 0.8);
 }
 
 .player-identity-block {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
+
 .nickname-accent {
-    color: #5ff883;
-    font-size: 20px;
+  color: #5ff883;
+  font-size: 20px;
 }
+
 .username-sub {
-    color: #a0a0a0;
-    font-size: 14px;
+  color: #a0a0a0;
+  font-size: 14px;
 }
 
 .role-badge {
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
 }
 
 .role-badge.admin {
-    background-color: transparent;
-    border: 1px solid #eb0000;
-    color: #eb0000;
+  background-color: transparent;
+  border: 1px solid #eb0000;
+  color: #eb0000;
 }
 
 .role-badge.player {
-    background-color: transparent;
-    border: 1px solid #00d4ff;
-    color: #00d4ff;
+  background-color: transparent;
+  border: 1px solid #00d4ff;
+  color: #00d4ff;
 }
 
 .action-buttons-group {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
 }
 
 .btn-manage {
-    background-color: #258816;
-    padding: 5px 12px;
-    font-size: 14px;
-    border-radius: 6px;
+  background-color: #258816;
+  padding: 5px 12px;
+  font-size: 14px;
+  border-radius: 6px;
 }
 
 .btn-logs {
-    background-color: #444;
-    padding: 5px 12px;
-    font-size: 14px;
-    border-radius: 6px;
+  background-color: #444;
+  padding: 5px 12px;
+  font-size: 14px;
+  border-radius: 6px;
 }
+
 .btn-logs:hover {
-    background-color: #555;
+  background-color: #555;
+}
+
+/* Autocomplete container */
+.autocomplete-box {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  background-color: #2f2f2f;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+}
+
+/* Dropdown */
+.autocomplete-dropdown {
+  list-style: none;
+  margin: 10px 0;
+  padding: 0;
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Items */
+.autocomplete-dropdown li {
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  border-bottom: 1px solid #333;
+  transition: 0.2s;
+}
+
+/* Hover */
+.autocomplete-dropdown li:hover {
+  background-color: rgba(120,255,120,0.08);
+}
+
+/* Active (keyboard selection) */
+.autocomplete-dropdown li.active {
+  background-color: #258816;
+}
+
+/* Prize */
+.autocomplete-dropdown span {
+  color: #5ff883;
+}
+
+/* Selected */
+.selected-tournament {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #1c1c1c;
+  border-radius: 10px;
+}
+
+/* Better positioning inside admin container */
+.autocomplete-box {
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto; /* center vertically better */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Smooth dropdown scroll */
+.autocomplete-dropdown {
+  max-height: 220px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+/* Scrollbar style */
+.autocomplete-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.autocomplete-dropdown::-webkit-scrollbar-thumb {
+  background: rgba(37, 136, 22, 0.6);
+  border-radius: 20px;
+}
+
+/* Active item stronger highlight */
+.autocomplete-dropdown li.active {
+  background-color: #258816;
+  transform: scale(1.02);
+}
+
+/* Better input spacing */
+.autocomplete-box input {
+  font-size: 18px;
 }

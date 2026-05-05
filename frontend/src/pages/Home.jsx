@@ -40,8 +40,11 @@ function Home() {
             const response = await loginUser({ username, password });
             const role = response.data.user.role_name;
 
+            console.log("LOGIN RESPONSE:", response.data);
+
             // Allow access only for player role
             if (role === "player") {
+                localStorage.setItem("user", JSON.stringify(response.data.user));
                 localStorage.setItem("role", role);
                 navigate("/player");
             } else {

@@ -1,6 +1,6 @@
 # Sprint Metrics
 
 Total tasks: 15  
-Completed: 9  
-In progress: 3  
-Pending: 3  
+Completed: 15  
+In progress: 0
+Pending: 0

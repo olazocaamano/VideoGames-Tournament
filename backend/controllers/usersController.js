@@ -127,25 +127,50 @@ exports.login = async (req, res) => {
 /* Get players only */
 exports.getPlayers = async (req, res) => {
     try {
-        const sql = `
-            SELECT 
-                u.id, 
-                u.username, 
-                u.nickname, 
-                u.email, 
-                u.role_id,
-                u.is_active,
-                r.role_name 
-            FROM users u
-            INNER JOIN roles r ON u.role_id = r.id
-            WHERE r.role_name = 'player'
+        const page = parseInt(req.query.page) || 1;
+        const limit = 50;
+        const offset = (page - 1) * limit;
+
+        const search = req.query.search || "";
+        const searchTerm = `%${search}%`;
+
+        // Get players (paginated)
+        const dataQuery = `
+            SELECT id, username, nickname, email, role_id, is_active
+            FROM users
+            WHERE role_id = 3
+            AND (username LIKE ? OR nickname LIKE ?)
+            LIMIT ? OFFSET ?
         `;
 
-        const [results] = await db.query(sql);
-        res.json(results);
+        const [players] = await db.query(dataQuery, [
+            searchTerm,
+            searchTerm,
+            limit,
+            offset
+        ]);
+
+        // Get total players
+        const countQuery = `
+            SELECT COUNT(*) AS total
+            FROM users
+            WHERE role_id = 3
+            AND (username LIKE ? OR nickname LIKE ?)
+        `;
+
+        const [[{ total }]] = await db.query(countQuery, [
+            searchTerm,
+            searchTerm
+        ]);
+
+        // Complete answer
+        res.json({
+            players,
+            total
+        });
 
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Database error fetching players" });
+        res.status(500).json({ error: err.message });
     }
 };

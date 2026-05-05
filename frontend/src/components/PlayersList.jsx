@@ -2,22 +2,92 @@
     File: PlayerList.jsx
     Description: Displays a filtered list of players (role_id = 3).
     Includes search functionality, loading/error states, and basic player actions UI.
+    OPTIMIZED: Uses backend pagination and search to avoid loading large datasets.
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "../App.css";
 
 /*
     PlayerList component
-    @param {Array} players - List of users from API
-    @param {boolean} loading - Loading state indicator
-    @param {string|null} error - Error message if request fails
- */
-const PlayerList = ({ players, loading, error }) => {
+    NOTE:
+    - Now fetches players directly from API (no longer receives full dataset as props)
+    - Uses pagination and server-side filtering for performance
+*/
+const PlayersList = () => {
+
+    // Players data state (current page only)
+    const [players, setPlayers] = useState([]);
+
+    // Total players (for "xx of xx")
+    const [totalPlayers, setTotalPlayers] = useState(0);
+
+    // UI states
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     // Search input state
     const [searchTerm, setSearchTerm] = useState("");
+
+    // Pagination state
+    const [page, setPage] = useState(1);
+    const limit = 20; // players per page
+
+    /*
+        Fetch players from backend:
+        - Applies pagination (page)
+        - Applies search filter (searchTerm)
+    */
+    const fetchPlayers = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+
+            const res = await fetch(
+                `http://localhost:5000/api/users/players?page=${page}&search=${encodeURIComponent(searchTerm)}`
+            );
+
+            // Validate response before parsing JSON
+            if (!res.ok) {
+                throw new Error(`Server error: ${res.status}`);
+            }
+
+            const data = await res.json();
+
+            /*
+                Expected response format:
+                {
+                    players: [...],
+                    total: number
+                }
+            */
+            setPlayers(data.players || []);
+            setTotalPlayers(data.total || 0);
+
+        } catch (err) {
+            console.error("FULL ERROR:", err);
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    /*
+        Trigger data fetch:
+        - When page changes
+    */
+    useEffect(() => {
+        fetchPlayers();
+    }, [page]);
+
+    /*
+        Handle search action (button or Enter key)
+    */
+    const handleSearch = () => {
+        setPage(1);
+        fetchPlayers();
+    };
 
     // Show loading state while fetching data
     if (loading) {
@@ -29,24 +99,6 @@ const PlayerList = ({ players, loading, error }) => {
         return <p className="error-text">{error}</p>;
     }
 
-    /*
-        Filter players:
-        - Only include users with role_id = 3 (players)
-        - Filter by nickname or username based on search input
-     */
-    const filteredPlayers = players.filter((player) => {
-
-        // Ensure user is a player role
-        const isPlayerRole = Number(player.role_id) === 3;
-
-        // Match search term with nickname or username
-        const matchesSearch =
-            player.nickname?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            player.username?.toLowerCase().includes(searchTerm.toLowerCase());
-
-        return isPlayerRole && matchesSearch;
-    });
-
     return (
         <div className="box-players-container">
 
@@ -56,12 +108,27 @@ const PlayerList = ({ players, loading, error }) => {
                     type="text"
                     placeholder="Search player by nickname..."
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={(e) => {
+                        setSearchTerm(e.target.value);
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                            handleSearch();
+                        }
+                    }}
                 />
 
-                {/* Display number of filtered results */}
+                {/* SEARCH BUTTON */}
+                <button
+                    className="btn-search"
+                    onClick={handleSearch}
+                >
+                    SEARCH
+                </button>
+
+                {/* Display number of players loaded vs total */}
                 <span className="player-count">
-                    Players: {filteredPlayers.length}
+                    Players: {players.length} of {totalPlayers}
                 </span>
             </div>
 
@@ -69,7 +136,7 @@ const PlayerList = ({ players, loading, error }) => {
             <div className="players-grid">
 
                 {/* No results state */}
-                {filteredPlayers.length === 0 ? (
+                {players.length === 0 ? (
                     <p className="no-results">
                         No players found (Role 3).
                     </p>
@@ -87,17 +154,16 @@ const PlayerList = ({ players, loading, error }) => {
                         </thead>
 
                         <tbody>
-                            {filteredPlayers.map((player) => (
+                            {players.map((player) => (
                                 <tr key={player.id} className="grid-row">
 
                                     {/* Active / inactive indicator */}
                                     <td className="col-status">
                                         <div
-                                            className={`status-indicator ${
-                                                Number(player.is_active) === 1
+                                            className={`status-indicator ${Number(player.is_active) === 1
                                                     ? "active"
                                                     : "inactive"
-                                            }`}
+                                                }`}
                                         />
                                     </td>
 
@@ -151,8 +217,35 @@ const PlayerList = ({ players, loading, error }) => {
                     </table>
                 )}
             </div>
+
+            <div className="bar-bottom">
+                {/* Pagination controls */}
+                <div className="pagination">
+
+                    {/* Previous page */}
+                    <button
+                        onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+                    >
+                        Prev
+                    </button>
+
+                    {/* Current page indicator */}
+                    <span className="page-indicator">
+                        Page {page}
+                    </span>
+
+                    {/* Next page (disabled if no more data) */}
+                    <button
+                        onClick={() => setPage(prev => prev + 1)}
+                        disabled={players.length < limit}
+                    >
+                        Next
+                    </button>
+
+                </div>
+            </div>
         </div>
     );
 };
 
-export default PlayerList;
+export default PlayersList;

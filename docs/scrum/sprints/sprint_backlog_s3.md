@@ -21,3 +21,22 @@ Improve system security and validations.
 
 ## Related Versions
 - [SEC]-v0.9.0
+
+---
+
+### AI Usage (Prompts and support)
+
+**Prompt:**
+> ¿Es seguro guardar contraseñas en texto plano?
+
+**IA support:**
+> La IA explicó riesgos de seguridad y recomendó usar bcrypt, tambien ayudandonos a crear un archivo para encriptar las contraseñas que
+> ya habian sido creadas para probar la aplicación y tambien ayudandonos a crear el metodo para encriptarlas.
+
+---
+
+**Prompt:**
+> ¿Cómo validar contraseñas encriptadas?
+
+**Apoyo de la IA:**
+> Se explicó que la validación debe hacerse en backend, no en SQL.

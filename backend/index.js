@@ -20,6 +20,7 @@ app.use('/api/games', gamesRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/tournaments', tournamentsRoutes);
 app.use('/api/activity', activityRoutes);
+app.use('/api/register', tournamentsRoutes);
 
 //Test route to see if the server is live
 app.get('/', (req, res) => {

@@ -42,3 +42,21 @@ March 25 - March 31
 - [DB]-v0.8.3
 - [BE]-v0.8.0
 - [DOC]-v0.7.4
+
+---
+
+### AI Usage (Prompts and support)
+
+**Prompt:**
+> Estoy diseñando la tabla `USERS` actualmente estu usando `ENUM` para los roles, ¿Esta bien?
+
+**AI support:**
+> La IA sugirió evitar ENUM por falta de escalabilidad y guió hacia una tabla ROLES con relación mediante clave foránea.
+
+--- 
+**Prompt:**
+> Mi login no funciona correctamente, ¿qué podría estar mal?
+
+**AI support:**
+> La IA hizo preguntas sobre el uso de INNER JOIN y la relación entre tablas, le mandamos partes de codigo para que nos
+> pudiera ayudar mejor hasta que logramos encontrar la solución.

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@faker-js/faker": "^10.4.0",
     "react-router-dom": "^7.13.1"
   }
 }
