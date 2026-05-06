@@ -18,7 +18,7 @@ This table defines the prefixes used to identify which component of the system i
 
 ---
 
-## Version [API]-v1.0.0 / [FE]-v1.0.0 / [BE]-v1.0.0 / [DB]-v1.0.0  
+## Version [API]-v9.8.0 / [FE]-v9.8.0 / [BE]-v9.8.0 / [DB]-v9.8.0  
 ### Sprint 5 - Tournament registration, system fixes and admin statistics (May 05, 2026)
 
 This sprint focused on stabilizing the system, fixing critical integration errors, 
