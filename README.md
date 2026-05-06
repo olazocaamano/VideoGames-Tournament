@@ -31,3 +31,26 @@ The latest version of the database design and system updates can always be found
 | The Query Master | Jimenez Solis Caleb |
 | The QA/Tester | Lopez Gil Dilan Osmar |
 | The DBA (Admin) | Aguilar Medina Angel Uriel |
+
+---
+
+# VideoGames Tournament System
+
+## Requirements
+- Node.js
+- MySQL
+
+## Backend
+cd backend
+npm install
+node index.js
+
+## Frontend
+cd frontend
+npm install
+npm run dev
+
+## Features
+- Tournament management
+- Player registration
+- Admin dashboard

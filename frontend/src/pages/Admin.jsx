@@ -23,6 +23,25 @@ import CreateTournament from "../components/CreateTournament";
 // Utils
 import formatDate from "../utils/formatDate";
 
+// Graphics
+import { Bar } from "react-chartjs-2";
+import {
+    Chart as ChartJS,
+    BarElement,
+    CategoryScale,
+    LinearScale,
+    Tooltip,
+    Legend
+} from "chart.js";
+
+ChartJS.register(
+    BarElement,
+    CategoryScale,
+    LinearScale,
+    Tooltip,
+    Legend
+);
+
 function Admin() {
     const navigate = useNavigate();
 
@@ -80,7 +99,7 @@ function Admin() {
 
     const [createMessage, setCreateMessage] = useState("");
 
-    
+
 
     /*
         Redirect non-admin users to home
@@ -216,6 +235,154 @@ function Admin() {
 
         fetchActivities();
     }, []);
+
+    // ==========================
+    // STATISTICS CALCULATIONS
+    // ==========================
+
+    // Total tournaments
+    const totalTournaments = tournaments.length;
+
+    // Active tournaments
+    const activeTournaments = tournaments.filter(t => t.is_active === 1).length;
+
+    // Finished tournaments (status = 2 por ejemplo)
+    const finishedTournaments = tournaments.filter(t => t.status === 2).length;
+
+    // Total players
+    const totalPlayers = players.length;
+
+    // Average prize pool
+    const avgPrize =
+        tournaments.length > 0
+            ? Math.round(
+                tournaments.reduce((sum, t) => sum + Number(t.prize_pool || 0), 0) /
+                tournaments.length
+            )
+            : 0;
+
+    /*
+    Chart configuration for statistics
+    Displays number of tournaments vs players
+*/
+
+    const chartData = {
+        labels: [
+            "Total Tournaments",
+            "Active",
+            "Finished",
+            "Players",
+            "Avg Prize"
+        ],
+        datasets: [
+            {
+                label: "Platform Statistics",
+                data: [
+                    totalTournaments,
+                    activeTournaments,
+                    finishedTournaments,
+                    totalPlayers,
+                    avgPrize
+                ],
+                borderWidth: 2,
+                borderRadius: 8
+            }
+        ]
+    };
+
+    /*
+    Improved chart configuration
+*/
+    const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        plugins: {
+            legend: {
+                display: true,
+                labels: {
+                    color: "#f8fafc",
+                    font: {
+                        size: 14
+                    }
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function (context) {
+                        return `${context.label}: ${context.raw}`;
+                    }
+                }
+            }
+        },
+
+        scales: {
+            x: {
+                ticks: {
+                    color: "#f8fafc"
+                },
+                grid: {
+                    display: false
+                }
+            },
+            y: {
+                ticks: {
+                    color: "#f8fafc",
+                    precision: 0
+                },
+                grid: {
+                    color: "rgba(255,255,255,0.05)"
+                }
+            }
+        },
+
+        animation: {
+            duration: 1000,
+            easing: "easeOutQuart"
+        },
+
+        responsive: true,
+        plugins: {
+            legend: {
+                labels: {
+                    color: "#ffffff",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: "#12fb50"
+                }
+            },
+            y: {
+                ticks: {
+                    color: "#12fb41"
+                }
+            }
+        }
+    };
+
+    const tournamentsByGame = {};
+
+    tournaments.forEach(t => {
+        const game = t.game_name || "Unknown";
+        tournamentsByGame[game] = (tournamentsByGame[game] || 0) + 1;
+    });
+
+    const gameChartData = {
+        labels: Object.keys(tournamentsByGame),
+        datasets: [
+            {
+                label: "Tournaments per Game",
+                data: Object.values(tournamentsByGame),
+                borderWidth: 2
+            }
+        ]
+    };
 
     return (
         <div className="window-admin">
@@ -392,10 +559,26 @@ function Admin() {
                     </div>
                 )}
 
-                {/* STATISTICS SECTION */}
                 {activeSection === "statistics" && (
                     <div className="admin-box">
-                        <h2>Statistics</h2>
+                        <div className="top">
+                            <div className="circle">
+                                <img src="/images/iconos/statistics.png" className="icono" />
+                            </div>
+                            <h2>Statistics</h2>
+                        </div>
+
+                        <div className="admin-container">
+                            <div className="box-tournaments" style={{ width: "100%" }}>
+                                <h2>System Overview</h2>
+
+                                {/* Bar chart showing tournaments vs players */}
+                                <div style={{ height: "350px" }}>
+                                    <Bar data={chartData} options={chartOptions} />
+                                    <Bar data={gameChartData} options={chartOptions} />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>

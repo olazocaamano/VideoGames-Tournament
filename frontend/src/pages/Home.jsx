@@ -62,8 +62,11 @@ function Home() {
         const fetchGames = async () => {
             try {
                 const response = await API.get("/games?active=1");
+
+                console.log("GAMES:", response.data);
                 setGames(response.data);
-            } catch {
+            } catch (err) {
+                console.error("ERROR LOADING GAMES:", err);
                 setError("Failed to load games");
             } finally {
                 setLoading(false);
@@ -99,11 +102,6 @@ function Home() {
 
                     <div className="container">
                         <div className="container-center">
-
-                            {/* Link to statistics page */}
-                            <Link to="/statistics" className="statistics-button">
-                                Statistics
-                            </Link>
 
                             {/* Games carousel section */}
                             <div className="carrousel">

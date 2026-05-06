@@ -54,6 +54,14 @@ exports.getTournaments = async (req, res) => {
     Automatically assigns default status_id = 1 and sets active = true
 */
 exports.createTournament = async (req, res) => {
+
+    /* Validate required fields */
+    if (!name || !game_id || !prize_pool || !start_date || !creator_id) {
+        return res.status(400).json({
+            error: "All fields are required"
+        });
+    }
+
     const { name, game_id, prize_pool, start_date, creator_id } = req.body;
 
     try {
@@ -166,6 +174,38 @@ exports.registerTournament = async (req, res) => {
 
         // Send success response to frontend
         res.json({ message: "Registration successful" });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Database error" });
+    }
+};
+
+/*
+    Update tournament status (admin control)
+*/
+exports.updateTournamentStatus = async (req, res) => {
+    const { id } = req.params;
+    const { status_id, is_active, user_id } = req.body;
+
+    try {
+        await db.query(
+            `
+            UPDATE tournaments
+            SET status_id = ?, is_active = ?
+            WHERE id = ?
+            `,
+            [status_id, is_active, id]
+        );
+
+        await logActivity({
+            user_id,
+            tournament_id: id,
+            action_type: "UPDATE_STATUS",
+            description: `Tournament status updated`
+        });
+
+        res.json({ message: "Tournament status updated" });
 
     } catch (error) {
         console.error(error);

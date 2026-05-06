@@ -18,6 +18,84 @@ This table defines the prefixes used to identify which component of the system i
 
 ---
 
+## Version [API]-v1.0.0 / [FE]-v1.0.0 / [BE]-v1.0.0 / [DB]-v1.0.0  
+### Sprint 5 - Tournament registration, system fixes and admin statistics (May 05, 2026)
+
+This sprint focused on stabilizing the system, fixing critical integration errors, 
+and implementing tournament registration along with administrative statistics visualization.
+
+---
+
+### Added
+
+- Tournament registration functionality (player → tournament)
+- Autocomplete search component for tournaments
+- Backend endpoint for tournament registration
+- Games endpoint `/api/games` for frontend carousel
+- Static file serving for game images
+- Admin statistics section with dynamic chart (Chart.js)
+- Calculation of system metrics:
+  - Total tournaments
+  - Active tournaments
+  - Finished tournaments
+  - Total players
+  - Average prize pool
+
+---
+
+### Changed
+
+- Fixed API route structure (`/api/users`, `/api/games`, `/api/tournaments`)
+- Standardized service layer methods in frontend (`tournamentService`)
+- Improved error handling for:
+  - Login
+  - Tournament creation
+  - Tournament registration
+- Updated Admin dashboard to include statistics visualization
+- Improved UI styling for charts (dark mode + responsive design)
+- Refactored tournament creation flow to avoid NULL values in DB
+
+---
+
+### Fixed
+
+- ❌ 404 error: `POST /api/register` → corrected to proper endpoint
+- ❌ `Cannot GET /api/games` → fixed missing route in backend
+- ❌ Images not loading → fixed static path configuration
+- ❌ Login failing → fixed missing `/api/users/login` route
+- ❌ MySQL error `Column 'name' cannot be null`
+- ❌ Missing exports in `tournamentService.js`
+- ❌ Autocomplete not showing results (wrong service usage)
+- ❌ Chart rendering without real data
+
+---
+
+### In Progress
+
+- Tournament status management (finish/cancel tournaments)
+- Player participation analytics per tournament
+- Advanced statistics (time-based activity tracking)
+- Admin controls for registrations
+
+---
+
+### System Status
+
+- Full flow achieved:
+  - Register → Login → View games → Join tournament → Admin control
+- Frontend, backend, and database are fully connected
+- System is stable and functional for core features
+
+---
+
+### Notes
+
+- Future improvements will focus on analytics and scalability
+- UI/UX polishing pending for admin dashboard
+- Additional validation recommended for edge cases
+
+---
+
 ## Version [API]-v0.9.5 / [FE]-v0.9.5 / [DB]-v0.9.5 
 ### Sprint 4 - Tournament management and system integration (April 22, 2026)
 

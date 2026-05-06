@@ -1,13 +1,25 @@
-const express = require('express');
+/*
+    File: tournamentsRoutes.js
+    Description: Defines tournament related routes including registration.
+*/
+
+const express = require("express");
 const router = express.Router();
-const tournamentsController = require('../controllers/tournamentsController');
+const controller = require("../controllers/tournamentsController");
 
-router.get('/', tournamentsController.getTournaments);
+/* Get tournaments */
+router.get("/", controller.getTournaments);
 
-router.post('/', tournamentsController.createTournament);
+/* Create tournament */
+router.post("/", controller.createTournament);
 
-router.put("/tournaments/:id", tournamentsController.updateTournament);
+/* Update tournament */
+router.put("/tournaments/:id", controller.updateTournament);
 
-router.post("/register", tournamentsController.registerTournament);
+/* Register user to tournament */
+router.post("/tournaments/register", controller.registerTournament);
+
+/* Disable / finish tournament */
+router.put("/tournaments/:id/status", controller.updateTournamentStatus);
 
 module.exports = router;

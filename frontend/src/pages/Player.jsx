@@ -91,6 +91,27 @@ function Player() {
 
                         <div className="admin-container">
 
+                            {/* Welcome panel */}
+                            <div className="box-tournaments">
+                                <h2>Welcome</h2>
+                                <div className="box-tournaments-content">
+                                    <p>Welcome back, player.</p>
+                                    <p>Select "Tournaments" to join competitions.</p>
+                                </div>
+                            </div>
+
+                            {/* Quick info */}
+                            <div className="box-activity">
+                                <h2>Activity</h2>
+                                <div className="box-activity-content">
+                                    <ul>
+                                        <li>
+                                            <strong>No recent activity</strong>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>

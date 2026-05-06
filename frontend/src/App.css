@@ -1130,3 +1130,67 @@ button:hover {
 .autocomplete-box input {
   font-size: 18px;
 }
+
+/* =========================
+   STATISTICS SECTION
+========================= */
+
+.statistics-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.chart-box {
+    width: 100%;
+    max-width: 800px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    transition: transform 0.2s ease;
+}
+
+.chart-box:hover {
+    transform: scale(1.02);
+}
+
+.chart-box h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #fbb812; /* tu color de marca */
+}
+
+.chart-box canvas {
+    max-height: 350px;
+}
+
+/* =========================
+   DARK MODE FRIENDLY
+========================= */
+
+.admin-box {
+    color: white;
+}
+
+.chart-box .chartjs-render-monitor {
+    color: white !important;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+    .chart-box {
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    .chart-box canvas {
+        max-height: 250px;
+    }
+}
