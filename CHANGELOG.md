@@ -19,7 +19,7 @@ This table defines the prefixes used to identify which component of the system i
 ---
 
 ## Version [API]-v9.8.0 / [FE]-v9.8.0 / [BE]-v9.8.0 / [DB]-v9.8.0  
-### Sprint 5 - Tournament registration, system fixes and admin statistics (May 05, 2026)
+### Tournament registration, system fixes and admin statistics (May 05, 2026)
 
 This sprint focused on stabilizing the system, fixing critical integration errors, 
 and implementing tournament registration along with administrative statistics visualization.
@@ -97,7 +97,7 @@ and implementing tournament registration along with administrative statistics vi
 ---
 
 ## Version [API]-v0.9.5 / [FE]-v0.9.5 / [DB]-v0.9.5 
-### Sprint 4 - Tournament management and system integration (April 22, 2026)
+### Tournament management and system integration (April 22, 2026)
 
 This sprint focused on implementing tournament management and achieving a functional system flow 
 by integrating frontend, backend, and database components.
