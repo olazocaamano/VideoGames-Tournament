@@ -15,10 +15,28 @@
   - [Enter the backend folder](#enter-the-backend-folder)
   - [Install dependencies](#install-dependencies)
   - [Run server](#run-server)
-- [Backend configuration](#backend-configuration-1)
+- [Frontend configuration](#frontend-configuration)
   - [Enter the frontend folder](#enter-the-frontend-folder)
   - [Install dependencies](#install-dependencies-1)
   - [Run server](#run-server-1)
+- [Technologies Used](#technologies-used)
+  - [Frontend](#frontend)
+  - [Backend](#backend)
+  - [Database](#database)
+  - [Development Tools](#development-tools)
+  - [Architecture](#architecture)
+  - [Features Implemented](#features-implemented)
+  - [Additional Libraries](#additional-libraries)
+  - [Version Control](#version-control)
+  - [Documentation](#documentation)
+- [Contributions](#contributions)
+  - [Frontend Development](#frontend-development)
+  - [Backend Development](#backend-development)
+  - [Database Development](#database-development)
+  - [Security Contributions](#security-contributions)
+  - [Testing and Debugging](#testing-and-debugging)
+  - [Documentation Contributions](#documentation-contributions)
+  - [AI-Assisted Development](#ai-assisted-development)
 
 ---
 
@@ -113,7 +131,7 @@ node index.js
 
 ---
 
-# Backend configuration
+# Frontend configuration
 
 ## Enter the frontend folder
 
@@ -134,3 +152,138 @@ npm start
 ```
 
 ---
+
+# Technologies Used
+
+## Frontend
+- React.js
+- React Router DOM
+- Axios
+- Chart.js
+- react-chartjs-2
+- CSS3
+- JavaScript (ES6+)
+
+---
+
+## Backend
+- Node.js
+- Express.js
+- MySQL2
+- bcrypt
+- CORS
+- dotenv
+
+---
+
+## Database
+- MySQL
+
+---
+
+## Development Tools
+- Visual Studio Code
+- Git
+- GitHub
+- npm
+- Postman
+
+---
+
+## Architecture
+- REST API
+- Client-Server Architecture
+- MVC Pattern (Model-View-Controller)
+
+---
+
+## Features Implemented
+- Authentication System
+- Tournament Management
+- Player Registration
+- Activity Logging
+- Statistics Dashboard
+- Role-Based Access Control
+- Dynamic Game Carousel
+- Responsive Admin Panel
+
+---
+
+## Additional Libraries
+- react-chartjs-2
+- chart.js
+- mysql2
+- bcrypt
+- cors
+
+---
+
+## Version Control
+- Git
+- GitHub Repository Management
+
+---
+
+## Documentation
+- Markdown (.md)
+- Scrum-based sprint documentation
+- CHANGELOG versioning system
+
+---
+
+# Contributions
+
+## Frontend Development
+- Designed and implemented the user interface using React.js
+- Developed responsive pages for players and administrators
+- Integrated tournament visualization and registration components
+- Implemented dynamic game carousel and statistics charts
+- Improved user experience and navigation flow
+
+---
+
+## Backend Development
+- Developed REST API endpoints using Express.js
+- Implemented authentication and user validation
+- Created tournament management and registration logic
+- Integrated activity logging system
+- Connected backend services with MySQL database
+
+---
+
+## Database Development
+- Designed relational database schema
+- Implemented tables, constraints, and relationships
+- Added foreign keys and normalization improvements
+- Optimized database structure for scalability
+
+---
+
+## Security Contributions
+- Implemented password encryption using bcrypt
+- Added login validation and duplicate user verification
+- Improved backend error handling and security practices
+
+---
+
+## Testing and Debugging
+- Performed integration testing between frontend and backend
+- Fixed routing and API communication errors
+- Resolved image loading and rendering issues
+- Validated complete application flow
+
+---
+
+## Documentation Contributions
+- Created and maintained CHANGELOG documentation
+- Documented sprint progress and Scrum activities
+- Wrote technical documentation and setup instructions
+- Organized project structure documentation
+
+---
+
+## AI-Assisted Development
+- Used AI tools for debugging and code correction
+- Generated technical documentation and reports
+- Assisted with frontend and backend integration
+- Improved development workflow and problem-solving process
