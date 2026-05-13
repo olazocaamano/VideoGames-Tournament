@@ -118,11 +118,7 @@ by integrating frontend, backend, and database components.
 
 ### System Status
 - Functional flow achieved: register → login → create tournament
-- Partial backend implementation for tournaments
-
-### Team Contributions
-See detailed contributions in:
-`/scrum/sprints/sprint-4/team-contributions.md`
+- Partial backend implementation for tournament
 
 ### Notes
 - Full tournament CRUD is not yet completed
