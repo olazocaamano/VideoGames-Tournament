@@ -1,107 +1,144 @@
-# eSports Tournament Database System
+# 🎮 eSports Tournament Database System
+
+<p align="center">
+  <img src="https://img.shields.io/badge/version-v9.8.0-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/status-active-success?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/license-academic-orange?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Frontend-React-61DAFB?style=for-the-badge&logo=react" />
+  <img src="https://img.shields.io/badge/Backend-Node.js-339933?style=for-the-badge&logo=node.js" />
+  <img src="https://img.shields.io/badge/Database-MySQL-4479A1?style=for-the-badge&logo=mysql" />
+</p>
 
 ---
 
-## Table of Contents
+# 📚 Table of Contents
 
-- [eSports Tournament Database System](#esports-tournament-database-system)
-  - [Table of Contents](#table-of-contents)
-  - [Project Overview](#project-overview)
-  - [Team Roles](#team-roles)
-- [Project structure](#project-structure)
-- [Project installation](#project-installation)
-  - [Clone the repository](#clone-the-repository)
-- [Backend configuration](#backend-configuration)
-  - [Enter the backend folder](#enter-the-backend-folder)
+- [🎮 eSports Tournament Database System](#-esports-tournament-database-system)
+- [📚 Table of Contents](#-table-of-contents)
+- [📖 Project Overview](#-project-overview)
+  - [🎯 Project Objectives](#-project-objectives)
+- [🚀 Main Features](#-main-features)
+- [👥 Team Roles](#-team-roles)
+- [🗂️ Project Structure](#️-project-structure)
+- [⚙️ Installation Guide](#️-installation-guide)
+  - [1️⃣ Clone Repository](#1️⃣-clone-repository)
+- [2️⃣ Backend Setup](#2️⃣-backend-setup)
+  - [Enter backend folder](#enter-backend-folder)
   - [Install dependencies](#install-dependencies)
-  - [Run server](#run-server)
-- [Frontend configuration](#frontend-configuration)
-  - [Enter the frontend folder](#enter-the-frontend-folder)
+  - [Configure environment variables](#configure-environment-variables)
+  - [Run backend server](#run-backend-server)
+- [3️⃣ Frontend Setup](#3️⃣-frontend-setup)
+  - [Enter frontend folder](#enter-frontend-folder)
   - [Install dependencies](#install-dependencies-1)
-  - [Run server](#run-server-1)
-- [Technologies Used](#technologies-used)
+  - [Start development server](#start-development-server)
+- [🛠️ Technologies Used](#️-technologies-used)
   - [Frontend](#frontend)
   - [Backend](#backend)
   - [Database](#database)
   - [Development Tools](#development-tools)
   - [Architecture](#architecture)
-  - [Features Implemented](#features-implemented)
-  - [Additional Libraries](#additional-libraries)
-  - [Version Control](#version-control)
-  - [Documentation](#documentation)
-- [Contributions](#contributions)
+- [✨ Features Implemented](#-features-implemented)
+  - [👤 Authentication System](#-authentication-system)
+  - [🏆 Tournament Management](#-tournament-management)
+  - [📈 Statistics Dashboard](#-statistics-dashboard)
+  - [🖥️ Responsive User Interface](#️-responsive-user-interface)
+- [🔒 Security Features](#-security-features)
+- [🧪 Testing \& Debugging](#-testing--debugging)
+- [📄 Documentation](#-documentation)
+- [🤝 Contributions](#-contributions)
   - [Frontend Development](#frontend-development)
   - [Backend Development](#backend-development)
   - [Database Development](#database-development)
-  - [Security Contributions](#security-contributions)
-  - [Testing and Debugging](#testing-and-debugging)
-  - [Documentation Contributions](#documentation-contributions)
-  - [AI-Assisted Development](#ai-assisted-development)
+  - [Quality Assurance](#quality-assurance)
+- [🤖 AI-Assisted Development](#-ai-assisted-development)
+- [📌 Current Version](#-current-version)
+- [⭐ Repository](#-repository)
 
 ---
 
-## Project Overview
-This project was created to promote healthy and competitive environments where video game tournaments can be organized and managed efficiently. The system is designed to simplify the creation, administration, and participation in tournaments, making it accessible for players, teams, and organizers interested in competitive gaming events.
+# 📖 Project Overview
 
-The database structure supports the management of users, games, tournaments, matches, registrations, and activity tracking within the platform.
+The **eSports Tournament Database System** is a full-stack web application designed to simplify the organization and management of competitive gaming tournaments.
 
-The project is divided into the following components:
-- **Database Design**
-- **Entity-Relationship Diagram**
-- **Data Dictionary**
-- **SQL Implementation**
-- **Query Development**
-- **Testing and Validation**
+This project provides an efficient platform where administrators, players, and organizers can manage tournaments, registrations, matches, statistics, and gaming activities in a centralized environment.
+
+The system was developed following modern software engineering practices, combining a responsive frontend, scalable backend architecture, and relational database management.
 
 ---
 
-> [!NOTE]
-> ## Current Version
-> The latest version of the database design and system updates can always be found in the **CHANGELOG**.
-> 
-> [![Version](https://img.shields.io/badge/version-v9.8.0-blue)](https://github.com/olazocaamano/VideoGames-Tournament/blob/main/CHANGELOG.md#version-api-v980-fe-v980-be-v980-db-v980)
+## 🎯 Project Objectives
+
+- Simplify tournament organization and administration
+- Improve player registration and management
+- Provide secure authentication and access control
+- Track tournament activity and player statistics
+- Maintain scalable and optimized database structures
+- Deliver a modern and responsive user experience
 
 ---
 
-## Team Roles
+# 🚀 Main Features
 
-| Role                   | Name                       |
-| :--------------------- | :------------------------- |
-| The Analyst & Designer | Galán Torres Citlalli      |
-| The SQL Developer      | Olazo Caamaño Emmanuel     |
-| The Query Master       | Jimenez Solis Caleb        |
-| The QA/Tester          | Lopez Gil Dilan Osmar      |
-| The DBA (Admin)        | Aguilar Medina Angel Uriel |
+✅ User Authentication System  
+✅ Tournament Creation & Management  
+✅ Player Registration System  
+✅ Activity Logging  
+✅ Statistics Dashboard  
+✅ Responsive Admin Panel  
+✅ Role-Based Access Control  
+✅ REST API Integration  
+✅ Dynamic Game Carousel  
+✅ Responsive Design for Multiple Devices  
 
 ---
 
-# Project structure
+# 👥 Team Roles
+
+| Role | Member |
+|:--|:--|
+| 📊 Analyst & Designer | Galán Torres Citlalli |
+| 💾 SQL Developer | Olazo Caamaño Emmanuel |
+| 🔎 Query Master | Jimenez Solis Caleb |
+| 🧪 QA / Tester | Lopez Gil Dilan Osmar |
+| 🛡️ Database Administrator | Aguilar Medina Angel Uriel |
+
+---
+
+# 🗂️ Project Structure
+
 ```txt
-backend/
- ├── controllers/
- ├── routes/
- ├── uploads/
- ├── utils/
- ├── db.js
- └── index.js
-
-frontend/
- ├── public/
- ├── src/
- │   ├── components/
- │   ├── pages/
- │   ├── resources/
- │   ├── services/
- │   ├── utils/
- ├── App.jsx
- └── index.jsx
+VideoGames-Tournament/
+│
+├── backend/
+│   ├── controllers/
+│   ├── routes/
+│   ├── uploads/
+│   ├── utils/
+│   ├── db.js
+│   └── index.js
+│
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── resources/
+│   │   ├── services/
+│   │   ├── utils/
+│   │
+│   ├── App.jsx
+│   └── main.jsx
+│
+├── CHANGELOG.md
+├── README.md
+└── package.json
 ```
 
 ---
 
-# Project installation
+# ⚙️ Installation Guide
 
-## Clone the repository
+## 1️⃣ Clone Repository
 
 ```bash
 git clone https://github.com/olazocaamano/VideoGames-Tournament.git
@@ -109,9 +146,9 @@ git clone https://github.com/olazocaamano/VideoGames-Tournament.git
 
 ---
 
-# Backend configuration
+# 2️⃣ Backend Setup
 
-## Enter the backend folder
+## Enter backend folder
 
 ```bash
 cd backend
@@ -120,20 +157,39 @@ cd backend
 ## Install dependencies
 
 ```bash
-node install
+npm install
 ```
 
-## Run server
+## Configure environment variables
+
+Create a `.env` file inside the backend folder:
+
+```env
+PORT=5000
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=yourpassword
+DB_NAME=esports_tournaments
+JWT_SECRET=your_secret_key
+```
+
+## Run backend server
 
 ```bash
 node index.js
 ```
 
+Or using nodemon:
+
+```bash
+npx nodemon index.js
+```
+
 ---
 
-# Frontend configuration
+# 3️⃣ Frontend Setup
 
-## Enter the frontend folder
+## Enter frontend folder
 
 ```bash
 cd frontend
@@ -145,17 +201,24 @@ cd frontend
 npm install
 ```
 
-## Run server
+## Start development server
 
 ```bash
 npm start
 ```
 
+If using Vite:
+
+```bash
+npm run dev
+```
+
 ---
 
-# Technologies Used
+# 🛠️ Technologies Used
 
 ## Frontend
+
 - React.js
 - React Router DOM
 - Axios
@@ -167,123 +230,187 @@ npm start
 ---
 
 ## Backend
+
 - Node.js
 - Express.js
 - MySQL2
 - bcrypt
-- CORS
 - dotenv
+- CORS
 
 ---
 
 ## Database
+
 - MySQL
+- Relational Database Design
+- SQL Queries
+- Foreign Keys & Constraints
+- Database Normalization
 
 ---
 
 ## Development Tools
+
 - Visual Studio Code
 - Git
 - GitHub
 - npm
 - Postman
+- MySQL Workbench
 
 ---
 
 ## Architecture
+
 - REST API
+- MVC Pattern (Model - View - Controller)
 - Client-Server Architecture
-- MVC Pattern (Model-View-Controller)
+- Modular Backend Structure
 
 ---
 
-## Features Implemented
-- Authentication System
-- Tournament Management
-- Player Registration
-- Activity Logging
-- Statistics Dashboard
-- Role-Based Access Control
-- Dynamic Game Carousel
-- Responsive Admin Panel
+# ✨ Features Implemented
+
+## 👤 Authentication System
+
+- Secure login system
+- Password encryption using bcrypt
+- User validation
+- Session management
 
 ---
 
-## Additional Libraries
-- react-chartjs-2
-- chart.js
-- mysql2
-- bcrypt
-- cors
+## 🏆 Tournament Management
+
+- Create tournaments
+- Edit tournaments
+- Delete tournaments
+- Tournament registration system
+- Match organization
 
 ---
 
-## Version Control
-- Git
-- GitHub Repository Management
+## 📈 Statistics Dashboard
+
+- Tournament statistics visualization
+- Player activity tracking
+- Dynamic charts using Chart.js
 
 ---
 
-## Documentation
-- Markdown (.md)
-- Scrum-based sprint documentation
-- CHANGELOG versioning system
+## 🖥️ Responsive User Interface
+
+- Mobile-friendly design
+- Responsive admin dashboard
+- Optimized navigation flow
+- Interactive UI components
 
 ---
 
-# Contributions
+# 🔒 Security Features
+
+- Password hashing with bcrypt
+- Environment variable protection
+- API validation
+- Duplicate account prevention
+- Error handling improvements
+- Secure backend routing
+
+---
+
+# 🧪 Testing & Debugging
+
+The project includes multiple testing and debugging processes such as:
+
+- Frontend and backend integration testing
+- API endpoint validation
+- Database query testing
+- Routing issue fixes
+- UI rendering validation
+- Error handling improvements
+
+---
+
+# 📄 Documentation
+
+The project documentation includes:
+
+- README.md
+- CHANGELOG.md
+- Sprint documentation
+- Scrum activity reports
+- Technical documentation
+- Installation and configuration guides
+
+---
+
+# 🤝 Contributions
 
 ## Frontend Development
-- Designed and implemented the user interface using React.js
-- Developed responsive pages for players and administrators
-- Integrated tournament visualization and registration components
-- Implemented dynamic game carousel and statistics charts
-- Improved user experience and navigation flow
+
+- Designed responsive user interfaces
+- Developed React components and pages
+- Integrated tournament visualizations
+- Improved UX/UI navigation flow
 
 ---
 
 ## Backend Development
-- Developed REST API endpoints using Express.js
-- Implemented authentication and user validation
-- Created tournament management and registration logic
-- Integrated activity logging system
-- Connected backend services with MySQL database
+
+- Developed REST API endpoints
+- Implemented authentication logic
+- Created tournament management services
+- Connected backend with MySQL database
 
 ---
 
 ## Database Development
+
 - Designed relational database schema
-- Implemented tables, constraints, and relationships
-- Added foreign keys and normalization improvements
-- Optimized database structure for scalability
+- Created SQL tables and relationships
+- Added constraints and foreign keys
+- Optimized queries for scalability
 
 ---
 
-## Security Contributions
-- Implemented password encryption using bcrypt
-- Added login validation and duplicate user verification
-- Improved backend error handling and security practices
+## Quality Assurance
+
+- Performed integration testing
+- Fixed backend/frontend communication issues
+- Resolved rendering and routing problems
+- Validated application functionality
 
 ---
 
-## Testing and Debugging
-- Performed integration testing between frontend and backend
-- Fixed routing and API communication errors
-- Resolved image loading and rendering issues
-- Validated complete application flow
+# 🤖 AI-Assisted Development
+
+Artificial Intelligence tools were used to assist in:
+
+- Code debugging
+- Technical documentation generation
+- Frontend/backend integration improvements
+- Error detection and correction
+- Development workflow optimization
 
 ---
 
-## Documentation Contributions
-- Created and maintained CHANGELOG documentation
-- Documented sprint progress and Scrum activities
-- Wrote technical documentation and setup instructions
-- Organized project structure documentation
+# 📌 Current Version
+
+> Latest Stable Version: **v9.8.0**
+
+📄 Full version history available in:
+
+```txt
+CHANGELOG.md
+```
 
 ---
 
-## AI-Assisted Development
-- Used AI tools for debugging and code correction
-- Generated technical documentation and reports
-- Assisted with frontend and backend integration
-- Improved development workflow and problem-solving process
+# ⭐ Repository
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
+
+```bash
+https://github.com/olazocaamano/VideoGames-Tournament
+```
