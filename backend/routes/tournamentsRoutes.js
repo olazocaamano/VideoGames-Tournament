@@ -5,6 +5,7 @@
 
 const express = require("express");
 const router = express.Router();
+
 const controller = require("../controllers/tournamentsController");
 
 /* Get tournaments */
@@ -14,12 +15,12 @@ router.get("/", controller.getTournaments);
 router.post("/", controller.createTournament);
 
 /* Update tournament */
-router.put("/tournaments/:id", controller.updateTournament);
+router.put("/:id", controller.updateTournament);
 
 /* Register user to tournament */
-router.post("/tournaments/register", controller.registerTournament);
+router.post("/register", controller.registerTournament);
 
 /* Disable / finish tournament */
-router.put("/tournaments/:id/status", controller.updateTournamentStatus);
+router.put("/:id/status", controller.updateTournamentStatus);
 
 module.exports = router;

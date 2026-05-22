@@ -8,12 +8,10 @@ const db = require("../db");
 const logActivity = require("../utils/activityLogger");
 
 /*
-    Get tournaments with optional filters:
-    - active: filters only active tournaments
-    - search: filters by tournament name
-    - limit & offset: pagination support for large datasets
+    Get tournaments with optional filters
 */
 exports.getTournaments = async (req, res) => {
+
     const { active, search = "", limit = 10, offset = 0 } = req.query;
 
     let sql = `
@@ -24,59 +22,92 @@ exports.getTournaments = async (req, res) => {
 
     let values = [];
 
-    // Filter only active tournaments
+    // Filter active tournaments
     if (active == 1 || active === "true") {
         sql += " AND t.is_active = ?";
         values.push(1);
     }
 
-    // Search by tournament name
+    // Search by name
     if (search) {
         sql += " AND t.name LIKE ?";
         values.push(`%${search}%`);
     }
 
-    // Apply ordering and pagination
+    // Pagination
     sql += " ORDER BY t.start_date DESC LIMIT ? OFFSET ?";
     values.push(parseInt(limit), parseInt(offset));
 
     try {
+
         const [results] = await db.query(sql, values);
+
         res.json(results);
+
     } catch (error) {
+
         console.error(error);
-        res.status(500).json({ error: "Database error" });
+
+        res.status(500).json({
+            error: "Database error"
+        });
     }
 };
 
 /*
-    Create a new tournament
-    Automatically assigns default status_id = 1 and sets active = true
+    Create tournament
 */
 exports.createTournament = async (req, res) => {
 
-    /* Validate required fields */
-    if (!name || !game_id || !prize_pool || !start_date || !creator_id) {
+    const {
+        name,
+        game_id,
+        prize_pool,
+        start_date,
+        creator_id
+    } = req.body;
+
+    // Validate required fields
+    if (
+        !name ||
+        !game_id ||
+        !prize_pool ||
+        !start_date ||
+        !creator_id
+    ) {
         return res.status(400).json({
             error: "All fields are required"
         });
     }
 
-    const { name, game_id, prize_pool, start_date, creator_id } = req.body;
-
     try {
+
         const [result] = await db.query(
             `
-            INSERT INTO tournaments 
-            (name, game_id, prize_pool, start_date, status_id, creator_id, is_active)
+            INSERT INTO tournaments
+            (
+                name,
+                game_id,
+                prize_pool,
+                start_date,
+                status_id,
+                creator_id,
+                is_active
+            )
             VALUES (?, ?, ?, ?, 1, ?, 1)
             `,
-            [name, game_id, prize_pool, start_date, creator_id]
+            [
+                name,
+                game_id,
+                prize_pool,
+                start_date,
+                creator_id
+            ]
         );
 
         const tournamentId = result.insertId;
 
-        // Log tournament creation activity
+        // Log activity
         await logActivity({
             user_id: creator_id,
             tournament_id: tournamentId,
@@ -84,32 +115,63 @@ exports.createTournament = async (req, res) => {
             description: `New tournament created: ${name}`
         });
 
-        res.json({ message: "Tournament created successfully" });
+        res.json({
+            message: "Tournament created successfully"
+        });
 
     } catch (error) {
+
         console.error(error);
-        res.status(500).json({ error: "Database error" });
+
+        res.status(500).json({
+            error: "Database error"
+        });
     }
 };
 
 /*
-    Update existing tournament data
+    Update tournament
 */
 exports.updateTournament = async (req, res) => {
+
     const { id } = req.params;
-    const { name, game_id, prize_pool, start_date, status_id, is_active, editor_id } = req.body;
+
+    const {
+        name,
+        game_id,
+        prize_pool,
+        start_date,
+        status_id,
+        is_active,
+        editor_id
+    } = req.body;
 
     try {
+
         await db.query(
             `
             UPDATE tournaments
-            SET name = ?, game_id = ?, prize_pool = ?, start_date = ?, status_id = ?, is_active = ?
+            SET
+                name = ?,
+                game_id = ?,
+                prize_pool = ?,
+                start_date = ?,
+                status_id = ?,
+                is_active = ?
             WHERE id = ?
             `,
-            [name, game_id, prize_pool, start_date, status_id, is_active, id]
+            [
+                name,
+                game_id,
+                prize_pool,
+                start_date,
+                status_id,
+                is_active,
+                id
+            ]
         );
 
-        // Log update activity
+        // Log activity
         await logActivity({
             user_id: editor_id,
             tournament_id: id,
@@ -117,54 +179,80 @@ exports.updateTournament = async (req, res) => {
             description: `Tournament updated: ${name}`
         });
 
-        res.json({ message: "Tournament updated successfully" });
+        res.json({
+            message: "Tournament updated successfully"
+        });
 
     } catch (error) {
+
         console.error(error);
-        res.status(500).json({ error: "Database error" });
+
+        res.status(500).json({
+            error: "Database error"
+        });
     }
 };
 
 /*
-    Register a user to a tournament
-    Includes validation to prevent duplicate registrations
+    Register user to tournament
 */
 exports.registerTournament = async (req, res) => {
+
     const { user_id, tournament_id } = req.body;
 
     try {
-        // Check if user is already registered
+
+        // Check duplicate registration
         const [existing] = await db.query(
-            `SELECT id FROM registration 
-             WHERE user_id = ? AND tournament_id = ?`,
+            `
+            SELECT id
+            FROM registration
+            WHERE user_id = ? AND tournament_id = ?
+            `,
             [user_id, tournament_id]
         );
 
         if (existing.length > 0) {
-            return res.status(400).json({ error: "Already registered" });
+
+            return res.status(400).json({
+                error: "Already registered"
+            });
         }
 
-        // Validate that the tournament exists
+        // Validate tournament exists
         const [tournament] = await db.query(
-            `SELECT name FROM tournaments WHERE id = ?`,
+            `
+            SELECT name
+            FROM tournaments
+            WHERE id = ?
+            `,
             [tournament_id]
         );
 
         if (tournament.length === 0) {
-            return res.status(404).json({ error: "Tournament not found" });
+
+            return res.status(404).json({
+                error: "Tournament not found"
+            });
         }
 
         const tournamentName = tournament[0].name;
 
-        // Insert registration record
+        // Insert registration
         await db.query(
-            `INSERT INTO registration 
-             (user_id, tournament_id, registration_date) 
-             VALUES (?, ?, NOW())`,
+            `
+            INSERT INTO registration
+            (
+                user_id,
+                tournament_id,
+                registration_date
+            )
+            VALUES (?, ?, NOW())
+            `,
             [user_id, tournament_id]
         );
 
-        // Log registration activity
+        // Log activity
         await logActivity({
             user_id,
             tournament_id,
@@ -172,43 +260,59 @@ exports.registerTournament = async (req, res) => {
             description: `User registered for tournament ${tournamentName}`
         });
 
-        // Send success response to frontend
-        res.json({ message: "Registration successful" });
+        res.json({
+            message: "Registration successful"
+        });
 
     } catch (error) {
+
         console.error(error);
-        res.status(500).json({ error: "Database error" });
+
+        res.status(500).json({
+            error: "Database error"
+        });
     }
 };
 
 /*
-    Update tournament status (admin control)
+    Update tournament status
 */
 exports.updateTournamentStatus = async (req, res) => {
+
     const { id } = req.params;
-    const { status_id, is_active, user_id } = req.body;
+
+    const {
+        status_id,
+        is_active
+    } = req.body;
 
     try {
+
         await db.query(
             `
             UPDATE tournaments
-            SET status_id = ?, is_active = ?
+            SET
+                status_id = ?,
+                is_active = ?
             WHERE id = ?
             `,
-            [status_id, is_active, id]
+            [
+                status_id,
+                is_active,
+                id
+            ]
         );
 
-        await logActivity({
-            user_id,
-            tournament_id: id,
-            action_type: "UPDATE_STATUS",
-            description: `Tournament status updated`
+        res.json({
+            message: "Tournament status updated"
         });
 
-        res.json({ message: "Tournament status updated" });
-
     } catch (error) {
+
         console.error(error);
-        res.status(500).json({ error: "Database error" });
+
+        res.status(500).json({
+            error: "Database error"
+        });
     }
 };
